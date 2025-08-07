@@ -34,50 +34,50 @@
   --secondary-main: var(--secondary-500);
 
   /* Neutral Colors - Semantic Naming (Works for both light/dark themes) */
-  --neutral-0: #0a0a0a;      /* Very dark gray (better than pure black) */
-  --neutral-50: #1a1a1a;     /* Very dark gray */
-  --neutral-100: #333333;    /* Dark gray */
-  --neutral-200: #4d4d4d;    /* Medium dark gray */
-  --neutral-300: #666666;    /* Medium gray */
-  --neutral-400: #808080;    /* Medium light gray */
-  --neutral-500: #999999;    /* Light gray */
-  --neutral-600: #b3b3b3;    /* Very light gray */
-  --neutral-700: #cccccc;    /* Off-white */
-  --neutral-800: #e6e6e6;    /* Near white */
-  --neutral-900: #f2f2f2;    /* Almost white */
-  --neutral-999: #ffffff;    /* Pure white */
-
-  /* Semantic Color Variables (Theme-agnostic) */
-  --color-background: var(--neutral-0);        /* Main background (black) */
-  --color-surface: var(--neutral-50);          /* Card/surface background (dark gray) */
-  --color-border: var(--neutral-300);          /* Borders (medium gray) */
-  --color-border-secondary: var(--neutral-400); /* Secondary borders (lighter gray) */
-  
-  /* Text Colors (Theme-agnostic) */
-  --color-text-primary: var(--neutral-999);    /* Main text (white) */
-  --color-text-secondary: var(--neutral-800);  /* Secondary text (light gray) */
-  --color-text-tertiary: var(--neutral-700);   /* Tertiary text (medium light gray) */
-  --color-text-quaternary: var(--neutral-600); /* Quaternary text (medium gray) */
-  --color-text-disabled: var(--neutral-500);   /* Disabled text (darker gray) */
+  --neutral-0: #0a0a0a;
+  --neutral-50: #1a1a1a;
+  --neutral-100: #333333;
+  --neutral-200: #4d4d4d;
+  --neutral-300: #666666;
+  --neutral-400: #808080;
+  --neutral-500: #999999;
+  --neutral-600: #b3b3b3;
+  --neutral-700: #cccccc;
+  --neutral-800: #e6e6e6;
+  --neutral-900: #f2f2f2;
+  --neutral-999: #ffffff;
 
   /*
    * THEME SWITCHING GUIDE:
    * 
-   * To switch to LIGHT theme, simply swap the semantic color assignments:
+   * To switch between themes, simply comment/uncomment the appropriate block below:
    * 
-   * --color-background: var(--neutral-999);    (white background)
-   * --color-surface: var(--neutral-900);       (light gray surface)
-   * --color-border: var(--neutral-700);        (medium gray borders)
-   * --color-border-secondary: var(--neutral-600); (lighter borders)
-   * 
-   * --color-text-primary: var(--neutral-0);    (black text)
-   * --color-text-secondary: var(--neutral-100); (dark gray text)
-   * --color-text-tertiary: var(--neutral-200); (medium dark gray text)
-   * --color-text-quaternary: var(--neutral-300); (medium gray text)
-   * --color-text-disabled: var(--neutral-400); (disabled text)
-   * 
-   * This way, all components using semantic colors will automatically adapt!
    */
+
+  /* ===== DARK THEME ===== */
+  /*
+  --color-background: var(--neutral-0);
+  --color-surface: var(--neutral-50);
+  --color-border: var(--neutral-300);
+  --color-border-secondary: var(--neutral-400);
+  
+  --color-text-primary: var(--neutral-999);
+  --color-text-secondary: var(--neutral-800);
+  --color-text-tertiary: var(--neutral-700);
+  --color-text-quaternary: var(--neutral-600);
+  --color-text-disabled: var(--neutral-500);
+  */
+  /* ===== LIGHT THEME ===== */
+  --color-background: var(--neutral-999);
+  --color-surface: var(--neutral-900);
+  --color-border: var(--neutral-700);
+  --color-border-secondary: var(--neutral-600);
+  
+  --color-text-primary: var(--neutral-0);
+  --color-text-secondary: var(--neutral-100);
+  --color-text-tertiary: var(--neutral-200);
+  --color-text-quaternary: var(--neutral-300);
+  --color-text-disabled: var(--neutral-400);
 
   /* Status Colors - Harmonized with new primary */
   --success-300: #6ee7b7;
