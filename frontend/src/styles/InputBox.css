@@ -1,0 +1,43 @@
+.input-box-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--neutral-400);
+  background: var(--neutral-0);
+  padding: 12px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.input-box-container:focus-within {
+  border-color: var(--primary-500);
+}
+
+.input-box-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  resize: none;
+  box-sizing: border-box;
+  color: var(--neutral-800);
+  line-height: 24px;
+  outline: none; /* remove default focus outline */
+  padding: 0;
+  min-height: 80px;
+}
+
+.input-box-textarea::placeholder {
+  color: var(--neutral-400);
+}
+
+.input-box-footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.input-box-char-count {
+  color: var(--neutral-400);
+}

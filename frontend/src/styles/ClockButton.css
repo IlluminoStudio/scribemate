@@ -1,0 +1,67 @@
+.clock-button {
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  font-family: inherit;
+  width: 100%;
+}
+
+.clock-button-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 24px;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.clock-button-caption {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.clock-button.clock-in {
+  background: linear-gradient(135deg, var(--neutral-500) 0%, var(--neutral-700) 15%);
+}
+
+.clock-button.clock-in .clock-button-content {
+  background-color: var(--neutral-0);
+  color: var(--neutral-700);
+}
+
+.clock-button.clock-in .clock-button-caption {
+    color: var(--neutral-200);
+}
+
+.clock-button.clock-out {
+  background: linear-gradient(135deg, var(--primary-400) 0%, var(--primary-600) 15%);
+}
+
+.clock-button.clock-out .clock-button-content {
+  background-color: var(--neutral-0);
+  color: var(--primary-600);
+  box-shadow: var(--shadow-md);
+}
+
+.clock-button.clock-out .clock-button-caption {
+    color: var(--primary-100);
+}
+
+/* Disabled state */
+.clock-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.clock-button:disabled .clock-button-content {
+  opacity: 0.8;
+} 

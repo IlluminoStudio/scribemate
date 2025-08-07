@@ -1,0 +1,27 @@
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
+}
+
+.checkbox-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neutral-400);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.checkbox-box.checked {
+  background-color: var(--primary-500);
+  border-color: var(--primary-500);
+}
+
+.checkbox-label {
+  color: var(--neutral-800);
+} 

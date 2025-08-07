@@ -1,0 +1,42 @@
+.radio-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  transition: background-color 0.2s ease-in-out;
+}
+
+.radio-container .text-body2 {
+    color: var(--neutral-800);
+}
+
+.radio-outer-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.radio-outer-circle.checked {
+  border-color: var(--primary-500);
+  background-color: var(--primary-500);
+}
+
+.radio-outer-circle.unchecked {
+  border-color: var(--neutral-400);
+  background-color: transparent;
+}
+
+.radio-inner-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--neutral-0);
+} 

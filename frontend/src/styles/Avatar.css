@@ -1,0 +1,14 @@
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar--primary {
+  background: var(--primary-100);
+}
+.avatar--secondary {
+  background: var(--secondary-100);
+} 

@@ -1,0 +1,69 @@
+.dailyview-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-300);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0 0 0;
+  gap: 12px;
+}
+
+.legend-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.legend-title {
+  color: var(--neutral-800);
+  font-weight: 600;
+}
+
+.legend-clock {
+  display: flex;
+  gap: 16px;
+}
+
+.legend-clock-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-clock-label {
+  color: var(--neutral-700);
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 2px;
+}
+.legend-dot-hollow {
+  background: var(--neutral-0);
+  border: 1.5px solid var(--primary-500);
+}
+.legend-dot-solid {
+  background: var(--primary-500);
+}
+
+.legend-row-bottom {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.legend-carer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-carer-name {
+  color: var(--neutral-800);
+  font-weight: 400;
+} 

@@ -1,0 +1,19 @@
+{
+  "watch": [
+    "server.js",
+    "users.js",
+    "database-test.js",
+    "lib/",
+    "auth/"
+  ],
+  "ext": "js,json",
+  "ignore": [
+    "node_modules/",
+    ".vercel/",
+    "*.log"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "delay": "1000"
+} 

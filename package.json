@@ -1,0 +1,40 @@
+{
+  "name": "saas-template",
+  "version": "1.0.0",
+  "description": "SaaS Template with React frontend and Vercel BFF",
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "dev-scripts"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:api": "cd dev-scripts && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm run preview",
+    "test": "cd dev-scripts && npm test",
+    "dev:test": "cross-env NODE_ENV=test concurrently \"npm run dev:api\" \"npm run dev:frontend\"",
+    "test:e2e": "concurrently -k \"npm run dev:api\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 && cypress run\"",
+    "test:e2e:open": "concurrently \"npm run dev:api\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 && cypress open\"",
+    "db:start": "npx supabase start",
+    "db:stop": "npx supabase stop",
+    "db:reset": "npx supabase db reset",
+    "db:push": "npx supabase db push",
+    "db:diff": "npx supabase db diff"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^10.0.3",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "cypress": "^14.5.2",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
+    "wait-on": "^8.0.3"
+  }
+}

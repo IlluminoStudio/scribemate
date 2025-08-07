@@ -1,0 +1,508 @@
+openapi: 3.0.3
+info:
+  title: CareSync BFF API
+  version: 0.1.0
+  description: >
+    Backend-for-Frontend (BFF) API for the CareSync MVP.  
+    The API is stateless – every request except /auth/login and /setup/dev-reset
+    must carry a user_id query parameter that maps to a row in view_current_user_profile.  
+    If validation fails the request is rejected with 401 or 403 as appropriate.
+
+servers:
+  - url: https://caresync.app/api
+    description: Production
+  - url: http://localhost:3001/api
+    description: Local development
+
+tags:
+  - name: Auth
+  - name: Coordinator
+  - name: Carer
+
+components:
+  securitySchemes:
+    UserIdParam:
+      type: apiKey
+      in: query
+      name: user_id
+      description: >
+        Public identifier returned by /auth/login.  
+        Validation rule – must resolve to an existing, non-deleted user.
+
+  parameters:
+    UserId:
+      name: user_id
+      in: query
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: User identity for authorisation
+
+    MessageId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Primary key of the message to acknowledge
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+          example: Invalid credentials
+      required: [status, message]
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        full_name:
+          type: string
+        role:
+          type: string
+          enum: [coordinator, carer]
+        created_at:
+          type: string
+          format: date-time
+      required: [id, username, full_name, role, created_at]
+
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required: [username, password]
+
+    LoginSuccess:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        profile:
+          $ref: "#/components/schemas/UserProfile"
+      required: [status, profile]
+
+    LogoutSuccess:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        logged_out_at:
+          type: string
+          format: date-time
+      required: [status, logged_out_at]
+
+    CareEventCreate:
+      type: object
+      properties:
+        carer_id:
+          type: string
+          format: uuid
+        event_type:
+          type: string
+          enum: [clock_in, clock_out, medication]
+        notes:
+          type: string
+      required: [carer_id, event_type]
+
+    CareEvent:
+      allOf:
+        - $ref: "#/components/schemas/CareEventCreate"
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            event_time:
+              type: string
+              format: date-time
+
+    CareEventWithDetails:
+      allOf:
+        - $ref: "#/components/schemas/CareEvent"
+        - type: object
+          properties:
+            carer_name:
+              type: string
+              description: Full name of the carer
+            initial:
+              type: string
+              description: First letter of the carer's name
+            time_of_day:
+              type: string
+              pattern: '^([01][0-9]|2[0-3])([0-5][0-9])$'
+              description: 4-digit time in 24-hour format (e.g., 2301, 0900)
+          required: [carer_name, initial, time_of_day]
+
+    ClockStatus:
+      type: object
+      properties:
+        carer_id:
+          type: string
+          format: uuid
+        full_name:
+          type: string
+        event_type:
+          type: string
+          enum: [clock_in, clock_out]
+        event_time:
+          type: string
+          format: date-time
+
+    MessageCreate:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        is_broadcast:
+          type: boolean
+        carer_id:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+          description: Array of carer UUIDs. Required for private messages (is_broadcast=false), optional for broadcasts (is_broadcast=true)
+      required: [title, body, is_broadcast]
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        sender_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        body:
+          type: string
+        is_broadcast:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+
+    MessageList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Message"
+
+    MessageSummary:
+      allOf:
+        - $ref: "#/components/schemas/Message"
+        - type: object
+          properties:
+            carer_id:
+              type: string
+              nullable: true
+            carer_name:
+              type: string
+              nullable: true
+            is_acknowledged:
+              type: boolean
+      required: [id, sender_id, title, body, is_broadcast, created_at, is_acknowledged]
+
+    MessageSummaryArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/MessageSummary"
+
+    MessageAcknowledgeRequest:
+      type: object
+      properties:
+        message_id: { type: string }
+      required: [message_id]
+
+    AcknowledgeResponse:
+      type: object
+      properties:
+        status: { type: string, example: acknowledged }
+        message_id: { type: string }
+        carer_id: { type: string }
+        acknowledged_at: { type: string, format: date-time }
+      required: [status, message_id, carer_id, acknowledged_at]
+
+paths:
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Authenticate user credentials
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Credentials valid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginSuccess"
+        "401":
+          description: Username or password incorrect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example: { status: error, message: Invalid username or password }
+        "429":
+          description: Excessive request rate (rate-limited only in production hardening)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: End current session
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogoutSuccess"
+        "401":
+          description: Unknown or invalid user_id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /user:
+    get:
+      tags: [Coordinator]
+      summary: List all users (future admin expansion)
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      security:
+        - UserIdParam: []
+      responses:
+        "200":
+          description: Array of user profiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/UserProfile" }
+        "403":
+          description: Only coordinators may view all users
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /care-event/today:
+    get:
+      tags: [Coordinator]
+      summary: Current day's care events
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: List of events with carer details and time information
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/CareEventWithDetails" }
+        "403":
+          description: Only coordinators may view
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /my-care-event:
+    post:
+      tags: [Carer]
+      summary: Record a care event (clock-in/out or medication)
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CareEventCreate" }
+      responses:
+        "201":
+          description: Event stored
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CareEvent" }
+        "403":
+          description: User is not a carer
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /my-clock-status:
+    get:
+      tags: [Carer]
+      summary: Return latest clock status for authenticated carer
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: Clock status object
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ClockStatus" }
+        "403":
+          description: User is not a carer
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /message:
+    post:
+      tags: [Coordinator]
+      summary: Create a new broadcast or private message
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MessageCreate" }
+      responses:
+        "201":
+          description: Message authored
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Message" }
+        "400":
+          description: Validation error (e.g. missing carer_id for private)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+        "403":
+          description: User is not a coordinator
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+    get:
+      tags: [Coordinator]
+      summary: Retrieve coordinator’s messages (optionally filter by status)
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [unread]
+          description: Return only unread messages when set to unread
+      responses:
+        "200":
+          description: Array of messages (filtered or full)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageSummaryArray"
+        "403":
+          description: User is not a coordinator
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /my-message:
+    get:
+      tags: [Carer]
+      summary: Retrieve messages visible to the authenticated carer
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: List of messages with status flags
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MessageList" }
+        "403":
+          description: User is not a carer
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+    post:
+      tags: [Carer]
+      summary: Mark a message as acknowledged
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MessageAcknowledgeRequest" }
+      responses:
+        "200":
+          description: Acknowledged successfully
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AcknowledgeResponse" }
+        "404":
+          description: Message not found or not assigned to carer
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+        "409":
+          description: Message already acknowledged
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /setup/dev-reset:
+    post:
+      tags: [Admin]
+      summary: Set all care-event dates to today (development only)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirm:
+                  type: boolean
+                  example: true
+      responses:
+        "200":
+          description: Database dates updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  rows_updated:
+                    type: integer
+        "403":
+          description: Disabled in production
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }

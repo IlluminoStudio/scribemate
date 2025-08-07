@@ -1,0 +1,64 @@
+.ff-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.ff-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.ff-input::placeholder {
+  color: var(--neutral-300);
+  opacity: 1;
+}
+
+.ff-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.ff-input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* icons are decorative, not interactive */
+}
+
+.ff-input-icon-left {
+  left: 14px;
+}
+
+.ff-input-icon-right {
+  right: 14px;
+}
+
+.ff-input-flex-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  position: relative;
+}
+
+/* Remove left absolute positioning for leftIcon in flex row */
+.ff-input-flex-row .ff-input-icon-left {
+  position: static;
+  margin: 0;
+} 
