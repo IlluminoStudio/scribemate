@@ -1,5 +1,5 @@
-export const TAGLINE = "Friends helping friends stick it out till the end";
-export const META_DESCRIPTION = "A fun, lightweight check-in app for tiny friend groups building daily habits together. 14-day sprints, streaks, and playful rewards – no social media noise.";
+export const TAGLINE = "Easy, On-Brand Posts in Minutes";
+export const META_DESCRIPTION = "ScribeMate helps small business owners create on-brand, SEO-friendly social media posts in minutes. Discover trending topics, get AI-generated text and images tailored to your brand, and keep your online presence fresh without the stress.";
 export const APP_NAME = "ScribeMate";
 
 export const SESSION_EXPIRY_SECONDS = 7200; // 2 hours
