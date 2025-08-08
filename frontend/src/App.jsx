@@ -6,6 +6,7 @@ import DemoPage from "./pages/DemoPage";
 import SignInPage from "./pages/SignInPage";
 import SandboxPage from "./pages/SandboxPage";
 import PlayPage from "./pages/PlayPage";
+import DashboardPage from "./pages/DashboardPage";
 import MainLayout from "./layout/MainLayout";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/sandbox" element={<LayoutWrapper><SandboxPage /></LayoutWrapper>} />
         <Route path="/play" element={<LayoutWrapper><PlayPage /></LayoutWrapper>} />
+        <Route path="/dashboard" element={<LayoutWrapper><DashboardPage /></LayoutWrapper>} />
       </Routes>
     </>
   );
