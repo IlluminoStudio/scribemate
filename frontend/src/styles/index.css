@@ -70,7 +70,7 @@
   --color-border: var(--neutral-700);
   --color-border-secondary: var(--neutral-600);
   
-  --color-text-primary: var(--neutral-900);
+  --color-text-primary: var(--neutral-0);
   --color-text-secondary: var(--neutral-100);
   --color-text-tertiary: var(--neutral-200);
   --color-text-quaternary: var(--neutral-300);
@@ -125,6 +125,23 @@ body {
 /* Ensure all elements inherit the font */
 * {
   font-family: inherit;
+}
+
+/* Header and text element styling for theme switching */
+header {
+  color: var(--color-text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  color: var(--color-text-secondary);
+  margin: 0;
+  padding: 0;
 }
 
 /* Global container for max-width */
