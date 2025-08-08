@@ -34,14 +34,14 @@ function SignInPage() {
         gap: "1.5rem",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <img src="/logo.svg" alt="FriendFlare Logo" style={{ width: 32, height: 32 }} />
+          <img src="/logo.svg" alt="ScribeMate Logo" style={{ width: 32, height: 32 }} />
           <Text variant="h4" style={{ 
             color: "var(--primary-light)",
             fontWeight: 700,
             fontSize: "30px",
             lineHeight: "36px"
           }}>
-            friendflare
+            ScribeMate
           </Text>
         </div>
         <Text variant="body2" style={{ marginTop: -16, marginBottom: 0, color: "#b0b0b0" }}>
