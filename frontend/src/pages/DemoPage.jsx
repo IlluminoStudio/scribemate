@@ -19,6 +19,7 @@ import Checkbox from "../components/Checkbox";
 import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
 import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check } from "phosphor-react";
+import userSvg from "../assets/user.svg";
 
 function DemoPage() {
   const [mode, setMode] = React.useState("medium");
@@ -374,6 +375,13 @@ function DemoPage() {
           <Avatar testid="sm-large-secondary" initials="SM" color="secondary" variant="lg" />
           <Avatar testid="jd-outlined-primary" initials="JD" color="primary" variant="outlined" />
           <Avatar testid="sm-outlined-secondary" initials="SM" color="secondary" variant="outlined" />
+          
+          {/* Image Avatar Examples */}
+          <Avatar testid="camila-jpg-small" image="/camila.jpg" variant="sm" />
+          <Avatar testid="camila-jpg-medium" image="/camila.jpg" />
+          <Avatar testid="camila-jpg-large" image="/camila.jpg" variant="lg" />
+          <Avatar testid="daniel-jpg-outlined" image="/daniel.jpg" variant="outlined" />
+          <Avatar testid="user-svg-medium" image={userSvg} />
         </div>
       </div>
 

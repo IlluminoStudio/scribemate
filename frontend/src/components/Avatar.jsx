@@ -4,7 +4,7 @@ import "../styles/Avatar.css";
 import harmoniousColors from "../color";
 
 // Accept a style prop for custom background color
-function Avatar({ testid = "avatar", initials, color = "primary", variant, style = {}, colorName }) {
+function Avatar({ testid = "avatar", initials, image, color = "primary", variant, style = {}, colorName }) {
   let textColor, backgroundColor, borderColor;
   
   if (colorName) {
@@ -45,7 +45,9 @@ function Avatar({ testid = "avatar", initials, color = "primary", variant, style
     width: size, 
     height: size, 
     minWidth: size, 
-    minHeight: size, 
+    minHeight: size,
+    borderRadius: '50%',
+    overflow: 'hidden',
     ...style 
   };
   
@@ -59,19 +61,54 @@ function Avatar({ testid = "avatar", initials, color = "primary", variant, style
       mergedStyle.background = backgroundColor;
     }
   }
+
+  // Determine content to render
+  const renderContent = () => {
+    if (image) {
+      // Render image
+      return (
+        <img 
+          src={image} 
+          alt="Avatar" 
+          style={{ 
+            width: '100%', 
+            height: '100%', 
+            objectFit: 'cover',
+            display: 'block'
+          }} 
+        />
+      );
+    } else if (initials) {
+      // Render initials
+      return (
+        <span style={{ 
+          fontSize, 
+          fontWeight: 600, 
+          color: textColor,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%'
+        }}>
+          {initials}
+        </span>
+      );
+    }
+    return null;
+  };
   
   return (
     <div data-testid={testid} className={`avatar avatar--${color}`} style={mergedStyle}>
-      <span style={{ fontSize, fontWeight: 600, color: textColor }}>
-        {initials}
-      </span>
+      {renderContent()}
     </div>
   );
 }
 
 Avatar.propTypes = {
   testid: PropTypes.string,
-  initials: PropTypes.string.isRequired,
+  initials: PropTypes.string,
+  image: PropTypes.string,
   color: PropTypes.oneOf(["primary", "secondary"]),
   variant: PropTypes.oneOf(["sm", "lg", "outlined"]),
   style: PropTypes.object,

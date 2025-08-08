@@ -7,7 +7,14 @@ import Button from '../components/Button';
 import { SignOut } from 'phosphor-react';
 import '../styles/TopBar.css';
 
-const TopBar = ({ userName, initials, onLogout }) => {
+const TopBar = ({ onLogout, currentPage = 'Dashboard' }) => {
+  const navigationItems = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'content-library', label: 'Content Library' },
+    { id: 'brand-assets', label: 'Brand Assets' },
+    { id: 'settings', label: 'Settings' }
+  ];
+
   return (
     <header className="top-bar">
       <div className="top-bar-left-group">
@@ -16,15 +23,36 @@ const TopBar = ({ userName, initials, onLogout }) => {
           alt="Scribemate Logo" 
           className="top-bar-logo" 
         />
-        <Text variant="body2" style={{ fontWeight: 600, color: 'var(--primary-800)' }}>
+        <Text variant="h4" style={{ fontWeight: 600, color: 'var(--primary-800)' }}>
           {APP_NAME}
         </Text>
+        <div className="top-bar-navigation">
+          {navigationItems.map((item) => {
+            const isSelected = currentPage === item.label;
+            return (
+              <Text
+                key={item.id}
+                variant="h6"
+                style={{
+                  fontWeight: isSelected ? 400 : 400,
+                  color: isSelected ? 'var(--primary-500)' : 'var(--neutral-700)',
+                  borderRadius: isSelected ? '8px' : 'unset',
+                  padding: isSelected ? '10px 12px' : 'unset',
+                  backgroundColor: isSelected ? 'var(--primary-100)' : 'transparent',
+                  cursor: 'pointer'
+                }}
+              >
+                {item.label}
+              </Text>
+            );
+          })}
+        </div>
       </div>
       <div className="top-bar-right-group">
-        <Text variant="caption" style={{ fontWeight: 500, color: 'var(--neutral-800)' }}>
-          {userName}
+        <Avatar image="/camila.jpg" variant="sm" />
+        <Text variant="body2" >
+          Camila Rowling
         </Text>
-        <Avatar initials={initials} variant="sm" />
         <Button 
           variant="text" 
           size="sm" 
