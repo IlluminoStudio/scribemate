@@ -66,37 +66,44 @@ const Text = ({
     body1: {
       fontWeight: 400,
       fontSize: '16px',
-      lineHeight: '28px',
+      lineHeight: '24px',
       letterSpacing: '0%',
-      color: 'var(--color-text-primary)',
+      color: 'var(--neutral-800)',
     },
     body2: {
       fontWeight: 400,
       fontSize: '14px',
-      lineHeight: '24px',
+      lineHeight: '20px',
       letterSpacing: '0%',
-      color: 'var(--color-text-secondary)',
+      color: 'var(--neutral-800)',
     },
     muted1: {
+      fontWeight: 400,
+      fontSize: '16px',
+      lineHeight: 'normal',
+      letterSpacing: '0%',
+      color: 'var(--neutral-600)',
+    },
+    muted2: {
       fontWeight: 400,
       fontSize: '14px',
       lineHeight: 'normal',
       letterSpacing: '0%',
-      color: 'var(--color-text-tertiary)',
-    },
-    muted2: {
-      fontWeight: 400,
-      fontSize: '12px',
-      lineHeight: 'normal',
-      letterSpacing: '0%',
-      color: 'var(--color-text-quaternary)',
+      color: 'var(--neutral-500)',
     },
     caption: {
       fontWeight: 400,
       fontSize: '12px',
-      lineHeight: 'normal',
+      lineHeight: '16px',
       letterSpacing: '0%',
-      color: 'var(--color-text-quaternary)',
+      color: 'var(--neutral-700)',
+    },
+    label: {
+      fontWeight: 500,
+      fontSize: '14px',
+      lineHeight: '20px',
+      letterSpacing: '0%',
+      color: 'var(--neutral-800)',
     },
   };
 
@@ -156,7 +163,7 @@ const Text = ({
 
 Text.propTypes = {
   testid: PropTypes.string,
-  variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'body1', 'body2', 'muted1', 'muted2', 'caption']),
+  variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'body1', 'body2', 'muted1', 'muted2', 'caption', 'label']),
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   color: PropTypes.string,
