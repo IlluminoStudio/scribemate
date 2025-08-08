@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { APP_NAME } from '../constants';
 import Text from '../components/Text';
@@ -8,12 +9,18 @@ import { SignOut } from 'phosphor-react';
 import '../styles/TopBar.css';
 
 const TopBar = ({ onLogout, currentPage = 'Dashboard', userName }) => {
+  const navigate = useNavigate();
+  
   const navigationItems = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'content-library', label: 'Content Library' },
-    { id: 'brand-assets', label: 'Brand Assets' },
-    { id: 'settings', label: 'Settings' }
+    { id: 'dashboard', label: 'Dashboard', path: '/dashboard' },
+    { id: 'content-library', label: 'Content Library', path: '/content-library' },
+    { id: 'brand-assets', label: 'Brand Assets', path: '/brand-assets' },
+    { id: 'settings', label: 'Settings', path: '/settings' }
   ];
+  
+  const handleNavigationClick = (path) => {
+    navigate(path);
+  };
 
   return (
     <header className="top-bar">
@@ -33,6 +40,7 @@ const TopBar = ({ onLogout, currentPage = 'Dashboard', userName }) => {
               <Text
                 key={item.id}
                 variant="h6"
+                onClick={() => handleNavigationClick(item.path)}
                 style={{
                   fontWeight: isSelected ? 400 : 400,
                   color: isSelected ? 'var(--primary-500)' : 'var(--neutral-700)',

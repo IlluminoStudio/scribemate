@@ -6,7 +6,11 @@ import { DEFAULT_USER_NAME } from '../constants';
 
 function DashboardPage() {
   return (
-    <div className="page-container">
+    <div style={{
+      background: 'var(--color-background)',
+      padding: '4px 80px',
+      borderBottom: '1px solid var(--neutral-300)'
+    }}>
       {/* Main content rack - first of many */}
       <div style={{ padding: '24px 0' }}>
         <div style={{ 
