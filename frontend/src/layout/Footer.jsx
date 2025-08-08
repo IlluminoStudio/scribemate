@@ -4,11 +4,8 @@ import { APP_NAME, getCurrentYear } from '../constants';
 
 function Footer() {
   return (
-    <footer className="footer" style={{ 
-      backgroundColor: 'var(--neutral-300)', 
-      borderTop: 'none' 
-    }}>
-      <Text variant="muted2">
+    <footer className="footer">
+      <Text variant="muted2" style={{ color: 'var(--neutral-0)' }}>
         &copy; {getCurrentYear()} {APP_NAME}. All rights reserved.
       </Text>
     </footer>
