@@ -6,6 +6,7 @@
   --border-color-secondary: var(--color-border-secondary);
 
   /* Brand Colors */
+  --primary-50: #F5FBFF;
   --primary-100: #E0F7FF;
   --primary-200: #B3EAFF;
   --primary-300: #80DCFF;
@@ -20,6 +21,7 @@
   --primary-main: var(--primary-500);
 
   /* Accent Colors */
+  --secondary-50: #FAFBFD;
   --secondary-100: #F1F3F7;
   --secondary-200: #DCE0E8;
   --secondary-300: #C6CCD6;
@@ -33,6 +35,7 @@
 
   /* Neutral Colors - Grey Palette */
   --neutral-0: #FFFFFF;
+  --neutral-50: #FCFCFD;
   --neutral-100: #F9FAFB;
   --neutral-200: #F3F4F6;
   --neutral-300: #E5E7EB;
