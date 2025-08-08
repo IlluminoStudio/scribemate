@@ -50,7 +50,7 @@ const TopBar = ({ onLogout, currentPage = 'Dashboard' }) => {
       </div>
       <div className="top-bar-right-group">
         <Avatar image="/camila.jpg" variant="sm" />
-        <Text variant="body2" >
+        <Text variant="body2" style={{ fontWeight: 500 }}>
           Camila Rowling
         </Text>
         <Button 
