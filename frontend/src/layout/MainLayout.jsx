@@ -5,6 +5,7 @@ import Footer from './Footer';
 import { handleLogout, getInitials } from '../utils/common';
 import { useUserData } from '../hooks/useSession';
 import { DEFAULT_USER_NAME } from '../constants';
+import '../styles/App.css';
 
 function MainLayout({ children }) {
   const { userData, updateSessionExpiry } = useUserData();
@@ -71,7 +72,7 @@ function MainLayout({ children }) {
         currentPage={getCurrentPage()}
       />
       {/* Future NavigationBar will go here */}
-      <main style={mainStyle}>
+      <main style={mainStyle} className="app">
         {children}
       </main>
       <Footer />

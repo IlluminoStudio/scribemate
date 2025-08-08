@@ -42,7 +42,7 @@ function DemoPage() {
   const allDoctors = ["Dr. Smith", "Dr. Jones", "Dr. Miller", "Dr. Brown"];
 
   return (
-    <div className="app">
+    <div>
       <header>
         <img 
           src="/logo.svg" 
