@@ -41,17 +41,14 @@
 
 # ARCHITECTURE OVERVIEW
 - **Frontend**: React + Vite (deployed on Vercel)
-- **BFF**: Vercel API Routes (Node.js serverless functions) - handles business logic and data processing
-- **Database**: Supabase (PostgreSQL) - handles data storage
-- **Deployment**: Vercel for both frontend and BFF
+- **BFF**:
+- **Database**:
+- **Deployment**:
 
 # TECH STACK
 ## Core Technologies
 - Cursor as my IDE (it's a fork of VSCode)
-- Node.js serverless functions (Vercel) for the BFF (Backend for Frontend)
 - React for the frontend
-- Supabase for the database (PostgreSQL)
-- Backend and frontend are deployed on Vercel
 
 ## UI MANDATORY REQUIREMENTS
 - NEVER DEVIATE FROM THESE
@@ -62,9 +59,6 @@
 - **Shadow variables** from `frontend/src/styles/index.css` - MANDATORY
 - NEVER DEVIATE FROM THESE
 
-# ENVIRONMENT VARIABLES
-- Use `.env.sample` to generate `.env.local`
-
 # CURRENT FOLDER STRUCTURE
 - We use the following folder conventions in `frontend/src/`:
   - `public/` — all image assets including icons
@@ -72,22 +66,11 @@
   - `modules/` — secondary components built by combining atomic components from `components/` (e.g. MessageBox)
   - `pages/` — for top-level route components/pages (e.g. HomePage, AboutPage)
   - `layout/` — for layout components that wrap or arrange pages/components (e.g. MainLayout, AuthLayout, SidebarLayout)
-- API routes are in `api/` directory:
-  - `lib/` — shared utilities and configurations
-  - `api/*.js` — individual API route handlers
-- Development scripts and tests are in `dev-scripts/` directory:
-  - `dev-scripts/tests/` — API endpoint tests
-  - `dev-scripts/server.js` — local development server
-  - `dev-scripts/debug-env.js` — environment debugging utilities
-- Database migrations are in `supabase/migrations/`
 
   Example usage:
   - `components/Button.jsx` — a reusable button
   - `pages/HomePage.jsx` — the main landing page
   - `layout/MainLayout.jsx` — a layout that provides the app's main structure (header, sidebar, etc)
-  - `api/users.js` — API route for user management
-  - `dev-scripts/tests/test-users.js` — tests for users endpoint
-  - `supabase/migrations/20240101000000_initial_schema.sql` — database migration
   
 # FRONTEND RULES
 ## UI DESIGN PRINCIPLES
@@ -110,6 +93,7 @@
 - **NO CUSTOM BUTTONS**: Never create custom buttons. Always use the `Button` component from `frontend/src/components/Button.jsx`.
 - **NO CUSTOM TEXT**: Never use native HTML elements like `<p>`, `<h1>`, `<span>` with manual styling. Always use the `Text` component from `frontend/src/components/Text.jsx`.
 - **NO EMOJI ICONS**: Never use emoji characters for icons. Always use Phosphor React icons.
+- **SHADOWS**: Always use `var(--shadow-sm|md|lg)` from `frontend/src/styles/index.css`; never hardcode `box-shadow`.
 - **COMPONENT OVERRIDE**: Only create custom elements if NO existing component can handle the requirement, and document why.
 
 # BACKEND RULES
