@@ -7,9 +7,6 @@ function SandboxPage() {
 
   return (
     <div className="main-page-container">
-      {/* Removed ClockStatus examples */}
-
-      {/* Removed ClockButton examples */}
 
       {/* Message Box Examples */}
       {!acknowledged && (

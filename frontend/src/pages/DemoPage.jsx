@@ -405,6 +405,39 @@ function DemoPage() {
           title="Group Accountability"
           body="Success depends on everyone - no one gets left behind"
         />
+        {/* Sample Card moved here to appear side-by-side */}
+        <Card
+          testid="clock-card"
+          icon={
+            <Icon
+              testid="clock-icon"
+              variant="circle"
+              size={56}
+              noBg={false}
+              style={{ background: "var(--primary-100)" }}
+              color="var(--primary-700)"
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 256 256"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="128" cy="128" r="96" fill="currentColor" />
+                <path
+                  d="M128 72v56l40 24"
+                  stroke="#fff"
+                  strokeWidth="16"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Icon>
+          }
+          title="Sample Card"
+          body="Timestamped shift tracking for every caregiver"
+        />
       </div>
 
       {/* Input Variants Showcase 1 */}
@@ -606,48 +639,7 @@ function DemoPage() {
       {/* Color Showcase */}
       <ColorSwitcher />
 
-      {/* New Card Showcase */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "48px 0",
-        }}
-      >
-        <Card
-          testid="clock-card"
-          icon={
-            <Icon
-              testid="clock-icon"
-              variant="circle"
-              size={56}
-              noBg={false}
-              style={{ background: "var(--primary-100)" }}
-              color="var(--primary-700)"
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 256 256"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="128" cy="128" r="96" fill="currentColor" />
-                <path
-                  d="M128 72v56l40 24"
-                  stroke="#fff"
-                  strokeWidth="16"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Icon>
-          }
-          title="Clock-In / Clock-Out"
-          body="Timestamped shift tracking for every caregiver"
-        />
-      </div>
+      
     </div>
   );
 }
