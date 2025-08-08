@@ -6,7 +6,6 @@
   margin-left: auto;
   margin-right: auto;
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
 }
 
 .color-category {
@@ -27,7 +26,6 @@
   box-sizing: border-box;
   box-shadow: var(--shadow-sm);
   margin-bottom: 4px;
-  border: 1px solid var(--border-color-secondary);
 }
 
 .swatch-info {
@@ -39,7 +37,6 @@
   margin-bottom: 8px;
   border-radius: 6px;
   padding: 2px 0;
-  border: 1px solid var(--border-color);
 }
 
 .swatch-label {
