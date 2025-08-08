@@ -5,7 +5,7 @@
   --border-color: var(--color-border);
   --border-color-secondary: var(--color-border-secondary);
 
-  /* Brand Colors - Primary (#00B2FF) */
+  /* Brand Colors */
   --primary-100: #E0F7FF;
   --primary-200: #B3EAFF;
   --primary-300: #80DCFF;
@@ -19,7 +19,7 @@
   --primary-dark: var(--primary-700);
   --primary-main: var(--primary-500);
 
-  /* Accent Colors - Secondary (#4F5D75) */
+  /* Accent Colors */
   --secondary-100: #F1F3F7;
   --secondary-200: #DCE0E8;
   --secondary-300: #C6CCD6;
@@ -32,7 +32,7 @@
   --secondary-main: var(--secondary-500);
 
   /* Neutral Colors - Grey Palette */
-  --neutral-0: #000000;      /* Pure black for dark theme */
+  --neutral-0: #FFFFFF;
   --neutral-100: #F9FAFB;
   --neutral-200: #F3F4F6;
   --neutral-300: #E5E7EB;
@@ -42,7 +42,7 @@
   --neutral-700: #4B5563;
   --neutral-800: #374151;
   --neutral-900: #1F2937;
-  --neutral-999: #FFFFFF;    /* Pure white for light theme */
+  --neutral-999: #000000;
 
   /*
    * THEME SWITCHING GUIDE:
@@ -53,24 +53,24 @@
 
   /* ===== DARK THEME ===== */
   /*
-  --color-background: var(--neutral-0);
+  --color-background: var(--neutral-999);
   --color-surface: var(--neutral-50);
   --color-border: var(--neutral-300);
   --color-border-secondary: var(--neutral-400);
   
-  --color-text-primary: var(--neutral-999);
+  --color-text-primary: var(--neutral-0);
   --color-text-secondary: var(--neutral-800);
   --color-text-tertiary: var(--neutral-700);
   --color-text-quaternary: var(--neutral-600);
   --color-text-disabled: var(--neutral-500);
   */
   /* ===== LIGHT THEME ===== */
-  --color-background: var(--neutral-999);
+  --color-background: var(--neutral-0);
   --color-surface: var(--neutral-900);
   --color-border: var(--neutral-700);
   --color-border-secondary: var(--neutral-600);
   
-  --color-text-primary: var(--neutral-0);
+  --color-text-primary: var(--neutral-999);
   --color-text-secondary: var(--neutral-100);
   --color-text-tertiary: var(--neutral-200);
   --color-text-quaternary: var(--neutral-300);
@@ -125,23 +125,6 @@ body {
 /* Ensure all elements inherit the font */
 * {
   font-family: inherit;
-}
-
-/* Header and text element styling for theme switching */
-header {
-  color: var(--color-text-primary);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-text-primary);
-  margin: 0;
-  padding: 0;
-}
-
-p {
-  color: var(--color-text-secondary);
-  margin: 0;
-  padding: 0;
 }
 
 /* Global container for max-width */
