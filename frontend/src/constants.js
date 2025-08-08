@@ -4,6 +4,9 @@ export const APP_NAME = "ScribeMate";
 
 export const SESSION_EXPIRY_SECONDS = 7200; // 2 hours
 
+// Default user for development/demo purposes
+export const DEFAULT_USER_NAME = "Camila Ramirez";
+
 export function getCurrentYear() {
   return new Date().getFullYear();
 } 

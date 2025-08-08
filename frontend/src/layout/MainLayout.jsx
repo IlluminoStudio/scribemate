@@ -4,11 +4,14 @@ import TopBar from './TopBar';
 import Footer from './Footer';
 import { handleLogout, getInitials } from '../utils/common';
 import { useUserData } from '../hooks/useSession';
+import { DEFAULT_USER_NAME } from '../constants';
 
 function MainLayout({ children }) {
   const { userData, updateSessionExpiry } = useUserData();
   const [initials, setInitials] = useState('');
   const location = useLocation();
+  
+
   
   // Determine current page based on pathname
   const getCurrentPage = () => {
@@ -17,7 +20,7 @@ function MainLayout({ children }) {
     if (path === '/demo') return 'Demo';
     if (path === '/sandbox') return 'Sandbox';
     if (path === '/play') return 'Play';
-    return 'Dashboard'; // Default
+    return 'Dashboard'; // default
   };
 
   useEffect(() => {
@@ -57,11 +60,13 @@ function MainLayout({ children }) {
     flex: 1,
   };
 
+
+  
   return (
     <div style={layoutStyle}>
       <TopBar 
-        userName={userData?.full_name || ''} 
-        initials={initials} 
+        userName={userData?.full_name || DEFAULT_USER_NAME} 
+        initials={initials || getInitials(DEFAULT_USER_NAME)} 
         onLogout={handleLogout}
         currentPage={getCurrentPage()}
       />

@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import { SignOut } from 'phosphor-react';
 import '../styles/TopBar.css';
 
-const TopBar = ({ onLogout, currentPage = 'Dashboard', userName, initials }) => {
+const TopBar = ({ onLogout, currentPage = 'Dashboard', userName }) => {
   const navigationItems = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'content-library', label: 'Content Library' },
@@ -51,7 +51,7 @@ const TopBar = ({ onLogout, currentPage = 'Dashboard', userName, initials }) => 
       <div className="top-bar-right-group">
         <Avatar image="/camila.jpg" variant="sm" />
         <Text variant="body2" style={{ fontWeight: 500 }}>
-          {userName || 'Camila Rowling'}
+           {userName}
         </Text>
         <Button 
           variant="text" 

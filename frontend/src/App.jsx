@@ -21,11 +21,11 @@ function App() {
       <AnalyticsTracker />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<LayoutWrapper><DashboardPage /></LayoutWrapper>} />
         <Route path="/demo" element={<LayoutWrapper><DemoPage /></LayoutWrapper>} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/sandbox" element={<LayoutWrapper><SandboxPage /></LayoutWrapper>} />
         <Route path="/play" element={<LayoutWrapper><PlayPage /></LayoutWrapper>} />
-        <Route path="/dashboard" element={<LayoutWrapper><DashboardPage /></LayoutWrapper>} />
       </Routes>
     </>
   );

@@ -15,10 +15,7 @@ const Icon = ({
   color = null, // Allow custom color override
   ...rest
 }) => {
-  // Get the computed value of --primary-dark from the document root
-  const primaryDark = getComputedStyle(document.documentElement).getPropertyValue("--primary-dark").trim() || "#55EDF5";
-  // Compute background color with 20% opacity
-  const bgColor = hexToRgba(primaryDark, 0.2);
+  const bgColor = "var(--primary-100)";
 
   // Choose border radius based on variant
   const borderRadius = variant === "circle" ? "50%" : "8px";
@@ -52,7 +49,7 @@ const Icon = ({
         })
       ) : (
         React.cloneElement(children, {
-          color: color || primaryDark,
+          color: color || "var(--primary-500)",
           size: size * 0.5,
         })
       )}
