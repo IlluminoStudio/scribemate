@@ -6,9 +6,6 @@ import DemoPage from "./pages/DemoPage";
 import SignInPage from "./pages/SignInPage";
 import SandboxPage from "./pages/SandboxPage";
 import PlayPage from "./pages/PlayPage";
-import CarerHomePage from "./pages/CarerHomePage";
-import CoordinatorHomePage from "./pages/CoordinatorHomePage";
-import NewMessagePage from "./pages/NewMessagePage";
 import MainLayout from "./layout/MainLayout";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 
@@ -27,9 +24,6 @@ function App() {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/sandbox" element={<LayoutWrapper><SandboxPage /></LayoutWrapper>} />
         <Route path="/play" element={<LayoutWrapper><PlayPage /></LayoutWrapper>} />
-        <Route path="/carer" element={<LayoutWrapper><CarerHomePage /></LayoutWrapper>} />
-        <Route path="/coordinator" element={<LayoutWrapper><CoordinatorHomePage /></LayoutWrapper>} />
-        <Route path="/new-message" element={<LayoutWrapper><NewMessagePage /></LayoutWrapper>} />
       </Routes>
     </>
   );
