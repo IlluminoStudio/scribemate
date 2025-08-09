@@ -1,5 +1,4 @@
 :root {
-  /* Dark mode defaults */
   --primary-bg: var(--neutral-0);
   --secondary-bg: var(--neutral-50);
   --border-color: var(--color-border);
@@ -136,8 +135,11 @@ body {
 }
 
 /* Global container for max-width */
-.page-container {
+.max-width {
   max-width: 1280px;
+}
+
+.page-container {
   margin: 0 auto;
   width: 100%;
 }
