@@ -92,33 +92,24 @@ function DashboardPage() {
 
       {/* Content block */}
       <div className="content-block">
-        <div
-          className="page-container max-width"
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            gap: 32,
-            padding: "24px 0",
-          }}
-        >
-          {/* Left column - 2 parts width */}
-          <div
-            className="content-left"
-            style={{ flex: 2, maxWidth: 800 }}
-          >
-            <DashboardCard
-              title="Choose Your Topic"
-              subtitle="Trending Topics"
-              body="Add topic suggestions here."
-            />
-          </div>
+        <div className="page-container max-width" style={{ padding: "24px 0" }}>
+          <div className="flex-row-wrap" style={{ maxWidth: "100%", alignItems: "flex-start" }}>
+            {/* Left column - 2 parts width*/}
+            <div className="content-left" style={{ flex: 2, maxWidth: 800 }}>
+              <DashboardCard
+                title="Choose Your Topic"
+                subtitle="Trending Topics"
+                body="Add topic suggestions here."
+              />
+            </div>
 
-          {/* Right column - 1 part width */}
-          <div className="content-right" style={{ flex: 1 }}>
-            <DashboardCard
-              subtitle="This Month"
-              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac feugiat urna."
-            />
+            {/* Right column - 1 part width */}
+            <div className="content-right" style={{ flex: 1 }}>
+              <DashboardCard
+                subtitle="This Month"
+                body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac feugiat urna."
+              />
+            </div>
           </div>
         </div>
       </div>

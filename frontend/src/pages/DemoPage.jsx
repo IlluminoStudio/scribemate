@@ -42,7 +42,7 @@ function DemoPage() {
   const allDoctors = ["Dr. Smith", "Dr. Jones", "Dr. Miller", "Dr. Brown"];
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <header>
         <img 
           src="/logo.svg" 
@@ -223,6 +223,7 @@ function DemoPage() {
           display: "flex",
           flexDirection: "column",
           gap: "24px",
+          textAlign: "center",
         }}
       >
         <Text testid="heading-1" variant="h1">Heading 1</Text>
