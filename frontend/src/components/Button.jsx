@@ -163,9 +163,9 @@ function Button({
     };
   } else if (size === "sm") {
     sizeStyle = {
-      borderRadius: 8,
-      fontSize: 14,
-      padding: "8px 16px",
+      borderRadius: 10,
+      fontSize: 15,
+      padding: "10px 18px",
     };
   }
 

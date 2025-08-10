@@ -18,19 +18,19 @@ function DashboardCard({ title, subtitle, body }) {
         padding: 24,
       }}
     >
-      {title ? (
-        <Text variant="h5">{title}</Text>
-      ) : null}
+      {title ? <Text variant="h5">{title}</Text> : null}
       {subtitle ? (
         <Text variant="h6" style={{ marginTop: title ? 12 : 0 }}>
           {subtitle}
         </Text>
       ) : null}
       {body ? (
-        <div style={{ 
-          marginTop: title || subtitle ? 16 : 0,
-          lineHeight: 1.5 
-        }}>
+        <div
+          style={{
+            marginTop: title || subtitle ? 16 : 0,
+            lineHeight: 1.5,
+          }}
+        >
           {body}
         </div>
       ) : null}
@@ -97,7 +97,10 @@ function DashboardPage() {
       {/* Content block */}
       <div className="content-block">
         <div className="page-container max-width" style={{ padding: "24px 0" }}>
-          <div className="flex-row-wrap" style={{ maxWidth: "100%", alignItems: "flex-start" }}>
+          <div
+            className="flex-row-wrap"
+            style={{ maxWidth: "100%", alignItems: "flex-start" }}
+          >
             {/* Left column - 2 parts width*/}
             <div className="content-left" style={{ flex: 2, maxWidth: 800 }}>
               <DashboardCard
@@ -108,53 +111,159 @@ function DashboardPage() {
             </div>
 
             {/* Right column - 1 part width */}
-            <div className="content-right" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div
+              className="content-right"
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                gap: "24px",
+              }}
+            >
               <DashboardCard
                 subtitle="This Month"
                 body={
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Text variant="body1" style={{ color: 'var(--neutral-700)' }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "16px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text
+                        variant="body1"
+                        style={{ color: "var(--neutral-700)" }}
+                      >
                         Posts Created
                       </Text>
-                      <Text variant="h6">
-                        12
-                      </Text>
+                      <Text variant="h6">12</Text>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Text variant="body1" style={{ color: 'var(--neutral-700)' }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text
+                        variant="body1"
+                        style={{ color: "var(--neutral-700)" }}
+                      >
                         Drafts Saved
                       </Text>
-                      <Text variant="h6">
-                        5
-                      </Text>
+                      <Text variant="h6">5</Text>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Text variant="body1" style={{ color: 'var(--neutral-700)' }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text
+                        variant="body1"
+                        style={{ color: "var(--neutral-700)" }}
+                      >
                         Images Generated
                       </Text>
-                      <Text variant="h6">
-                        18
-                      </Text>
+                      <Text variant="h6">18</Text>
                     </div>
                   </div>
                 }
               />
-              
+
               <DashboardCard
                 title="Quick Actions"
                 body={
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
-                    <Button testid="content-library" color="grey" variant="text" size="sm" leftIcon={<Folder weight="fill" size={20} />} style={{ paddingLeft: 0 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    <Button
+                      testid="content-library"
+                      color="grey"
+                      variant="text"
+                      size="sm"
+                      leftIcon={<Folder weight="fill" size={20} />}
+                      style={{ paddingLeft: 0 }}
+                    >
                       Content Library
                     </Button>
-                    <Button testid="brand-assets" color="grey" variant="text" size="sm" leftIcon={<Palette weight="fill" size={20} />} style={{ paddingLeft: 0 }}>
+                    <Button
+                      testid="brand-assets"
+                      color="grey"
+                      variant="text"
+                      size="sm"
+                      leftIcon={<Palette weight="fill" size={20} />}
+                      style={{ paddingLeft: 0 }}
+                    >
                       Brand Assets
                     </Button>
-                    <Button testid="help-support" color="grey" variant="text" size="sm" leftIcon={<Question weight="fill" size={20} />} style={{ paddingLeft: 0 }}>
+                    <Button
+                      testid="help-support"
+                      color="grey"
+                      variant="text"
+                      size="sm"
+                      leftIcon={<Question weight="fill" size={20} />}
+                      style={{ paddingLeft: 0 }}
+                    >
                       Help & Support
                     </Button>
                   </div>
+                }
+              />
+
+              <DashboardCard
+                body={
+                                     <div
+                     style={{
+                       display: "flex",
+                       alignItems: "flex-start",
+                       gap: "8px",
+                       background: "var(--primary-100)",
+                       border: "1px solid var(--primary-200)",
+                       borderRadius: "12px",
+                       padding: "24px",
+                       boxShadow: "var(--shadow-sm)",
+                       margin: "-24px", // Compensate for DashboardCard's internal padding
+                     }}
+                   >
+                     <div style={{ 
+                       display: "flex", 
+                       alignItems: "flex-start",
+                       paddingTop: "4px"
+                     }}>
+                       <Lightbulb
+                         weight="fill"
+                         size={16}
+                         style={{ color: "var(--primary-500)" }}
+                       />
+                     </div>
+                     <div
+                       style={{
+                         display: "flex",
+                         flexDirection: "column",
+                         gap: "8px",
+                       }}
+                     >
+                       <Text variant="h6">Pro Tip</Text>
+                       <Text variant="body2" style={{ lineHeight: "20px" }}>
+                         Try combining seasonal topics with your teaching
+                         expertise for higher engagement rates!
+                       </Text>
+                     </div>
+                   </div>
                 }
               />
             </div>
