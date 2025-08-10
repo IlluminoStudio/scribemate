@@ -107,7 +107,34 @@ function DashboardPage() {
             <div className="content-right" style={{ flex: 1 }}>
               <DashboardCard
                 subtitle="This Month"
-                body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac feugiat urna."
+                body={
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Text variant="body1" style={{ color: 'var(--neutral-700)' }}>
+                        Posts Created
+                      </Text>
+                      <Text variant="h6">
+                        12
+                      </Text>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Text variant="body1" style={{ color: 'var(--neutral-700)' }}>
+                        Drafts Saved
+                      </Text>
+                      <Text variant="h6">
+                        5
+                      </Text>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Text variant="body1" style={{ color: 'var(--neutral-700)' }}>
+                        Images Generated
+                      </Text>
+                      <Text variant="h6">
+                        18
+                      </Text>
+                    </div>
+                  </div>
+                }
               />
             </div>
           </div>
