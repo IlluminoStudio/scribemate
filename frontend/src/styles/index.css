@@ -87,23 +87,35 @@
   --shadow-sm: 0 4px 8px -2px rgb(255 255 255 / 0.2), 0 1px 4px -1px rgb(255 255 255 / 0.12);
 
   /* Status Colors - Harmonized with new primary */
+  --success-100: #d1fae5;
+  --success-200: #a7f3d0;
   --success-300: #6ee7b7;
   --success-400: #34d399;
   --success-500: #10b981;
   --success-600: #059669;
   --success-700: #047857;
+  --success-800: #065f46;
+  --success-900: #064e3b;
 
+  --error-100: #fee2e2;
+  --error-200: #fecaca;
   --error-300: #ffb3b3;
   --error-400: #ff8080;
   --error-500: #ff1a1a;
   --error-600: #e60000;
   --error-700: #cc0000;
+  --error-800: #991a1a;
+  --error-900: #800000;
 
+  --warning-100: #fef3c7;
+  --warning-200: #fde68a;
   --warning-300: #fcd34d;
   --warning-400: #fbbf24;
   --warning-500: #f59e0b;
   --warning-600: #d97706;
   --warning-700: #b45309;
+  --warning-800: #92400e;
+  --warning-900: #78350f;
 
 }
 

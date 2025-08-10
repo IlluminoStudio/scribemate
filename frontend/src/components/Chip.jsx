@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Warning } from 'phosphor-react';
 
 /**
  * Chip component with primary and secondary variants.
@@ -18,6 +19,21 @@ const VARIANT_STYLES = {
   light: {
     backgroundColor: 'var(--primary-100)',
     color: 'var(--primary-600)',
+    cursor: 'pointer',
+  },
+  success: {
+    backgroundColor: 'var(--success-100)',
+    color: 'var(--success-500)',
+    cursor: 'pointer',
+  },
+  warning: {
+    backgroundColor: 'var(--warning-100)',
+    color: 'var(--warning-500)',
+    cursor: 'pointer',
+  },
+  error: {
+    backgroundColor: 'var(--error-100)',
+    color: 'var(--error-500)',
     cursor: 'pointer',
   },
 };
@@ -52,9 +68,10 @@ const CHIP_SIZES = {
     padding: '0 10px 0 10px',
   },
   xs: {
+    borderRadius: '4px',
     height: '20px',
     fontSize: '10px',
-    padding: '0 6px 0 6px',
+    padding: '4px 8px',
   },
 };
 

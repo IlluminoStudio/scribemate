@@ -282,6 +282,11 @@ function DemoPage() {
           icon={<Check weight="fill" size={16} />}
         />
         <Chip testid="cardiology-chip" label="Cardiology" variant="light" rightIcon={<X size={16} />} />
+        <Chip testid="cardiology-chip" label="Trending" variant="light" size="xs" />
+        <Chip testid="success-chip" label="Success" variant="success" />
+        <Chip testid="success-xs-chip" label="Success" variant="success" size="xs" />
+        <Chip testid="warning-xs-chip" label="Warning" variant="warning" size="xs" />
+        <Chip testid="error-xs-chip" label="Error" variant="error" size="xs" />
       </div>
 
       {/* Dropdown Component Showcase */}

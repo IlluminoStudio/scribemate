@@ -37,15 +37,15 @@ const colorCategories = [
 const statusRows = [
   {
     label: 'Success',
-    colors: ['success-300','success-400','success-500','success-600','success-700'],
+    colors: ['success-100','success-200','success-300','success-400','success-500','success-600','success-700','success-800','success-900'],
   },
   {
     label: 'Warning',
-    colors: ['warning-300','warning-400','warning-500','warning-600','warning-700'],
+    colors: ['warning-100','warning-200','warning-300','warning-400','warning-500','warning-600','warning-700','warning-800','warning-900'],
   },
   {
     label: 'Error',
-    colors: ['error-300','error-400','error-500','error-600','error-700'],
+    colors: ['error-100','error-200','error-300','error-400','error-500','error-600','error-700','error-800','error-900'],
   },
 ];
 
@@ -57,20 +57,22 @@ const ColorSwatch = () => {
           <div key={category.label} className="color-category">
             <Text variant="h3">{category.label}</Text>
             {statusRows.map(row => (
-              <div className="swatch-row" key={row.label}>
-                <Text variant="body2" className="swatch-row-label">{row.label}</Text>
-                {row.colors.map(color => {
-                  const value = getCssVarValue(color);
-                  return (
-                    <div key={color} className="swatch-cell">
-                      <div className="swatch" style={{ background: `var(--${color})` }} />
-                      <div className="swatch-info">
-                        <Text variant="caption" className="swatch-label">--{color}</Text>
-                        <Text variant="caption" className="swatch-value">{value}</Text>
+              <div key={row.label}>
+                <Text variant="h4" style={{ marginBottom: "16px", textAlign: "center" }}>{row.label}</Text>
+                <div className="swatch-row">
+                  {row.colors.map(color => {
+                    const value = getCssVarValue(color);
+                    return (
+                      <div key={color} className="swatch-cell">
+                        <div className="swatch" style={{ background: `var(--${color})` }} />
+                        <div className="swatch-info">
+                          <Text variant="caption" className="swatch-label">--{color}</Text>
+                          <Text variant="caption" className="swatch-value">{value}</Text>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             ))}
           </div>
