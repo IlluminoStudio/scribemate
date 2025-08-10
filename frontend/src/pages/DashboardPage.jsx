@@ -1,7 +1,8 @@
 import React from "react";
 import Text from "../components/Text";
 import Icon from "../components/Icon";
-import { Lightbulb } from "phosphor-react";
+import Button from "../components/Button";
+import { Lightbulb, Folder, Palette, Question } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 
 // Local, file-scoped card for dashboard only. Do not change global Card.
@@ -13,7 +14,7 @@ function DashboardCard({ title, subtitle, body }) {
         borderRadius: 12,
         border: "1px solid var(--neutral-300)",
         background: "var(--primary-bg)",
-        boxShadow: "var(--shadow-sm)",
+        boxShadow: "var(--shadow-xs)",
         padding: 24,
       }}
     >
@@ -26,9 +27,12 @@ function DashboardCard({ title, subtitle, body }) {
         </Text>
       ) : null}
       {body ? (
-        <Text variant="body2" style={{ marginTop: subtitle ? 14 : 0, lineHeight: 1.5 }}>
+        <div style={{ 
+          marginTop: title || subtitle ? 16 : 0,
+          lineHeight: 1.5 
+        }}>
           {body}
-        </Text>
+        </div>
       ) : null}
     </div>
   );
@@ -104,7 +108,7 @@ function DashboardPage() {
             </div>
 
             {/* Right column - 1 part width */}
-            <div className="content-right" style={{ flex: 1 }}>
+            <div className="content-right" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <DashboardCard
                 subtitle="This Month"
                 body={
@@ -133,6 +137,23 @@ function DashboardPage() {
                         18
                       </Text>
                     </div>
+                  </div>
+                }
+              />
+              
+              <DashboardCard
+                title="Quick Actions"
+                body={
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
+                    <Button testid="content-library" color="grey" variant="text" size="sm" leftIcon={<Folder weight="fill" size={20} />} style={{ paddingLeft: 0 }}>
+                      Content Library
+                    </Button>
+                    <Button testid="brand-assets" color="grey" variant="text" size="sm" leftIcon={<Palette weight="fill" size={20} />} style={{ paddingLeft: 0 }}>
+                      Brand Assets
+                    </Button>
+                    <Button testid="help-support" color="grey" variant="text" size="sm" leftIcon={<Question weight="fill" size={20} />} style={{ paddingLeft: 0 }}>
+                      Help & Support
+                    </Button>
                   </div>
                 }
               />

@@ -18,7 +18,7 @@ import Toggle from "../components/Toggle";
 import Checkbox from "../components/Checkbox";
 import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
-import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check } from "phosphor-react";
+import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder } from "phosphor-react";
 import userSvg from "../assets/user.svg";
 
 function DemoPage() {
@@ -204,6 +204,15 @@ function DemoPage() {
           leftIcon={<Flame weight="fill" size={20} />}
         >
           Hot Action
+        </Button>
+        <Button 
+          testid="content-library"
+          color="grey"
+          variant="text"
+          size="sm"
+          leftIcon={<Folder weight="fill" size={20} />}
+        >
+          Content Library
         </Button>
         <Button 
           testid="click-here-btn"
