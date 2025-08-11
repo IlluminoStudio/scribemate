@@ -2,7 +2,8 @@ import React from "react";
 import Text from "../components/Text";
 import Icon from "../components/Icon";
 import Button from "../components/Button";
-import { Lightbulb, Folder, Palette, Question } from "phosphor-react";
+import Chip from "../components/Chip";
+import { Lightbulb, Folder, Palette, Question, ArrowClockwise } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 
 // Local, file-scoped card for dashboard only. Do not change global Card.
@@ -34,6 +35,44 @@ function DashboardCard({ title, subtitle, body }) {
           {body}
         </div>
       ) : null}
+    </div>
+  );
+}
+
+function TopicCard({ title, body, tag, tagVariant }) {
+  return (
+    <div
+      style={{
+        background: "var(--primary-bg)",
+        border: "1px solid var(--neutral-300)",
+        borderRadius: "8px",
+        padding: "16px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+        height: "100%",
+      }}
+    >
+      <Text variant="h6" style={{ marginBottom: "4px" }}>
+        {title}
+      </Text>
+      <Text 
+        variant="body2" 
+        style={{ 
+          color: "var(--neutral-700)", 
+          lineHeight: "20px",
+          marginBottom: "8px"
+        }}
+      >
+        {body}
+      </Text>
+      <div style={{ alignSelf: "flex-start", marginTop: "auto" }}>
+        <Chip 
+          label={tag} 
+          variant={tagVariant} 
+          size="xs"
+        />
+      </div>
     </div>
   );
 }
@@ -105,8 +144,62 @@ function DashboardPage() {
             <div className="content-left" style={{ flex: 2, maxWidth: 800 }}>
               <DashboardCard
                 title="Choose Your Topic"
-                subtitle="Trending Topics"
-                body="Add topic suggestions here."
+                body={
+                  <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                    {/* Header with Refresh button */}
+                    <div style={{ 
+                      display: "flex", 
+                      justifyContent: "space-between", 
+                      alignItems: "center" 
+                    }}>
+                      <Text variant="h6">Trending Topics</Text>
+                      <Button
+                        testid="refresh-topics"
+                        color="primary"
+                        variant="text"
+                        size="sm"
+                        leftIcon={<ArrowClockwise weight="fill" size={16} />}
+                      >
+                        Refresh
+                      </Button>
+                    </div>
+                    
+                    {/* Topic Cards Grid */}
+                    <div 
+                      style={{ 
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                        gap: "12px",
+                        width: "100%"
+                      }}
+                    >
+                      <TopicCard
+                        title="Spring Recital Preparation Tips"
+                        body="Help students prepare for their upcoming performances"
+                        tag="Trending"
+                        tagVariant="light"
+                      />
+                      <TopicCard
+                        title="Benefits of Learning Piano for Kids"
+                        body="Showcase the cognitive benefits of music education"
+                        tag="Evergreen"
+                        tagVariant="success"
+                      />
+                      <TopicCard
+                        title="Adult Piano Lessons: It's Never Too Late"
+                        body="Encourage adult learners to start their musical journey"
+                        tag="Trending"
+                        tagVariant="light"
+                      />
+                      <TopicCard
+                        title="Practice Tips for Busy Families"
+                        body="Share strategies for consistent practice routines"
+                        tag="Evergreen"
+                        tagVariant="success"
+                      />
+                    </div>
+                  </div>
+                }
               />
             </div>
 
