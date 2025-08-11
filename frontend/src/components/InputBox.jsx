@@ -31,7 +31,7 @@ const InputBox = ({ testid = "inputbox", title, placeholder, maxLength, value, o
   };
 
   return (
-    <div data-testid={testid} style={{ width: "100%", flex: 1 }}>
+    <div data-testid={testid} style={{ width: "100%" }}>
       {title && (
         <Text variant="label" style={{ marginBottom: "6px" }}>
           {title}

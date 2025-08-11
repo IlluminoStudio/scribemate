@@ -3,7 +3,15 @@ import Text from "../components/Text";
 import Icon from "../components/Icon";
 import Button from "../components/Button";
 import Chip from "../components/Chip";
-import { Lightbulb, Folder, Palette, Question, ArrowClockwise } from "phosphor-react";
+import Input from "../components/Input";
+import InputBox from "../components/InputBox";
+import {
+  Lightbulb,
+  Folder,
+  Palette,
+  Question,
+  ArrowClockwise,
+} from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 
 // Local, file-scoped card for dashboard only. Do not change global Card.
@@ -56,22 +64,18 @@ function TopicCard({ title, body, tag, tagVariant }) {
       <Text variant="h6" style={{ marginBottom: "4px" }}>
         {title}
       </Text>
-      <Text 
-        variant="body2" 
-        style={{ 
-          color: "var(--neutral-700)", 
+      <Text
+        variant="body2"
+        style={{
+          color: "var(--neutral-700)",
           lineHeight: "20px",
-          marginBottom: "8px"
+          marginBottom: "8px",
         }}
       >
         {body}
       </Text>
       <div style={{ alignSelf: "flex-start", marginTop: "auto" }}>
-        <Chip 
-          label={tag} 
-          variant={tagVariant} 
-          size="xs"
-        />
+        <Chip label={tag} variant={tagVariant} size="xs" />
       </div>
     </div>
   );
@@ -145,13 +149,21 @@ function DashboardPage() {
               <DashboardCard
                 title="Choose Your Topic"
                 body={
-                  <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "24px",
+                    }}
+                  >
                     {/* Header with Refresh button */}
-                    <div style={{ 
-                      display: "flex", 
-                      justifyContent: "space-between", 
-                      alignItems: "center" 
-                    }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
                       <Text variant="h6">Trending Topics</Text>
                       <Button
                         testid="refresh-topics"
@@ -163,14 +175,15 @@ function DashboardPage() {
                         Refresh
                       </Button>
                     </div>
-                    
+
                     {/* Topic Cards Grid */}
-                    <div 
-                      style={{ 
+                    <div
+                      style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                        gridTemplateColumns:
+                          "repeat(auto-fit, minmax(280px, 1fr))",
                         gap: "12px",
-                        width: "100%"
+                        width: "100%",
                       }}
                     >
                       <TopicCard
@@ -196,6 +209,29 @@ function DashboardPage() {
                         body="Share strategies for consistent practice routines"
                         tag="Evergreen"
                         tagVariant="success"
+                      />
+                    </div>
+                    {/* Or Create Your Own Topic Card */}
+                    <div
+                      style={{
+                        background: "var(--primary-bg)",
+                        borderTop: "1px solid var(--neutral-300)",
+                        paddingTop: "25px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "12px",
+                      }}
+                    >
+                      <Text variant="h5">Or Create Your Own Topic</Text>
+                      <Input
+                        testid="topic-input"
+                        label="Topic/Heading"
+                        placeholder="Enter your topic idea..."
+                      />
+                      <InputBox
+                        testid="context-inputbox"
+                        title="Additional Context"
+                        placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..."
                       />
                     </div>
                   </div>
@@ -319,44 +355,46 @@ function DashboardPage() {
 
               <DashboardCard
                 body={
-                                     <div
-                     style={{
-                       display: "flex",
-                       alignItems: "flex-start",
-                       gap: "8px",
-                       background: "var(--primary-100)",
-                       border: "1px solid var(--primary-200)",
-                       borderRadius: "12px",
-                       padding: "24px",
-                       boxShadow: "var(--shadow-sm)",
-                       margin: "-24px", // Compensate for DashboardCard's internal padding
-                     }}
-                   >
-                     <div style={{ 
-                       display: "flex", 
-                       alignItems: "flex-start",
-                       paddingTop: "4px"
-                     }}>
-                       <Lightbulb
-                         weight="fill"
-                         size={16}
-                         style={{ color: "var(--primary-500)" }}
-                       />
-                     </div>
-                     <div
-                       style={{
-                         display: "flex",
-                         flexDirection: "column",
-                         gap: "8px",
-                       }}
-                     >
-                       <Text variant="h6">Pro Tip</Text>
-                       <Text variant="body2" style={{ lineHeight: "20px" }}>
-                         Try combining seasonal topics with your teaching
-                         expertise for higher engagement rates!
-                       </Text>
-                     </div>
-                   </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "8px",
+                      background: "var(--primary-100)",
+                      border: "1px solid var(--primary-200)",
+                      borderRadius: "12px",
+                      padding: "24px",
+                      boxShadow: "var(--shadow-sm)",
+                      margin: "-24px", // Compensate for DashboardCard's internal padding
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        paddingTop: "4px",
+                      }}
+                    >
+                      <Lightbulb
+                        weight="fill"
+                        size={16}
+                        style={{ color: "var(--primary-500)" }}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      }}
+                    >
+                      <Text variant="h6">Pro Tip</Text>
+                      <Text variant="body2" style={{ lineHeight: "20px" }}>
+                        Try combining seasonal topics with your teaching
+                        expertise for higher engagement rates!
+                      </Text>
+                    </div>
+                  </div>
                 }
               />
             </div>
