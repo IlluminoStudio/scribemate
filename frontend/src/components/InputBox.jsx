@@ -1,35 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Text from "./Text";
 import "../styles/InputBox.css";
 
-const InputBox = ({ testid = "inputbox", placeholder, maxLength, value, onChange }) => {
+const InputBox = ({ testid = "inputbox", title, placeholder, maxLength, value, onChange }) => {
+  // Internal state for uncontrolled mode
+  const [internalValue, setInternalValue] = useState("");
+  
+  // Determine if component is controlled or uncontrolled
+  const isControlled = typeof value !== "undefined" && typeof onChange === "function";
+  const currentValue = isControlled ? (value || "") : internalValue;
+
   const charCountText = () => {
     if (maxLength != null) {
-      return `${value?.length || 0}/${maxLength} characters`;
+      return `${currentValue.length}/${maxLength} characters`;
     }
-    return `${value?.length || 0} characters`;
+    return `${currentValue.length} characters`;
   }
 
-  // Only controlled if both value and onChange are provided
-  const textareaProps = { 
-    className: "input-box-textarea",
-    placeholder,
-    maxLength
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+    
+    if (isControlled) {
+      // Controlled mode: call parent's onChange
+      onChange(newValue);
+    } else {
+      // Uncontrolled mode: update internal state
+      setInternalValue(newValue);
+    }
   };
-  if (typeof value !== "undefined" && typeof onChange === "function") {
-    textareaProps.value = value;
-    textareaProps.onChange = onChange;
-  } else {
-    textareaProps.defaultValue = value || "";
-  }
 
   return (
-    <div data-testid={testid} className="input-box-container">
-      <textarea {...textareaProps} />
-      <div className="input-box-footer">
-        <div className="input-box-char-count">
-          <Text variant="body2">{charCountText()}</Text>
+    <div data-testid={testid} style={{ width: "100%", flex: 1 }}>
+      {title && (
+        <Text variant="label" style={{ marginBottom: "6px" }}>
+          {title}
+        </Text>
+      )}
+      <div className="input-box-container">
+        <textarea 
+          className="input-box-textarea"
+          placeholder={placeholder}
+          maxLength={maxLength}
+          value={currentValue}
+          onChange={handleChange}
+        />
+        <div className="input-box-footer">
+          {maxLength != null && (
+            <div className="input-box-char-count">
+              <Text variant="body2">{charCountText()}</Text>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -38,6 +59,7 @@ const InputBox = ({ testid = "inputbox", placeholder, maxLength, value, onChange
 
 InputBox.propTypes = {
   testid: PropTypes.string,
+  title: PropTypes.string,
   placeholder: PropTypes.string,
   maxLength: PropTypes.number,
   value: PropTypes.string,

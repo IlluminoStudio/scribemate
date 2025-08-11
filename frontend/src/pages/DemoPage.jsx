@@ -543,6 +543,7 @@ function DemoPage() {
       {/* InputBox Showcase */}
       <div
         style={{
+          width: "100%",
           maxWidth: 1200,
           margin: "32px auto",
           display: "flex",
@@ -550,7 +551,10 @@ function DemoPage() {
           gap: "24px",
         }}
       >
-        <InputBox testid="message-inputbox" placeholder="Type your message here..." maxLength={30} />
+        <div style={{ display: "flex", gap: "24px", alignItems: "flex-start", width: "100%", minWidth: 0 }}>
+          <InputBox testid="message-inputbox" placeholder="Type your message here..." maxLength={30} />
+          <InputBox testid="context-inputbox" title="Additional Context" placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..." />
+        </div>
       </div>
 
       {/* Dott Component Showcase */}
