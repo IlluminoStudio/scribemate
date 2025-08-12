@@ -5,24 +5,37 @@
   width: 100%;
 }
 
+.ff-input-label {
+  color: var(--neutral-800);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+}
+
 .ff-input {
   width: 100%;
   padding: 12px 16px;
-  background: var(--neutral-50);
-  border: 1px solid var(--neutral-200);
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-400);
   border-radius: 8px;
   font-size: 16px;
   font-weight: 400;
   font-family: inherit;
-  color: var(--color-text-primary);
+  color: var(--neutral-999);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
 }
 
 .ff-input::placeholder {
-  color: var(--neutral-300);
+  color: var(--neutral-500);
   opacity: 1;
+}
+
+.ff-input:focus {
+  border: 2px solid var(--primary-500);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
 }
 
 .ff-input-wrapper {

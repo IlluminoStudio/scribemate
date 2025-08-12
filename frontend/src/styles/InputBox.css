@@ -23,14 +23,14 @@
   resize: none;
   box-sizing: border-box;
   color: var(--neutral-800);
-  line-height: 24px;
+  line-height: 1.5;
   outline: none; /* remove default focus outline */
-  padding: 0;
+  padding: 12px 16px;
   min-height: 80px;
 }
 
 .input-box-textarea::placeholder {
-  color: var(--neutral-400);
+  color: var(--neutral-500);
 }
 
 .input-box-footer {

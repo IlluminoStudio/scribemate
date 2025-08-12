@@ -7,12 +7,7 @@ const Input = ({ testid = "input", label, placeholder, leftIcon, rightIcon, ...p
   return (
     <div data-testid={testid} className="ff-input-group">
       {label && (
-        <Text variant="body2" style={{
-          color: "var(--neutral-400)", 
-          fontWeight: 400, 
-          fontSize: "14px",
-          textAlign: "left"
-        }} className="ff-input-label">{label}</Text>
+        <Text variant="body2" className="ff-input-label">{label}</Text>
       )}
       <div className="ff-input-wrapper">
         {leftIcon && <span className="ff-input-icon ff-input-icon-left">{leftIcon}</span>}
@@ -21,7 +16,6 @@ const Input = ({ testid = "input", label, placeholder, leftIcon, rightIcon, ...p
           placeholder={placeholder}
           style={{
             paddingLeft: leftIcon ? 42 : undefined,
-            fontSize: "16px",
           }}
           {...props}
         />
