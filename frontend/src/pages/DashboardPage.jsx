@@ -152,173 +152,175 @@ function DashboardPage() {
           >
             {/* Left column - 2 parts width*/}
             <div className="content-left" style={{ flex: 2, maxWidth: 800 }}>
-              <DashboardCard
-                title="Choose Your Topic"
-                body={
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "24px",
-                    }}
-                  >
-                    {/* Header with Refresh button */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                <DashboardCard
+                  title="Choose Your Topic"
+                  body={
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Text variant="h6">Trending Topics</Text>
-                      <Button
-                        testid="refresh-topics"
-                        color="primary"
-                        variant="text"
-                        size="sm"
-                        leftIcon={<ArrowClockwise weight="fill" size={16} />}
-                      >
-                        Refresh
-                      </Button>
-                    </div>
-
-                    {/* Topic Cards Grid */}
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns:
-                          "repeat(auto-fit, minmax(280px, 1fr))",
-                        gap: "12px",
-                        width: "100%",
-                      }}
-                    >
-                      <TopicCard
-                        title="Spring Recital Preparation Tips"
-                        body="Help students prepare for their upcoming performances"
-                        tag="Trending"
-                        tagVariant="light"
-                      />
-                      <TopicCard
-                        title="Benefits of Learning Piano for Kids"
-                        body="Showcase the cognitive benefits of music education"
-                        tag="Evergreen"
-                        tagVariant="success"
-                      />
-                      <TopicCard
-                        title="Adult Piano Lessons: It's Never Too Late"
-                        body="Encourage adult learners to start their musical journey"
-                        tag="Trending"
-                        tagVariant="light"
-                      />
-                      <TopicCard
-                        title="Practice Tips for Busy Families"
-                        body="Share strategies for consistent practice routines"
-                        tag="Evergreen"
-                        tagVariant="success"
-                      />
-                    </div>
-                    {/* Or Create Your Own Topic Card */}
-                    <div
-                      style={{
-                        background: "var(--primary-bg)",
-                        borderTop: "1px solid var(--neutral-300)",
-                        paddingTop: "25px",
                         display: "flex",
                         flexDirection: "column",
-                        gap: "12px",
+                        gap: "24px",
                       }}
                     >
-                      <Text variant="h5">Or Create Your Own Topic</Text>
-                      <Input
-                        testid="topic-input"
-                        label="Topic/Heading"
-                        placeholder="Enter your topic idea..."
-                      />
-                      <InputBox
-                        testid="context-inputbox"
-                        title="Additional Context"
-                        placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..."
-                      />
+                      {/* Header with Refresh button */}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Text variant="h6">Trending Topics</Text>
+                        <Button
+                          testid="refresh-topics"
+                          color="primary"
+                          variant="text"
+                          size="sm"
+                          leftIcon={<ArrowClockwise weight="fill" size={16} />}
+                        >
+                          Refresh
+                        </Button>
+                      </div>
+
+                      {/* Topic Cards Grid */}
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns:
+                            "repeat(auto-fit, minmax(280px, 1fr))",
+                          gap: "12px",
+                          width: "100%",
+                        }}
+                      >
+                        <TopicCard
+                          title="Spring Recital Preparation Tips"
+                          body="Help students prepare for their upcoming performances"
+                          tag="Trending"
+                          tagVariant="light"
+                        />
+                        <TopicCard
+                          title="Benefits of Learning Piano for Kids"
+                          body="Showcase the cognitive benefits of music education"
+                          tag="Evergreen"
+                          tagVariant="success"
+                        />
+                        <TopicCard
+                          title="Adult Piano Lessons: It's Never Too Late"
+                          body="Encourage adult learners to start their musical journey"
+                          tag="Trending"
+                          tagVariant="light"
+                        />
+                        <TopicCard
+                          title="Practice Tips for Busy Families"
+                          body="Share strategies for consistent practice routines"
+                          tag="Evergreen"
+                          tagVariant="success"
+                        />
+                      </div>
+                      {/* Or Create Your Own Topic Card */}
+                      <div
+                        style={{
+                          background: "var(--primary-bg)",
+                          borderTop: "1px solid var(--neutral-300)",
+                          paddingTop: "25px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "12px",
+                        }}
+                      >
+                        <Text variant="h5">Or Create Your Own Topic</Text>
+                        <Input
+                          testid="topic-input"
+                          label="Topic/Heading"
+                          placeholder="Enter your topic idea..."
+                        />
+                        <InputBox
+                          testid="context-inputbox"
+                          title="Additional Context"
+                          placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..."
+                        />
+                      </div>
                     </div>
-                  </div>
-                }
-              />
-              
-              <DashboardCard
-                title="Select Platform"
-                body={
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "24px",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                      flexWrap: "wrap",
-                    }}
-                  >
+                  }
+                />
+                
+                <DashboardCard
+                  title="Select Platform"
+                  body={
                     <div
                       style={{
-                        border: "1px solid var(--neutral-300)",
-                        borderRadius: "8px",
-                        padding: "16px",
-                        background: "none",
-                        flex: "1",
-                        minWidth: "200px",
+                        display: "flex",
+                        gap: "24px",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        flexWrap: "wrap",
                       }}
                     >
-                      <Radio
-                        testid="facebook-radio"
-                        label="Facebook"
-                        name="socialMediaOptions"
-                        value="facebook"
-                        checked={socialMediaOption === "facebook"}
-                        onChange={setSocialMediaOption}
-                        icon={<FacebookLogo weight="fill" size={16} />}
-                      />
+                      <div
+                        style={{
+                          border: "1px solid var(--neutral-300)",
+                          borderRadius: "8px",
+                          padding: "16px",
+                          background: "none",
+                          flex: "1",
+                          minWidth: "200px",
+                        }}
+                      >
+                        <Radio
+                          testid="facebook-radio"
+                          label="Facebook"
+                          name="socialMediaOptions"
+                          value="facebook"
+                          checked={socialMediaOption === "facebook"}
+                          onChange={setSocialMediaOption}
+                          icon={<FacebookLogo weight="fill" size={16} />}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          border: "1px solid var(--neutral-300)",
+                          borderRadius: "8px",
+                          padding: "16px",
+                          background: "none",
+                          flex: "1",
+                          minWidth: "200px",
+                        }}
+                      >
+                        <Radio
+                          testid="linkedin-radio"
+                          label="LinkedIn"
+                          name="socialMediaOptions"
+                          value="linkedin"
+                          checked={socialMediaOption === "linkedin"}
+                          onChange={setSocialMediaOption}
+                          icon={<LinkedinLogo weight="fill" size={16} />}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          border: "1px solid var(--neutral-300)",
+                          borderRadius: "8px",
+                          padding: "16px",
+                          background: "none",
+                          flex: "1",
+                          minWidth: "200px",
+                        }}
+                      >
+                        <Radio
+                          testid="blog-radio"
+                          label="Blog"
+                          name="socialMediaOptions"
+                          value="blog"
+                          checked={socialMediaOption === "blog"}
+                          onChange={setSocialMediaOption}
+                          icon={<BookOpen weight="fill" size={16} />}
+                        />
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        border: "1px solid var(--neutral-300)",
-                        borderRadius: "8px",
-                        padding: "16px",
-                        background: "none",
-                        flex: "1",
-                        minWidth: "200px",
-                      }}
-                    >
-                      <Radio
-                        testid="linkedin-radio"
-                        label="LinkedIn"
-                        name="socialMediaOptions"
-                        value="linkedin"
-                        checked={socialMediaOption === "linkedin"}
-                        onChange={setSocialMediaOption}
-                        icon={<LinkedinLogo weight="fill" size={16} />}
-                      />
-                    </div>
-                    <div
-                      style={{
-                        border: "1px solid var(--neutral-300)",
-                        borderRadius: "8px",
-                        padding: "16px",
-                        background: "none",
-                        flex: "1",
-                        minWidth: "200px",
-                      }}
-                    >
-                      <Radio
-                        testid="blog-radio"
-                        label="Blog"
-                        name="socialMediaOptions"
-                        value="blog"
-                        checked={socialMediaOption === "blog"}
-                        onChange={setSocialMediaOption}
-                        icon={<BookOpen weight="fill" size={16} />}
-                      />
-                    </div>
-                  </div>
-                }
-              />
+                  }
+                />
+              </div>
             </div>
 
             {/* Right column - 1 part width */}

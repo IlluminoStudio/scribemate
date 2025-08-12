@@ -18,7 +18,7 @@ import Toggle from "../components/Toggle";
 import Checkbox from "../components/Checkbox";
 import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
-import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder } from "phosphor-react";
+import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen } from "phosphor-react";
 import userSvg from "../assets/user.svg";
 
 function DemoPage() {
@@ -32,6 +32,7 @@ function DemoPage() {
     "Neurology",
   ]);
   const [selectedDoctor, setSelectedDoctor] = React.useState([]);
+  const [socialMediaDemo, setSocialMediaDemo] = React.useState("facebook");
 
   const allSpecialties = [
     "Dermatology",
@@ -637,20 +638,22 @@ function DemoPage() {
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          gap: "16px",
+          gap: "48px",
+          margin: "32px auto",
           alignItems: "flex-start",
           justifyContent: "center",
-          margin: "32px auto",
-          maxWidth: "300px",
+          flexWrap: "wrap",
         }}
       >
+        {/* Vertical Radio Layout */}
         <div
           style={{
-            border: "1px solid var(--neutral-300)",
-            borderRadius: "8px",
-            padding: "16px",
-            background: "none",
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            maxWidth: "300px",
           }}
         >
           <Radio
@@ -661,15 +664,6 @@ function DemoPage() {
             checked={deliveryTime === "morning"}
             onChange={setDeliveryTime}
           />
-        </div>
-        <div
-          style={{
-            border: "1px solid var(--neutral-300)",
-            borderRadius: "8px",
-            padding: "16px",
-            background: "none",
-          }}
-        >
           <Radio
             testid="afternoon-radio"
             label="Afternoon (12:00 PM - 5:00 PM)"
@@ -677,6 +671,46 @@ function DemoPage() {
             value="afternoon"
             checked={deliveryTime === "afternoon"}
             onChange={setDeliveryTime}
+          />
+        </div>
+
+        {/* Horizontal Radio Layout */}
+        <div
+          style={{
+            display: "flex",
+            gap: "24px",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            maxWidth: "400px",
+          }}
+        >
+          <Radio
+            testid="facebook-demo-radio"
+            label="Facebook"
+            name="socialMediaDemo"
+            value="facebook"
+            checked={socialMediaDemo === "facebook"}
+            onChange={setSocialMediaDemo}
+            icon={<FacebookLogo weight="fill" size={16} />}
+          />
+          <Radio
+            testid="linkedin-demo-radio"
+            label="LinkedIn"
+            name="socialMediaDemo"
+            value="linkedin"
+            checked={socialMediaDemo === "linkedin"}
+            onChange={setSocialMediaDemo}
+            icon={<LinkedinLogo weight="fill" size={16} />}
+          />
+          <Radio
+            testid="blog-demo-radio"
+            label="Blog"
+            name="socialMediaDemo"
+            value="blog"
+            checked={socialMediaDemo === "blog"}
+            onChange={setSocialMediaDemo}
+            icon={<BookOpen weight="fill" size={16} />}
           />
         </div>
       </div>
