@@ -664,56 +664,44 @@ function DemoPage() {
         />
       </div>
 
-      {/* Radio Component Horizontal Layout Showcase */}
+      {/* Social Media Radio Group */}
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          gap: "16px",
+          gap: "24px",
           alignItems: "center",
           justifyContent: "center",
           margin: "32px auto",
-          maxWidth: "600px",
+          flexWrap: "wrap",
         }}
       >
-        <Text testid="horizontal-radio-title" variant="h5">Horizontal Radio Layout</Text>
-        <div
-          style={{
-            display: "flex",
-            gap: "24px",
-            alignItems: "center",
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <Radio
-            testid="facebook-radio"
-            label="Facebook"
-            name="socialMediaOptions"
-            value="facebook"
-            checked={socialMediaOption === "facebook"}
-            onChange={setSocialMediaOption}
-            icon={<FacebookLogo weight="fill" size={16} />}
-          />
-          <Radio
-            testid="linkedin-radio"
-            label="LinkedIn"
-            name="socialMediaOptions"
-            value="linkedin"
-            checked={socialMediaOption === "linkedin"}
-            onChange={setSocialMediaOption}
-            icon={<LinkedinLogo weight="fill" size={16} />}
-          />
-          <Radio
-            testid="blog-radio"
-            label="Blog"
-            name="socialMediaOptions"
-            value="blog"
-            checked={socialMediaOption === "blog"}
-            onChange={setSocialMediaOption}
-            icon={<BookOpen weight="fill" size={16} />}
-          />
-        </div>
+        <Radio
+          testid="facebook-radio"
+          label="Facebook"
+          name="socialMediaOptions"
+          value="facebook"
+          checked={socialMediaOption === "facebook"}
+          onChange={setSocialMediaOption}
+          icon={<FacebookLogo weight="fill" size={16} />}
+        />
+        <Radio
+          testid="linkedin-radio"
+          label="LinkedIn"
+          name="socialMediaOptions"
+          value="linkedin"
+          checked={socialMediaOption === "linkedin"}
+          onChange={setSocialMediaOption}
+          icon={<LinkedinLogo weight="fill" size={16} />}
+        />
+        <Radio
+          testid="blog-radio"
+          label="Blog"
+          name="socialMediaOptions"
+          value="blog"
+          checked={socialMediaOption === "blog"}
+          onChange={setSocialMediaOption}
+          icon={<BookOpen weight="fill" size={16} />}
+        />
       </div>
 
       {/* Color Showcase */}

@@ -1,7 +1,6 @@
 .radio-container {
   display: flex;
   align-items: center;
-  gap: 12px;
   cursor: pointer;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -13,12 +12,6 @@
     color: var(--neutral-800);
 }
 
-.radio-icon {
-  display: flex;
-  align-items: center;
-  color: var(--primary-500);
-}
-
 .radio-outer-circle {
   width: 16px;
   height: 16px;
@@ -28,6 +21,14 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-in-out;
+  margin-right: 12px;
+}
+
+.radio-icon {
+  display: flex;
+  align-items: center;
+  color: var(--primary-500);
+  margin-right: 8px;
 }
 
 .radio-outer-circle.checked {
