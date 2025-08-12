@@ -5,12 +5,16 @@ import Button from "../components/Button";
 import Chip from "../components/Chip";
 import Input from "../components/Input";
 import InputBox from "../components/InputBox";
+import Radio from "../components/Radio";
 import {
   Lightbulb,
   Folder,
   Palette,
   Question,
   ArrowClockwise,
+  FacebookLogo,
+  LinkedinLogo,
+  BookOpen,
 } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 
@@ -82,6 +86,8 @@ function TopicCard({ title, body, tag, tagVariant }) {
 }
 
 function DashboardPage() {
+  const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
+  
   return (
     <>
       {/* Greeting block */}
@@ -232,6 +238,82 @@ function DashboardPage() {
                         testid="context-inputbox"
                         title="Additional Context"
                         placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..."
+                      />
+                    </div>
+                  </div>
+                }
+              />
+              
+              <DashboardCard
+                title="Select Platform"
+                body={
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "24px",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <div
+                      style={{
+                        border: "1px solid var(--neutral-300)",
+                        borderRadius: "8px",
+                        padding: "16px",
+                        background: "none",
+                        flex: "1",
+                        minWidth: "200px",
+                      }}
+                    >
+                      <Radio
+                        testid="facebook-radio"
+                        label="Facebook"
+                        name="socialMediaOptions"
+                        value="facebook"
+                        checked={socialMediaOption === "facebook"}
+                        onChange={setSocialMediaOption}
+                        icon={<FacebookLogo weight="fill" size={16} />}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        border: "1px solid var(--neutral-300)",
+                        borderRadius: "8px",
+                        padding: "16px",
+                        background: "none",
+                        flex: "1",
+                        minWidth: "200px",
+                      }}
+                    >
+                      <Radio
+                        testid="linkedin-radio"
+                        label="LinkedIn"
+                        name="socialMediaOptions"
+                        value="linkedin"
+                        checked={socialMediaOption === "linkedin"}
+                        onChange={setSocialMediaOption}
+                        icon={<LinkedinLogo weight="fill" size={16} />}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        border: "1px solid var(--neutral-300)",
+                        borderRadius: "8px",
+                        padding: "16px",
+                        background: "none",
+                        flex: "1",
+                        minWidth: "200px",
+                      }}
+                    >
+                      <Radio
+                        testid="blog-radio"
+                        label="Blog"
+                        name="socialMediaOptions"
+                        value="blog"
+                        checked={socialMediaOption === "blog"}
+                        onChange={setSocialMediaOption}
+                        icon={<BookOpen weight="fill" size={16} />}
                       />
                     </div>
                   </div>
