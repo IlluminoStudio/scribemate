@@ -18,7 +18,7 @@ import Toggle from "../components/Toggle";
 import Checkbox from "../components/Checkbox";
 import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
-import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder } from "phosphor-react";
+import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen } from "phosphor-react";
 import userSvg from "../assets/user.svg";
 
 function DemoPage() {
@@ -32,6 +32,7 @@ function DemoPage() {
     "Neurology",
   ]);
   const [selectedDoctor, setSelectedDoctor] = React.useState([]);
+  const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
 
   const allSpecialties = [
     "Dermatology",
@@ -661,6 +662,58 @@ function DemoPage() {
           checked={deliveryTime === "afternoon"}
           onChange={setDeliveryTime}
         />
+      </div>
+
+      {/* Radio Component Horizontal Layout Showcase */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "32px auto",
+          maxWidth: "600px",
+        }}
+      >
+        <Text testid="horizontal-radio-title" variant="h5">Horizontal Radio Layout</Text>
+        <div
+          style={{
+            display: "flex",
+            gap: "24px",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Radio
+            testid="facebook-radio"
+            label="Facebook"
+            name="socialMediaOptions"
+            value="facebook"
+            checked={socialMediaOption === "facebook"}
+            onChange={setSocialMediaOption}
+            icon={<FacebookLogo weight="fill" size={16} />}
+          />
+          <Radio
+            testid="linkedin-radio"
+            label="LinkedIn"
+            name="socialMediaOptions"
+            value="linkedin"
+            checked={socialMediaOption === "linkedin"}
+            onChange={setSocialMediaOption}
+            icon={<LinkedinLogo weight="fill" size={16} />}
+          />
+          <Radio
+            testid="blog-radio"
+            label="Blog"
+            name="socialMediaOptions"
+            value="blog"
+            checked={socialMediaOption === "blog"}
+            onChange={setSocialMediaOption}
+            icon={<BookOpen weight="fill" size={16} />}
+          />
+        </div>
       </div>
 
       {/* Color Showcase */}
