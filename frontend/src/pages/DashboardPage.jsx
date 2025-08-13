@@ -15,6 +15,7 @@ import {
   FacebookLogo,
   LinkedinLogo,
   BookOpen,
+  MagicWand,
 } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 
@@ -244,7 +245,8 @@ function DashboardPage() {
                     </div>
                   }
                 />
-                
+
+
                 <DashboardCard
                   title="Select Platform"
                   body={
@@ -317,6 +319,32 @@ function DashboardPage() {
                           icon={<BookOpen weight="fill" size={16} />}
                         />
                       </div>
+                    </div>
+                  }
+                />
+                
+                <DashboardCard
+                  body={
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "12px",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        testid="generate-content-btn"
+                        leftIcon={<MagicWand weight="fill" size={20} />}
+                      >
+                        Generate Content
+                      </Button>
+                      <Text
+                        variant="muted2"
+                        style={{ color: "var(--neutral-700)" }}
+                      >
+                        AI will create tailored content for your selected platforms
+                      </Text>
                     </div>
                   }
                 />
