@@ -89,6 +89,7 @@ function TopicCard({ title, body, tag, tagVariant }) {
 
 function DashboardPage() {
   const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
+  const [selectedTab, setSelectedTab] = React.useState("facebook");
   const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
   
   return (
@@ -439,9 +440,10 @@ function DashboardPage() {
                            tabs={[
                              { label: "Facebook", value: "facebook", icon: <FacebookLogo weight="fill" size={16} /> },
                              { label: "LinkedIn", value: "linkedin", icon: <LinkedinLogo weight="fill" size={16} /> },
+                             { label: "Blog", value: "blog", icon: <BookOpen weight="fill" size={16} /> },
                            ]}
-                           selectedTab={socialMediaOption}
-                           onTabChange={setSocialMediaOption}
+                           selectedTab={selectedTab}
+                           onTabChange={setSelectedTab}
                            variant="icon-left"
                            iconSize={16}
                          />
