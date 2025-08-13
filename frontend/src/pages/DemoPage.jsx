@@ -18,7 +18,8 @@ import Toggle from "../components/Toggle";
 import Checkbox from "../components/Checkbox";
 import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
-import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen } from "phosphor-react";
+import TabNavigation from "../components/TabNavigation";
+import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen, ChartLine, FileText, Users as UsersIcon } from "phosphor-react";
 import userSvg from "../assets/user.svg";
 
 function DemoPage() {
@@ -33,6 +34,7 @@ function DemoPage() {
   ]);
   const [selectedDoctor, setSelectedDoctor] = React.useState([]);
   const [socialMediaDemo, setSocialMediaDemo] = React.useState("facebook");
+  const [selectedTab, setSelectedTab] = React.useState("analytics");
 
   const allSpecialties = [
     "Dermatology",
@@ -711,6 +713,64 @@ function DemoPage() {
             checked={socialMediaDemo === "blog"}
             onChange={setSocialMediaDemo}
             icon={<BookOpen weight="fill" size={16} />}
+          />
+        </div>
+      </div>
+
+      {/* TabNavigation Component Showcase */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "1200px",
+          margin: "48px auto",
+          display: "flex",
+          gap: "48px",
+          alignItems: "flex-start",
+        }}
+      >
+        {/* No Icon Variant */}
+        <div style={{ flex: 1 }}>
+          <TabNavigation
+            testid="no-icon-tabs"
+            tabs={[
+              { label: "Overview", value: "overview" },
+              { label: "Details", value: "details" },
+              { label: "Settings", value: "settings" },
+            ]}
+            selectedTab={selectedTab}
+            onTabChange={setSelectedTab}
+            variant="no-icon"
+          />
+        </div>
+
+        {/* Icon on Top Variant */}
+        <div style={{ flex: 1 }}>
+          <TabNavigation
+            testid="icon-top-tabs"
+            tabs={[
+              { label: "Analytics", value: "analytics", icon: <ChartLine weight="fill" /> },
+              { label: "Reports", value: "reports", icon: <FileText weight="fill" /> },
+              { label: "Users", value: "users", icon: <UsersIcon weight="fill" /> },
+            ]}
+            selectedTab={selectedTab}
+            onTabChange={setSelectedTab}
+            variant="icon-top"
+            iconSize={20}
+          />
+        </div>
+
+        {/* Icon on Left Variant */}
+        <div style={{ flex: 1 }}>
+          <TabNavigation
+            testid="icon-left-tabs"
+            tabs={[
+              { label: "Facebook", value: "facebook", icon: <FacebookLogo weight="fill" /> },
+              { label: "LinkedIn", value: "linkedin", icon: <LinkedinLogo weight="fill" /> },
+            ]}
+            selectedTab={selectedTab}
+            onTabChange={setSelectedTab}
+            variant="icon-left"
+            iconSize={20}
           />
         </div>
       </div>

@@ -19,7 +19,6 @@ import {
 } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 
-// Local, file-scoped card for dashboard only. Do not change global Card.
 function DashboardCard({ title, subtitle, body }) {
   return (
     <div
