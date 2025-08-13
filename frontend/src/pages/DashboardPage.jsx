@@ -16,8 +16,10 @@ import {
   LinkedinLogo,
   BookOpen,
   MagicWand,
+  Check,
 } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
+import TabNavigation from "../components/TabNavigation";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -352,7 +354,99 @@ function DashboardPage() {
                                  
                  {showGeneratedPost && (
                    <DashboardCard
-                     title="Here's your generated post"
+                     body={
+                       <div
+                         style={{
+                           display: "flex",
+                           flexDirection: "column",
+                           gap: "24px",
+                         }}
+                       >
+                         {/* Header Section */}
+                         <div
+                           style={{
+                             display: "flex",
+                             justifyContent: "space-between",
+                             alignItems: "flex-start",
+                           }}
+                         >
+                           {/* Left side - Checkmark icon + title/subtitle stack */}
+                           <div
+                             style={{
+                               display: "flex",
+                               alignItems: "flex-start",
+                               gap: "12px",
+                             }}
+                           >
+                             {/* Green checkmark icon */}
+                             <Icon 
+                               variant="circle" 
+                               size={40} 
+                               noBg={false}
+                               style={{ 
+                                 background: "var(--success-100)",
+                                 flexShrink: 0,
+                               }}
+                             >
+                               <Check weight="fill" size={20} style={{ color: "var(--success-600)" }} />
+                             </Icon>
+                             
+                             {/* Title and subtitle stack */}
+                             <div
+                               style={{
+                                 display: "flex",
+                                 flexDirection: "column",
+                                 gap: "0px",
+                               }}
+                             >
+                               <Text variant="h5">Here's your generated post</Text>
+                               <Text
+                                 variant="body2"
+                                 style={{
+                                   color: "var(--neutral-700)",
+                                   marginTop: "0px",
+                                 }}
+                               >
+                                 AI-generated content ready for your review
+                               </Text>
+                             </div>
+                           </div>
+                           
+                           {/* Right side - Regenerate All button */}
+                           <Button
+                             testid="regenerate-all-btn"
+                             color="grey"
+                             variant="outlined"
+                             size="sm"
+                             leftIcon={<ArrowClockwise weight="fill" size={16} />}
+                           >
+                             Regenerate All
+                           </Button>
+                         </div>
+                         
+                         {/* Divider line */}
+                         <div
+                           style={{
+                             height: "1px",
+                             background: "var(--neutral-300)",
+                             width: "100%",
+                           }}
+                         />
+                         
+                         {/* Tab Navigation */}
+                         <TabNavigation
+                           testid="social-media-tabs"
+                           tabs={[
+                             { label: "Facebook", value: "facebook", icon: <FacebookLogo weight="fill" /> },
+                             { label: "LinkedIn", value: "linkedin", icon: <LinkedinLogo weight="fill" /> },
+                           ]}
+                           selectedTab="linkedin"
+                           onTabChange={() => {}}
+                           variant="icon-left"
+                           iconSize={16}
+                         />
+                       </div>
+                     }
                    />
                  )}
               </div>
