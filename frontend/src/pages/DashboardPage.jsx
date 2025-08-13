@@ -388,7 +388,7 @@ function DashboardPage() {
                                  flexShrink: 0,
                                }}
                              >
-                               <Check weight="fill" size={20} style={{ color: "var(--success-600)" }} />
+                               <Check weight="bold" size={20} style={{ color: "var(--success-600)" }} />
                              </Icon>
                              
                              {/* Title and subtitle stack */}
@@ -437,11 +437,11 @@ function DashboardPage() {
                          <TabNavigation
                            testid="social-media-tabs"
                            tabs={[
-                             { label: "Facebook", value: "facebook", icon: <FacebookLogo weight="fill" /> },
-                             { label: "LinkedIn", value: "linkedin", icon: <LinkedinLogo weight="fill" /> },
+                             { label: "Facebook", value: "facebook", icon: <FacebookLogo weight="fill" size={16} /> },
+                             { label: "LinkedIn", value: "linkedin", icon: <LinkedinLogo weight="fill" size={16} /> },
                            ]}
-                           selectedTab="linkedin"
-                           onTabChange={() => {}}
+                           selectedTab={socialMediaOption}
+                           onTabChange={setSocialMediaOption}
                            variant="icon-left"
                            iconSize={16}
                          />
