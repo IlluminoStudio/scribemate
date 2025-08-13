@@ -87,6 +87,7 @@ function TopicCard({ title, body, tag, tagVariant }) {
 
 function DashboardPage() {
   const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
+  const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
   
   return (
     <>
@@ -335,6 +336,7 @@ function DashboardPage() {
                       <Button
                         testid="generate-content-btn"
                         leftIcon={<MagicWand weight="fill" size={20} />}
+                        onClick={() => setShowGeneratedPost(true)}
                       >
                         Generate Content
                       </Button>
@@ -347,6 +349,12 @@ function DashboardPage() {
                     </div>
                   }
                 />
+                                 
+                 {showGeneratedPost && (
+                   <DashboardCard
+                     title="Here's your generated post"
+                   />
+                 )}
               </div>
             </div>
 
