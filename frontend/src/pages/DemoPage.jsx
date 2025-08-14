@@ -20,7 +20,7 @@ import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
 import TabNavigation from "../components/TabNavigation";
 import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen, ChartLine, FileText, Users as UsersIcon } from "phosphor-react";
-import userSvg from "../assets/user.svg";
+import userSvg from "../assets/avatar.svg";
 
 function DemoPage() {
   const [mode, setMode] = React.useState("medium");
