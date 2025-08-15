@@ -19,7 +19,7 @@ import Checkbox from "../components/Checkbox";
 import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
 import TabNavigation from "../components/TabNavigation";
-import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen, ChartLine, FileText, Users as UsersIcon } from "phosphor-react";
+import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen, ChartLine, FileText, Users as UsersIcon, Copy, Download } from "phosphor-react";
 import userSvg from "../assets/avatar.svg";
 
 function DemoPage() {
@@ -55,175 +55,95 @@ function DemoPage() {
         <h1>Welcome to {APP_NAME}</h1>
         <p className="tagline">{TAGLINE}</p>
       </header>
+      {/* All Button Variants - One Row Per Color */}
       <div
         style={{
           display: "flex",
-          gap: 32,
-          marginTop: 32,
-          justifyContent: "center",
-          alignItems: "center",
+          flexDirection: "column",
+          gap: "24px",
+          marginTop: "32px",
+          width: "100%",
         }}
       >
-        {/* Primary Color Buttons */}
-        <Button testid="pink-tiger" variant="outlined">Join In</Button>
-        <Button testid="misty-harbour" variant="text">Sign In</Button>
-        <Button testid="golden-sunset">Get Started</Button>
-        <Button testid="silver-moonlight" size="lg">Start Your 14-Day Sprint</Button>
-        <Button testid="crimson-rose" size="sm">Small Button</Button>
-      </div>
-      {/* Secondary Color Buttons */}
-      <div
-        style={{
-          display: "flex",
-          gap: 32,
-          marginTop: 16,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Button testid="azure-sky" color="secondary" variant="outlined">
-          Join In
-        </Button>
-        <Button testid="emerald-forest" color="secondary" variant="text">
-          Sign In
-        </Button>
-        <Button testid="sapphire-ocean" color="secondary">Get Started</Button>
-        <Button testid="amethyst-dream" color="secondary" size="lg">
-          Start Your 14-Day Sprint
-        </Button>
-        <Button testid="jade-river" color="secondary" size="sm">
-          Small Button
-        </Button>
-      </div>
+        {/* Primary Color Row */}
+        <div
+          style={{
+            display: "flex",
+            gap: "32px",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Button testid="pink-tiger" variant="outlined">Join In</Button>
+          <Button testid="misty-harbour" variant="text">Sign In</Button>
+          <Button testid="golden-sunset">Get Started</Button>
+          <Button testid="silver-moonlight" size="lg">Start Your 14-Day Sprint</Button>
+          <Button testid="crimson-rose" size="sm">Small Button</Button>
+          <Button testid="notifications-btn" leftIcon={<Bell weight="fill" size={20} />}>Notifications</Button>
+          <Button testid="view-users-btn" rightIcon={<Users weight="fill" size={20} />}>View Users</Button>
+          <Button testid="start-journey-btn" leftIcon={<Trophy weight="fill" size={20} />} rightIcon={<Rocket weight="bold" size={20} />}>Start Journey</Button>
+        </div>
 
-      {/* Grey Color Buttons */}
-      <div
-        style={{
-          display: "flex",
-          gap: 32,
-          marginTop: 16,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Button testid="charcoal-smoke" color="grey" variant="outlined">
-          Join In
-        </Button>
-        <Button testid="pearl-dust" color="grey" variant="text">
-          Sign In
-        </Button>
-        <Button testid="steel-shadow" color="grey">Get Started</Button>
-        <Button testid="graphite-stone" color="grey" size="lg">
-          Start Your 14-Day Sprint
-        </Button>
-        <Button testid="silver-frost" color="grey" size="sm">
-          Small Button
-        </Button>
-      </div>
+        {/* Secondary Color Row */}
+        <div
+          style={{
+            display: "flex",
+            gap: "32px",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Button testid="azure-sky" color="secondary" variant="outlined">Join In</Button>
+          <Button testid="emerald-forest" color="secondary" variant="text">Sign In</Button>
+          <Button testid="sapphire-ocean" color="secondary">Get Started</Button>
+          <Button testid="amethyst-dream" color="secondary" size="lg">Start Your 14-Day Sprint</Button>
+          <Button testid="jade-river" color="secondary" size="sm">Small Button</Button>
+          <Button testid="hot-action-btn" color="secondary" leftIcon={<Flame weight="fill" size={20} />}>Hot Action</Button>
+          <Button testid="secondary-save-btn" color="secondary" variant="outlined" leftIcon={<Folder weight="fill" size={20} />}>Save Draft</Button>
+          <Button testid="secondary-copy-btn" color="secondary" variant="text" rightIcon={<Copy weight="fill" size={20} />}>Copy Text</Button>
+        </div>
 
-      {/* Icon Showcase */}
-      <div
-        style={{
-          display: "flex",
-          gap: 48,
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "48px 0",
-        }}
-      >
-        <Icon
-          testid="bell-icon-circle"
-          variant="circle"
-          size={80}
-          noBg={false}
-          style={{ background: "var(--secondary-100)" }}
-          color="var(--secondary-700)"
+        {/* Neutral Color Row */}
+        <div
+          style={{
+            display: "flex",
+            gap: "32px",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
         >
-          <Bell weight="fill" />
-        </Icon>
-        <Icon
-          testid="users-icon-square"
-          variant="roundedSquare"
-          size={80}
-          noBg={false}
-          style={{ background: "var(--primary-100)" }}
-          color="var(--primary-700)"
-        >
-          <UsersThree weight="duotone" />
-        </Icon>
-        <Icon testid="trophy-icon-circle" variant="circle" size={80} noBg={false}>
-          <Trophy weight="fill" />
-        </Icon>
-        <Icon
-          testid="cursor-icon-square"
-          variant="roundedSquare"
-          size={80}
-          noBg={false}
-          style={{ color: "var(--secondary-700)" }}
-        >
-          <Cursor weight="fill" />
-        </Icon>
-        <Icon testid="users-small-circle" variant="circle" size={56} noBg={false}>
-          <Users weight="fill" />
-        </Icon>
-        <Icon testid="users-small-square" variant="roundedSquare" size={56} noBg={false}>
-          <Users weight="fill" />
-        </Icon>
-        <Icon testid="flame-icon-circle" variant="circle" size={56} noBg={false}>
-          <Flame weight="fill" />
-        </Icon>
-        <Icon testid="rocket-icon-square" variant="roundedSquare" size={56} noBg={false}>
-          <Rocket weight="bold" />
-        </Icon>
-      </div>
+          <Button testid="charcoal-smoke" color="neutral" variant="outlined">Join In</Button>
+          <Button testid="pearl-dust" color="neutral" variant="text">Sign In</Button>
+          <Button testid="steel-shadow" color="neutral">Get Started</Button>
+          <Button testid="graphite-stone" color="neutral" size="lg">Start Your 14-Day Sprint</Button>
+          <Button testid="silver-frost" color="neutral" size="sm">Small Button</Button>
+          <Button testid="content-library" color="neutral" variant="text" size="sm" leftIcon={<Folder weight="fill" size={20} />}>Content Library</Button>
+          <Button testid="click-here-btn" color="neutral" rightIcon={<Cursor weight="fill" size={20} />}>Click Here</Button>
+          <Button testid="neutral-download-btn" color="neutral" variant="outlined" leftIcon={<Download weight="fill" size={20} />}>Download</Button>
+        </div>
 
-      {/* Button with Icons Showcase */}
-      <div
-        style={{
-          display: "flex",
-          gap: 32,
-          marginTop: 32,
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        <Button testid="notifications-btn" leftIcon={<Bell weight="fill" size={20} />}>
-          Notifications
-        </Button>
-        <Button testid="view-users-btn" rightIcon={<Users weight="fill" size={20} />}>
-          View Users
-        </Button>
-        <Button 
-          testid="start-journey-btn"
-          leftIcon={<Trophy weight="fill" size={20} />}
-          rightIcon={<Rocket weight="bold" size={20} />}
+        {/* Error Color Row */}
+        <div
+          style={{
+            display: "flex",
+            gap: "32px",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
         >
-          Start Journey
-        </Button>
-        <Button 
-          testid="hot-action-btn"
-          color="secondary"
-          leftIcon={<Flame weight="fill" size={20} />}
-        >
-          Hot Action
-        </Button>
-        <Button 
-          testid="content-library"
-          color="grey"
-          variant="text"
-          size="sm"
-          leftIcon={<Folder weight="fill" size={20} />}
-        >
-          Content Library
-        </Button>
-        <Button 
-          testid="click-here-btn"
-          color="grey"
-          rightIcon={<Cursor weight="fill" size={20} />}
-        >
-          Click Here
-        </Button>
+          <Button testid="error-outlined" color="error" variant="outlined">Delete Post</Button>
+          <Button testid="error-text" color="error" variant="text">Remove Item</Button>
+          <Button testid="error-filled" color="error">Discard Changes</Button>
+          <Button testid="error-large" color="error" size="lg">Permanently Delete</Button>
+          <Button testid="error-small" color="error" size="sm">Remove</Button>
+          <Button testid="error-delete-btn" color="error" leftIcon={<X weight="fill" size={20} />}>Delete Post</Button>
+          <Button testid="error-remove-btn" color="error" variant="outlined" leftIcon={<X weight="fill" size={20} />}>Remove Item</Button>
+          <Button testid="error-discard-btn" color="error" variant="text" size="sm" leftIcon={<X weight="fill" size={20} />}>Discard</Button>
+        </div>
       </div>
 
       {/* Text Component Showcase */}
