@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../components/Button';
 import Text from '../components/Text';
 import Icon from '../components/Icon';
-import { ArrowClockwise, Download, Copy, CaretDown, CaretUp } from 'phosphor-react';
+import { ArrowClockwise, Download, Copy, CaretDown, CaretUp, LockOpen } from 'phosphor-react';
 
 function GeneratedPostCard({ text, image, style = {}, ...props }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -18,7 +18,6 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
   };
 
   const handleRegenerateText = () => {
-    // This would typically call a parent function to regenerate text
     console.log('Regenerate text clicked');
   };
 
@@ -167,6 +166,20 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
             color="var(--neutral-900)"
           >
             <Copy weight="bold" />
+          </Icon>
+          
+          {/* Lock Button */}
+          <Icon
+            variant="circle"
+            size={32}
+            noBg={false}
+            style={{
+              background: 'rgba(255, 255, 255, 0.9)',
+              cursor: 'pointer',
+            }}
+            color="var(--neutral-900)"
+          >
+            <LockOpen weight="bold" />
           </Icon>
         </div>
       </div>
