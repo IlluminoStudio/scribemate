@@ -27,6 +27,10 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
         display: 'flex',
         flexDirection: 'column',
         gap: '16px',
+        padding: '16px',
+        background: 'var(--neutral-100)',
+        borderRadius: '8px',
+        border: '1px solid var(--neutral-300)',
         ...style,
       }}
       {...props}
