@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../components/Button';
 import Text from '../components/Text';
 import Icon from '../components/Icon';
-import { ArrowClockwise, Download, Copy, CaretDown, CaretUp, LockOpen } from 'phosphor-react';
+import { ArrowClockwise, Download, Copy, CaretDown, CaretUp, LockOpen, Folder, Trash } from 'phosphor-react';
 
 function GeneratedPostCard({ text, image, style = {}, ...props }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -26,166 +26,233 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '16px',
-        padding: '16px',
-        background: 'var(--neutral-100)',
-        borderRadius: '8px',
-        border: '1px solid var(--neutral-300)',
+        gap: '24px',
         ...style,
       }}
       {...props}
     >
-      {/* Text Content Section */}
+      {/* Main Content Card */}
       <div
         style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          padding: '16px',
+          background: 'var(--neutral-100)',
           borderRadius: '8px',
           border: '1px solid var(--neutral-300)',
-          background: 'var(--neutral-0)',
-          padding: '16px',
         }}
       >
-        <Text 
-          variant="body1" 
-          color="var(--neutral-900)"
-          style={{ marginBottom: '16px', lineHeight: '1.5' }}
-        >
-          {displayText}
-        </Text>
-        
-        {/* Action Buttons Row */}
+        {/* Text Content Section */}
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            borderRadius: '8px',
+            border: '1px solid var(--neutral-300)',
+            background: 'var(--neutral-0)',
+            padding: '16px',
           }}
         >
-          {/* Toggle Text Button */}
-          {shouldShowSeeMore && (
+          <Text 
+            variant="body1" 
+            color="var(--neutral-900)"
+            style={{ marginBottom: '16px', lineHeight: '1.5' }}
+          >
+            {displayText}
+          </Text>
+          
+          {/* Action Buttons Row */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            {/* Toggle Text Button */}
+            {shouldShowSeeMore && (
+              <Button
+                variant="text"
+                color="primary"
+                size="sm"
+                onClick={handleToggleText}
+                style={{ 
+                  padding: '8px 0',
+                  color: 'var(--primary-500)',
+                  fontWeight: 500,
+                  gap: '4px'
+                }}
+              >
+                <Text variant="body2" color="var(--primary-500)" style={{ fontWeight: 500 }}>
+                  {isExpanded ? 'see less' : 'see more'}
+                </Text>
+                {isExpanded ? (
+                  <CaretUp size={16} weight="bold" />
+                ) : (
+                  <CaretDown size={16} weight="bold" />
+                )}
+              </Button>
+            )}
+            
+            {/* Regenerate Text Button */}
             <Button
               variant="text"
               color="primary"
               size="sm"
-              onClick={handleToggleText}
+              onClick={handleRegenerateText}
               style={{ 
                 padding: '8px 0',
                 color: 'var(--primary-500)',
                 fontWeight: 500,
+                marginLeft: 'auto',
                 gap: '4px'
               }}
             >
+              <ArrowClockwise size={16} weight="bold" />
               <Text variant="body2" color="var(--primary-500)" style={{ fontWeight: 500 }}>
-                {isExpanded ? 'see less' : 'see more'}
+                Regenerate Text
               </Text>
-              {isExpanded ? (
-                <CaretUp size={16} weight="bold" />
-              ) : (
-                <CaretDown size={16} weight="bold" />
-              )}
             </Button>
-          )}
-          
-          {/* Regenerate Text Button */}
-          <Button
-            variant="text"
-            color="primary"
-            size="sm"
-            onClick={handleRegenerateText}
-            style={{ 
-              padding: '8px 0',
-              color: 'var(--primary-500)',
-              fontWeight: 500,
-              marginLeft: 'auto',
-              gap: '4px'
+          </div>
+        </div>
+
+        {/* Image Section */}
+        <div
+          style={{
+            borderRadius: '8px',
+            backgroundImage: `url(${image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            padding: '12px',
+            position: 'relative',
+            minHeight: '200px',
+          }}
+        >
+          {/* Icon Buttons Overlay */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '12px',
+              right: '12px',
+              display: 'flex',
+              gap: '8px',
             }}
           >
-            <ArrowClockwise size={16} weight="bold" />
-            <Text variant="body2" color="var(--primary-500)" style={{ fontWeight: 500 }}>
-              Regenerate Text
-            </Text>
-          </Button>
+            {/* Refresh Button */}
+            <Icon
+              variant="circle"
+              size={32}
+              noBg={false}
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                cursor: 'pointer',
+              }}
+              color="var(--neutral-900)"
+            >
+              <ArrowClockwise weight="bold" />
+            </Icon>
+            
+            {/* Download Button */}
+            <Icon
+              variant="circle"
+              size={32}
+              noBg={false}
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                cursor: 'pointer',
+              }}
+              color="var(--neutral-900)"
+            >
+              <Download weight="bold" />
+            </Icon>
+            
+            {/* Copy Button */}
+            <Icon
+              variant="circle"
+              size={32}
+              noBg={false}
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                cursor: 'pointer',
+              }}
+              color="var(--neutral-900)"
+            >
+              <Copy weight="bold" />
+            </Icon>
+            
+            {/* Lock Button */}
+            <Icon
+              variant="circle"
+              size={32}
+              noBg={false}
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                cursor: 'pointer',
+              }}
+              color="var(--neutral-900)"
+            >
+              <LockOpen weight="bold" />
+            </Icon>
+          </div>
         </div>
       </div>
 
-      {/* Image Section */}
+      {/* Action Buttons Row - Outside the main card */}
       <div
         style={{
-          borderRadius: '8px',
-          backgroundImage: `url(${image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          padding: '12px',
-          position: 'relative',
-          minHeight: '200px',
+          display: 'flex',
+          gap: '12px',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
         }}
       >
-        {/* Icon Buttons Overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '12px',
-            right: '12px',
-            display: 'flex',
-            gap: '8px',
-          }}
+        {/* Save to Drafts Button */}
+        <Button
+          variant="default"
+          color="primary"
+          size="md"
+          leftIcon={<Folder weight="bold" size={20} />}
         >
-          {/* Refresh Button */}
-          <Icon
-            variant="circle"
-            size={32}
-            noBg={false}
-            style={{
-              background: 'rgba(255, 255, 255, 0.9)',
-              cursor: 'pointer',
-            }}
-            color="var(--neutral-900)"
-          >
-            <ArrowClockwise weight="bold" />
-          </Icon>
-          
-          {/* Download Button */}
-          <Icon
-            variant="circle"
-            size={32}
-            noBg={false}
-            style={{
-              background: 'rgba(255, 255, 255, 0.9)',
-              cursor: 'pointer',
-            }}
-            color="var(--neutral-900)"
-          >
-            <Download weight="bold" />
-          </Icon>
-          
-          {/* Copy Button */}
-          <Icon
-            variant="circle"
-            size={32}
-            noBg={false}
-            style={{
-              background: 'rgba(255, 255, 255, 0.9)',
-              cursor: 'pointer',
-            }}
-            color="var(--neutral-900)"
-          >
-            <Copy weight="bold" />
-          </Icon>
-          
-          {/* Lock Button */}
-          <Icon
-            variant="circle"
-            size={32}
-            noBg={false}
-            style={{
-              background: 'rgba(255, 255, 255, 0.9)',
-              cursor: 'pointer',
-            }}
-            color="var(--neutral-900)"
-          >
-            <LockOpen weight="bold" />
-          </Icon>
-        </div>
+          <Text variant="body2" color="var(--neutral-0)">
+            Save to Drafts
+          </Text>
+        </Button>
+
+        {/* Copy Text Button */}
+        <Button
+          variant="default"
+          color="neutral"
+          size="md"
+          leftIcon={<Copy weight="bold" size={20} />}
+        >
+          <Text variant="body2" color="var(--neutral-800)">
+            Copy Text
+          </Text>
+        </Button>
+
+        {/* Download Image Button */}
+        <Button
+          variant="default"
+          color="neutral"
+          size="md"
+          leftIcon={<Download weight="bold" size={20} />}
+        >
+          <Text variant="body2" color="var(--neutral-800)">
+            Download Image
+          </Text>
+        </Button>
+
+        {/* Discard Post Button */}
+        <Button
+          variant="text"
+          color="error"
+          size="md"
+          leftIcon={<Trash weight="bold" size={20} />}
+        >
+          <Text variant="body2" color="var(--error-500)">
+            Discard Post
+          </Text>
+        </Button>
       </div>
     </div>
   );
