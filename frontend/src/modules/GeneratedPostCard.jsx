@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Button from '../components/Button';
-import Text from '../components/Text';
-import Icon from '../components/Icon';
-import { ArrowClockwise, Download, Copy, CaretDown, CaretUp, LockOpen, Folder, Trash, Palette } from 'phosphor-react';
-import './GeneratedPostCard.css';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Button from "../components/Button";
+import Text from "../components/Text";
+import Icon from "../components/Icon";
+import {
+  ArrowClockwise,
+  Download,
+  Copy,
+  CaretDown,
+  CaretUp,
+  LockOpen,
+  Folder,
+  Trash,
+  Palette,
+} from "phosphor-react";
+import "./GeneratedPostCard.css";
 
 function GeneratedPostCard({ text, image, style = {}, ...props }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   // Truncate text to 350 characters initially
-  const truncatedText = text.length > 350 ? text.substring(0, 350) + '...' : text;
+  const truncatedText =
+    text.length > 350 ? text.substring(0, 350) + "..." : text;
   const displayText = isExpanded ? text : truncatedText;
   const shouldShowSeeMore = text.length > 350;
 
@@ -19,7 +30,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
   };
 
   const handleRegenerateText = () => {
-    console.log('Regenerate text clicked');
+    console.log("Regenerate text clicked");
   };
 
   return (
@@ -28,14 +39,14 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
       <div className="generated-post-card__main">
         {/* Text Content Section */}
         <div className="generated-post-card__text-section">
-          <Text 
-            variant="body1" 
+          <Text
+            variant="body1"
             color="var(--neutral-900)"
             className="generated-post-card__text-content"
           >
             {displayText}
           </Text>
-          
+
           {/* Action Buttons Row */}
           <div className="generated-post-card__actions-row">
             {/* Toggle Text Button */}
@@ -47,8 +58,12 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
                 onClick={handleToggleText}
                 className="generated-post-card__toggle-button"
               >
-                <Text variant="body2" color="var(--primary-500)" style={{ fontWeight: 500 }}>
-                  {isExpanded ? 'see less' : 'see more'}
+                <Text
+                  variant="body2"
+                  color="var(--primary-500)"
+                  style={{ fontWeight: 500 }}
+                >
+                  {isExpanded ? "see less" : "see more"}
                 </Text>
                 {isExpanded ? (
                   <CaretUp size={16} weight="bold" />
@@ -57,7 +72,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
                 )}
               </Button>
             )}
-            
+
             {/* Regenerate Text Button */}
             <Button
               variant="text"
@@ -67,7 +82,11 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
               className="generated-post-card__regenerate-button"
             >
               <ArrowClockwise size={16} weight="bold" />
-              <Text variant="body2" color="var(--primary-500)" style={{ fontWeight: 500 }}>
+              <Text
+                variant="body2"
+                color="var(--primary-500)"
+                style={{ fontWeight: 500 }}
+              >
                 Regenerate Text
               </Text>
             </Button>
@@ -75,7 +94,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
         </div>
 
         {/* Image Section */}
-        <div 
+        <div
           className="generated-post-card__image-section"
           style={{ backgroundImage: `url(${image})` }}
         >
@@ -91,7 +110,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
             >
               <ArrowClockwise weight="bold" />
             </Icon>
-            
+
             {/* Download Button */}
             <Icon
               variant="circle"
@@ -102,7 +121,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
             >
               <Download weight="bold" />
             </Icon>
-            
+
             {/* Copy Button */}
             <Icon
               variant="circle"
@@ -113,7 +132,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
             >
               <Copy weight="bold" />
             </Icon>
-            
+
             {/* Lock Button */}
             <Icon
               variant="circle"
@@ -180,15 +199,16 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
       </div>
 
         {/* Content Library and Brand Profile Actions */}
-        <div className="generated-post-card__bottom-actions">
+        <div className="flex-row-wrap generated-post-card__bottom-actions">
           {/* View All Drafts Button */}
           <Button
             variant="text"
             color="primary"
             size="sm"
             leftIcon={<Folder weight="fill" size={14} />}
+            style={{ paddingLeft: 0, fontWeight: 500 }}
           >
-              View All Drafts in Content Library
+            View All Drafts in Content Library
           </Button>
 
           {/* Update Brand Profile Button */}
@@ -197,8 +217,9 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
             color="primary"
             size="sm"
             leftIcon={<Palette weight="fill" size={14} />}
+            style={{ paddingLeft: 0, fontWeight: 500 }}
           >
-              Update Brand Profile or Assets
+            Update Brand Profile or Assets
           </Button>
         </div>
     </div>

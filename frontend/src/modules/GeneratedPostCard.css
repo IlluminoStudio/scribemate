@@ -66,7 +66,6 @@
 }
 
 .generated-post-card__icon-button {
-  background: rgba(255, 255, 255, 0.9);
   cursor: pointer;
 }
 
@@ -74,5 +73,5 @@
   border-top: 1px solid var(--neutral-300);
   display: flex;
   gap: 0;
-  padding: 24px 0 0 0;
+  padding: 12px 0 0 0;
 }
