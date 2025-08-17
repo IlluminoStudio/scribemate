@@ -76,32 +76,7 @@
   }
 }
 
-.flex-row-wrap {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 32px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  justify-content: center;
-}
-.flex-row-wrap > * {
-  min-width: 280px;
-  flex: 1;
-}
-@media (max-width: 768px) {
-  .flex-row-wrap {
-    flex-direction: column;
-    gap: 20px;
-    align-items: stretch;
-  }
-  .flex-row-wrap > * {
-    min-width: 0;
-    width: 100%;
-    flex: unset;
-  }
-}
+
 
 .main-page-container {
   max-width: 800px;

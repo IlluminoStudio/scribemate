@@ -205,25 +205,61 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 16px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  justify-content: center;
+  align-items: center;
 }
+
 .flex-row-wrap > * {
-  min-width: 280px;
-  flex: 1;
+  flex: 0 0 auto;
 }
-@media (max-width: 768px) {
+
+/* Large desktop - single row, no wrapping */
+@media (min-width: 1200px) {
+  .flex-row-wrap {
+    gap: 24px;
+    justify-content: flex-start;
+  }
+  
+  .flex-row-wrap > * {
+    flex: 0 0 auto;
+  }
+}
+
+/* Medium desktop - single row, no wrapping */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .flex-row-wrap {
+    gap: 20px;
+    justify-content: flex-start;
+  }
+  
+  .flex-row-wrap > * {
+    flex: 0 0 auto;
+  }
+}
+
+/* Small desktop/tablet - allow wrapping if needed */
+@media (min-width: 640px) and (max-width: 767px) {
+  .flex-row-wrap {
+    gap: 16px;
+    justify-content: flex-start;
+  }
+  
+  .flex-row-wrap > * {
+    flex: 0 0 auto;
+  }
+}
+
+/* Mobile - stack vertically */
+@media (max-width: 639px) {
   .flex-row-wrap {
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
     align-items: stretch;
   }
+  
   .flex-row-wrap > * {
-    min-width: 0;
     width: 100%;
-    flex: unset;
+    flex: 0 0 auto;
   }
 } 
