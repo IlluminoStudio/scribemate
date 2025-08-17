@@ -196,8 +196,8 @@ function Button({
   } else if (size === "sm") {
     sizeStyle = {
       borderRadius: 10,
-      fontSize: 15,
-      padding: "10px 18px",
+      fontSize: 14,
+      padding: "8px 12px",
     };
   }
 

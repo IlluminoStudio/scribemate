@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../components/Button';
 import Text from '../components/Text';
 import Icon from '../components/Icon';
-import { ArrowClockwise, Download, Copy, CaretDown, CaretUp, LockOpen, Folder, Trash } from 'phosphor-react';
+import { ArrowClockwise, Download, Copy, CaretDown, CaretUp, LockOpen, Folder, Trash, Palette } from 'phosphor-react';
 import './GeneratedPostCard.css';
 
 function GeneratedPostCard({ text, image, style = {}, ...props }) {
@@ -178,6 +178,29 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
           </Text>
         </Button>
       </div>
+
+        {/* Content Library and Brand Profile Actions */}
+        <div className="generated-post-card__bottom-actions">
+          {/* View All Drafts Button */}
+          <Button
+            variant="text"
+            color="primary"
+            size="sm"
+            leftIcon={<Folder weight="fill" size={14} />}
+          >
+              View All Drafts in Content Library
+          </Button>
+
+          {/* Update Brand Profile Button */}
+          <Button
+            variant="text"
+            color="primary"
+            size="sm"
+            leftIcon={<Palette weight="fill" size={14} />}
+          >
+              Update Brand Profile or Assets
+          </Button>
+        </div>
     </div>
   );
 }
