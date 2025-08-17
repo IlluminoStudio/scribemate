@@ -129,7 +129,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
       </div>
 
       {/* Action Buttons Row - Outside the main card */}
-      <div className="generated-post-card__bottom-actions">
+      <div className="flex-row-wrap">
         {/* Save to Drafts Button */}
         <Button
           variant="default"

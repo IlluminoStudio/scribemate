@@ -7,18 +7,18 @@
 # MANDATORY TECHNOLOGY CHECK - READ FIRST
 **BEFORE implementing ANY UI or functionality, you MUST verify these technology requirements:**
 
-## 🚨 CRITICAL TECHNOLOGY CONSTRAINTS
+## CRITICAL FRONTEND CONSTRAINTS
 - **ICONS**: ALWAYS use Phosphor React icons (`phosphor-react` package) - NEVER use emoji, HTML entities, or other icon libraries
 - **TEXT**: ALWAYS use the `Text` component from `frontend/src/components/Text.jsx` - NEVER use native HTML text elements
 - **BUTTONS**: ALWAYS use the `Button` component from `frontend/src/components/Button.jsx` - NEVER create custom buttons
 - **COLORS**: ALWAYS use CSS variables from `frontend/src/styles/index.css` - NEVER use hardcoded colors
+- **FLEXBOX**: ALWAYS use `.flex-row-wrap` for horizontal flex rows that should wrap - NEVER create custom flexbox styles without checking utilities first
 
-## ✅ MANDATORY PRE-IMPLEMENTATION CHECKLIST
+## MANDATORY PRE-IMPLEMENTATION CHECKLIST
 1. **Check existing components** in `frontend/src/components/` before creating custom UI
-2. **Verify technology stack** requirements (Phosphor icons, Text component, etc.)
-3. **Use semantic color variables** from the design system
-4. **Follow folder structure** conventions
-5. **Apply responsive design** principles
+2. **Check existing utility classes** in `frontend/src/styles/index.css` before writing CSS
+5. **Follow folder structure** conventions
+6. **Apply responsive design** principles
 
 # GLOBAL RULES
 - BE VERY SUSPICIOUS OF EVERY COMPLICATION in our code. SIMPLE = GOOD, COMPLEX = BAD.

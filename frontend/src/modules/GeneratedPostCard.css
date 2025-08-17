@@ -54,7 +54,7 @@
   background-repeat: no-repeat;
   padding: 12px;
   position: relative;
-  min-height: 200px;
+  min-height: 256px;
 }
 
 .generated-post-card__icon-overlay {
@@ -71,8 +71,5 @@
 }
 
 .generated-post-card__bottom-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-start;
-  align-items: center;
+  /* Using utility class from index.css for consistent flex row behavior */
 }
