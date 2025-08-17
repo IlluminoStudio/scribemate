@@ -79,16 +79,9 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
               color="primary"
               size="sm"
               onClick={handleRegenerateText}
-              className="generated-post-card__regenerate-button"
+              leftIcon={<ArrowClockwise weight="fill" size={16} />}
             >
-              <ArrowClockwise size={16} weight="bold" />
-              <Text
-                variant="body2"
-                color="var(--primary-500)"
-                style={{ fontWeight: 500 }}
-              >
                 Regenerate Text
-              </Text>
             </Button>
           </div>
         </div>
@@ -156,9 +149,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
           size="md"
           leftIcon={<Folder weight="bold" size={20} />}
         >
-          <Text variant="body2" color="var(--neutral-0)">
             Save to Drafts
-          </Text>
         </Button>
 
         {/* Copy Text Button */}
@@ -168,9 +159,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
           size="md"
           leftIcon={<Copy weight="bold" size={20} />}
         >
-          <Text variant="body2" color="var(--neutral-800)">
             Copy Text
-          </Text>
         </Button>
 
         {/* Download Image Button */}
@@ -180,9 +169,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
           size="md"
           leftIcon={<Download weight="bold" size={20} />}
         >
-          <Text variant="body2" color="var(--neutral-800)">
             Download Image
-          </Text>
         </Button>
 
         {/* Discard Post Button */}
@@ -192,9 +179,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
           size="md"
           leftIcon={<Trash weight="bold" size={20} />}
         >
-          <Text variant="body2" color="var(--error-500)">
             Discard Post
-          </Text>
         </Button>
       </div>
 

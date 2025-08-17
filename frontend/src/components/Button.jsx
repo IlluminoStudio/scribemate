@@ -169,7 +169,7 @@ function Button({
     lineHeight: "normal",
     letterSpacing: 0,
     borderRadius: 12,
-    padding: "12px 24px",
+    padding: "8px 16px",
     cursor: "pointer",
     outline: "none",
     border: "none",
@@ -214,7 +214,8 @@ function Button({
     color: variantColors.color,
     WebkitTextFillColor: variantColors.WebkitTextFillColor,
     border: variantColors.border,
-    fontWeight: variantColors.fontWeight,
+    // Preserve base font weight unless explicitly overridden by variant
+    fontWeight: variantColors.fontWeight || 500,
   };
 
   // Hover/active/disabled state styles
