@@ -1,0 +1,78 @@
+.generated-post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.generated-post-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: var(--neutral-100);
+  border-radius: 8px;
+  border: 1px solid var(--neutral-300);
+}
+
+.generated-post-card__text-section {
+  border-radius: 8px;
+  border: 1px solid var(--neutral-300);
+  background: var(--neutral-0);
+  padding: 16px;
+}
+
+.generated-post-card__text-content {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.generated-post-card__actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.generated-post-card__toggle-button {
+  padding: 8px 0;
+  color: var(--primary-500);
+  font-weight: 500;
+  gap: 4px;
+}
+
+.generated-post-card__regenerate-button {
+  padding: 8px 0;
+  color: var(--primary-500);
+  font-weight: 500;
+  margin-left: auto;
+  gap: 4px;
+}
+
+.generated-post-card__image-section {
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 12px;
+  position: relative;
+  min-height: 200px;
+}
+
+.generated-post-card__icon-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.generated-post-card__icon-button {
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+
+.generated-post-card__bottom-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  align-items: center;
+}
