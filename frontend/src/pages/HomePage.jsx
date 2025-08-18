@@ -3,14 +3,70 @@ import Text from '../components/Text';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 import { APP_NAME, getCurrentYear } from '../constants';
-import Icon from '../components/Icon';
-import { Check } from 'phosphor-react';
+import { Check, Brain, MagnifyingGlass, Palette, Clock, ShareNetwork, CheckCircle } from 'phosphor-react';
+
+/**
+ * Reusable FeatureCard component for displaying feature information
+ */
+const FeatureCard = ({ icon: IconComponent, title, subtitle }) => {
+  return (
+    <div className="feature-card">
+      <IconComponent weight="regular" size={48} className="card-icon" />
+      <Text
+        variant="h4"
+        className="card-card-title"
+      >
+        {title}
+      </Text>
+      <Text
+        variant="body1"
+        className="card-card-subtitle"
+      >
+        {subtitle}
+      </Text>
+    </div>
+  );
+};
 
 /**
  * Landing page component that displays the main value proposition
  * and call-to-action for the Scribemate app
  */
 const HomePage = () => {
+  // Feature cards data
+  const featureCards = [
+    {
+      icon: Brain,
+      title: "AI-Powered Content",
+      subtitle: "Generate engaging posts tailored to your brand voice and current trends with advanced AI technology."
+    },
+    {
+      icon: MagnifyingGlass,
+      title: "SEO Optimization",
+      subtitle: "Every post is crafted with SEO best practices to help your content reach the right audience."
+    },
+    {
+      icon: Palette,
+      title: "Brand Consistency",
+      subtitle: "Maintain your unique brand voice and visual identity across all social media platforms."
+    },
+    {
+      icon: Clock,
+      title: "Time-Saving",
+      subtitle: "Create weeks of content in minutes, not hours. Focus on running your business, not content creation."
+    },
+    {
+      icon: ShareNetwork,
+      title: "Multi-Platform",
+      subtitle: "Optimize content for Facebook, Instagram, LinkedIn, and more with platform-specific formatting."
+    },
+    {
+      icon: CheckCircle,
+      title: "Compliant",
+      subtitle: "Stay within platform guidelines with content that's designed for manual posting by you."
+    }
+  ];
+
   return (
     <div className="homepage-wrapper">
       {/* Top Bar */}
@@ -115,6 +171,39 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* Rack #2 - Feature Cards */}
+      <div className="rack rack-light">
+        <div className="rack-content flex-row-wrap">
+          {/* Title and Subtitle */}
+          <div className="feature-section-header">
+            <Text
+              variant="h1"
+              className="card-title"
+            >
+              Everything you need for social success
+            </Text>
+            <Text
+              variant="body1"
+              className="card-subtitle"
+            >
+              Designed specifically for busy small business owners who need consistent, professional content
+            </Text>
+          </div>
+          
+          {/* Feature Cards Grid */}
+          <div className="flex-row-wrap">
+            {featureCards.map((card, index) => (
+              <FeatureCard
+                key={index}
+                icon={card.icon}
+                title={card.title}
+                subtitle={card.subtitle}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
       <footer className="homepage-footer">
         <div className="footer-content">
@@ -213,6 +302,7 @@ const HomePage = () => {
         .rack-content {
           max-width: 1200px;
           margin: 0 auto;
+          text-align: center;
         }
 
         /* Rack Background Variants */
@@ -298,6 +388,71 @@ const HomePage = () => {
           max-width: 600px;
         }
 
+        /* Feature Cards Section */
+        .feature-section-header {
+          margin-bottom: 40px;
+          width: 100%;
+        }
+
+        .card-title {
+          font-size: 36px;
+          font-weight: 700;
+          line-height: 40px;
+          color: var(--neutral-800);
+          margin: 0;
+          padding: 0;
+        }
+
+        .card-subtitle {
+          margin-top: 12px;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 28px;
+          color: var(--neutral-700);
+          margin-bottom: 40px;
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        .feature-card {
+          background-color: var(--neutral-100);
+          border-radius: 12px;
+          border: none;
+          box-shadow: var(--shadow-sm);
+          padding: 32px;
+          max-width: 384px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: left;
+          flex: 1;
+          min-width: 300px;
+        }
+
+        .card-icon {
+          color: var(--primary-500);
+          margin: 0 0 0 0;
+          padding: 0;
+        }
+
+        .feature-card .card-card-title {
+          font-size: 20px;
+          font-weight: 600;
+          color: var(--neutral-800);
+          margin: 28px 0 14px 0 !important;
+          padding: 0;
+          line-height: 1.2;
+        }
+
+        .card-card-subtitle {
+          font-size: 16px;
+          font-weight: 400;
+          color: var(--neutral-700);
+          line-height: 1.5;
+          margin: 0;
+          padding: 0;
+        }
+
         /* Footer */
         .homepage-footer {
           background-color: var(--primary-200);
@@ -358,6 +513,18 @@ const HomePage = () => {
             font-size: 18px;
             line-height: 28px;
           }
+          
+
+          
+          .card-title {
+            font-size: 32px;
+            line-height: 36px;
+          }
+          
+          .card-subtitle {
+            font-size: 18px;
+            line-height: 26px;
+          }
         }
 
         @media (max-width: 640px) {
@@ -375,6 +542,22 @@ const HomePage = () => {
           
           .homepage-footer {
             padding: 16px 20px;
+          }
+          
+
+          
+          .card-title {
+            font-size: 28px;
+            line-height: 32px;
+          }
+          
+          .card-subtitle {
+            font-size: 16px;
+            line-height: 24px;
+          }
+          
+          .feature-card {
+            padding: 24px;
           }
         }
       `}</style>
