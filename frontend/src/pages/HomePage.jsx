@@ -1,9 +1,18 @@
-import React from 'react';
-import Text from '../components/Text';
-import Button from '../components/Button';
-import { Link } from 'react-router-dom';
-import { APP_NAME, getCurrentYear } from '../constants';
-import { Check, Brain, MagnifyingGlass, Palette, Clock, ShareNetwork, CheckCircle } from 'phosphor-react';
+import React from "react";
+import Text from "../components/Text";
+import Button from "../components/Button";
+import { Link } from "react-router-dom";
+import { APP_NAME, getCurrentYear } from "../constants";
+import {
+  Check,
+  Brain,
+  MagnifyingGlass,
+  Palette,
+  Clock,
+  ShareNetwork,
+  CheckCircle,
+} from "phosphor-react";
+import Icon from "../components/Icon";
 
 /**
  * Reusable FeatureCard component for displaying feature information
@@ -11,17 +20,18 @@ import { Check, Brain, MagnifyingGlass, Palette, Clock, ShareNetwork, CheckCircl
 const FeatureCard = ({ icon: IconComponent, title, subtitle }) => {
   return (
     <div className="feature-card">
-      <IconComponent weight="regular" size={48} className="card-icon" />
-      <Text
-        variant="h4"
-        className="card-card-title"
+      <Icon
+        testid="feature-card-icon"
+        variant="circle"
+        size={44}
+        noBg={false}
       >
+        <IconComponent />
+      </Icon>
+      <Text variant="h4" className="card-card-title">
         {title}
       </Text>
-      <Text
-        variant="body1"
-        className="card-card-subtitle"
-      >
+      <Text variant="body1" className="card-card-subtitle">
         {subtitle}
       </Text>
     </div>
@@ -38,33 +48,39 @@ const HomePage = () => {
     {
       icon: Brain,
       title: "AI-Powered Content",
-      subtitle: "Generate engaging posts tailored to your brand voice and current trends with advanced AI technology."
+      subtitle:
+        "Generate engaging posts tailored to your brand voice and current trends with advanced AI technology.",
     },
     {
       icon: MagnifyingGlass,
       title: "SEO Optimization",
-      subtitle: "Every post is crafted with SEO best practices to help your content reach the right audience."
+      subtitle:
+        "Every post is crafted with SEO best practices to help your content reach the right audience.",
     },
     {
       icon: Palette,
       title: "Brand Consistency",
-      subtitle: "Maintain your unique brand voice and visual identity across all social media platforms."
+      subtitle:
+        "Maintain your unique brand voice and visual identity across all social media platforms.",
     },
     {
       icon: Clock,
       title: "Time-Saving",
-      subtitle: "Create weeks of content in minutes, not hours. Focus on running your business, not content creation."
+      subtitle:
+        "Create weeks of content in minutes, not hours. Focus on running your business, not content creation.",
     },
     {
       icon: ShareNetwork,
       title: "Multi-Platform",
-      subtitle: "Optimize content for Facebook, Instagram, LinkedIn, and more with platform-specific formatting."
+      subtitle:
+        "Optimize content for Facebook, Instagram, LinkedIn, and more with platform-specific formatting.",
     },
     {
       icon: CheckCircle,
       title: "Compliant",
-      subtitle: "Stay within platform guidelines with content that's designed for manual posting by you."
-    }
+      subtitle:
+        "Stay within platform guidelines with content that's designed for manual posting by you.",
+    },
   ];
 
   return (
@@ -73,15 +89,12 @@ const HomePage = () => {
       <header className="homepage-header">
         <div className="header-content">
           <div className="header-left">
-            <img 
-              src="/logo.svg" 
+            <img
+              src="/logo.svg"
               alt="Scribemate Logo"
               className="header-logo"
             />
-            <Text
-              variant="body1"
-              className="header-title"
-            >
+            <Text variant="body1" className="header-title">
               ScribeMate
             </Text>
           </div>
@@ -100,9 +113,7 @@ const HomePage = () => {
               state={{ tab: "signup" }}
               className="header-link"
             >
-              <Button size="sm">
-                Get Started
-              </Button>
+              <Button size="sm">Get Started</Button>
             </Link>
           </div>
         </div>
@@ -113,57 +124,46 @@ const HomePage = () => {
         <div className="rack-content flex-row-wrap">
           {/* Left side - Text content */}
           <div className="hero-text">
-            <Text
-              variant="h1"
-              className="hero-title"
-            >
-              Create <span className="hero-highlight">on-brand</span> social content in minutes
+            <Text variant="h1" className="hero-title">
+              Create <span className="hero-highlight">on-brand</span> social
+              content in minutes
             </Text>
-            
-            <Text
-              variant="body1"
-              className="hero-subtitle"
-            >
-              ScribeMate helps busy small business owners craft SEO-conscious social media posts that showcase expertise and nurture community growth.
+
+            <Text variant="body1" className="hero-subtitle">
+              ScribeMate helps busy small business owners craft SEO-conscious
+              social media posts that showcase expertise and nurture community
+              growth.
             </Text>
-            
+
             {/* Buttons */}
             <div className="hero-buttons flex-row-wrap">
-              <Button size="lg">
-                Start Creating Content
-              </Button>
+              <Button size="lg">Start Creating Content</Button>
               <Button color="primary" variant="outlined" size="lg">
                 See How It Works
               </Button>
             </div>
-            
+
             {/* Icon-text pairs */}
             <div className="hero-features">
               <div className="feature-item">
                 <Check weight="bold" size={16} className="feature-icon" />
-                <Text
-                  variant="body1"
-                  className="feature-text"
-                >
+                <Text variant="body1" className="feature-text">
                   No posting required
                 </Text>
               </div>
               <div className="feature-item">
                 <Check weight="bold" size={16} className="feature-icon" />
-                <Text
-                  variant="body1"
-                  className="feature-text"
-                >
+                <Text variant="body1" className="feature-text">
                   Brand-aligned content
                 </Text>
               </div>
             </div>
           </div>
-          
+
           {/* Right side - Image */}
           <div className="hero-image">
-            <img 
-              src="/landing.jpg" 
+            <img
+              src="/landing.jpg"
               alt="ScribeMate landing page illustration"
               className="hero-illustration"
             />
@@ -176,20 +176,15 @@ const HomePage = () => {
         <div className="rack-content flex-row-wrap">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
-            <Text
-              variant="h1"
-              className="card-title"
-            >
+            <Text variant="h1" className="card-title">
               Everything you need for social success
             </Text>
-            <Text
-              variant="body1"
-              className="card-subtitle"
-            >
-              Designed specifically for busy small business owners who need consistent, professional content
+            <Text variant="body1" className="card-subtitle">
+              Designed specifically for busy small business owners who need
+              consistent, professional content
             </Text>
           </div>
-          
+
           {/* Feature Cards Grid */}
           <div className="flex-row-wrap">
             {featureCards.map((card, index) => (
@@ -208,15 +203,12 @@ const HomePage = () => {
       <footer className="homepage-footer">
         <div className="footer-content">
           <div className="footer-left">
-            <Text
-              variant="body1"
-              className="footer-copyright"
-            >
+            <Text variant="body1" className="footer-copyright">
               © {getCurrentYear()} {APP_NAME}. All rights reserved.
             </Text>
           </div>
           <div className="footer-right">
-            <a 
+            <a
               href="https://jialinwang.pro?utm_source=scribemate"
               target="_blank"
               rel="noopener noreferrer"
@@ -326,28 +318,29 @@ const HomePage = () => {
         .hero-text {
           flex: 1;
           max-width: 600px;
+          text-align: left;
         }
 
-        .hero-title {
-          font-size: 48px;
-          font-weight: 700;
-          color: var(--neutral-800);
-          line-height: 48px;
-          margin: 0;
-          padding: 0;
+        .hero-text .hero-title {
+          font-size: 48px !important;
+          font-weight: 700 !important;
+          color: var(--neutral-900) !important;
+          line-height: 48px !important;
+          margin: 0 !important;
+          padding: 0 !important;
         }
 
         .hero-highlight {
           color: var(--primary-500);
         }
 
-        .hero-subtitle {
-          font-size: 20px;
-          font-weight: 400;
-          line-height: 33px;
-          color: var(--neutral-700);
-          margin: 24px 0 0 0;
-          padding: 0;
+        .hero-text .hero-subtitle {
+          font-size: 20px !important;
+          font-weight: 400 !important;
+          line-height: 33px !important;
+          color: var(--neutral-800) !important;
+          margin: 24px 0 0 0 !important;
+          padding: 0 !important;
         }
 
         .hero-buttons {
@@ -439,7 +432,7 @@ const HomePage = () => {
           font-size: 20px;
           font-weight: 600;
           color: var(--neutral-800);
-          margin: 28px 0 14px 0 !important;
+          margin: 20px 0 14px 0 !important;
           padding: 0;
           line-height: 1.2;
         }
@@ -565,4 +558,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage; 
+export default HomePage;
