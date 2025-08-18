@@ -3,6 +3,8 @@ import Text from '../components/Text';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 import { APP_NAME, getCurrentYear } from '../constants';
+import Icon from '../components/Icon';
+import { Check } from 'phosphor-react';
 
 /**
  * Landing page component that displays the main value proposition
@@ -66,8 +68,92 @@ const HomePage = () => {
       </header>
 
       {/* Rack #1 - Hero Section */}
-      <div>
-        this is the hero section
+      <div className="hero-section">
+        <div className="hero-content flex-row-wrap">
+          {/* Left side - Text content */}
+          <div className="hero-text">
+            <Text
+              variant="h1"
+              style={{
+                fontSize: '48px',
+                fontWeight: 700,
+                color: 'var(--neutral-800)',
+                lineHeight: '48px',
+                margin: 0,
+                padding: 0
+              }}
+            >
+              Create <span style={{ color: 'var(--primary-500)' }}>on-brand</span> social content in minutes
+            </Text>
+            
+            <Text
+              variant="body1"
+              style={{
+                fontSize: '20px',
+                fontWeight: 400,
+                lineHeight: '33px',
+                color: 'var(--neutral-700)',
+                margin: '24px 0 0 0',
+                padding: 0
+              }}
+            >
+              ScribeMate helps busy small business owners craft SEO-conscious social media posts that showcase expertise and nurture community growth.
+            </Text>
+            
+            {/* Buttons */}
+            <div className="hero-buttons flex-row-wrap">
+              <Button size="lg">
+                Start Creating Content
+              </Button>
+              <Button color="secondary" variant="outlined" size="lg">
+                Watch Demo
+              </Button>
+            </div>
+            
+            {/* Icon-text pairs */}
+            <div className="hero-features">
+              <div className="feature-item">
+                <Check weight="bold" size={16} color="var(--primary-500)" />
+                <Text
+                  variant="body1"
+                  style={{
+                    lineHeight: 1.5,
+                    margin: 0,
+                    padding: 0
+                  }}
+                >
+                  No posting required
+                </Text>
+              </div>
+              <div className="feature-item">
+                <Check weight="bold" size={16} color="var(--primary-500)" />
+                <Text
+                  variant="body1"
+                  style={{
+                    lineHeight: 1.5,
+                    margin: 0,
+                    padding: 0
+                  }}
+                >
+                  Brand-aligned content
+                </Text>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right side - Image */}
+          <div className="hero-image">
+            <img 
+              src="/landing.jpg" 
+              alt="ScribeMate landing page illustration"
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxWidth: '600px'
+              }}
+            />
+          </div>
+        </div>
       </div>
 
 
@@ -121,7 +207,7 @@ const HomePage = () => {
 
         /* Base layout styles */
         .homepage-wrapper {
-          background-color: var(--primary-bg);
+          background-color: var(--neutral-0);
           min-height: 100vh;
           display: flex;
           flex-direction: column;
@@ -182,6 +268,44 @@ const HomePage = () => {
         .footer-right {
           flex: 1;
           text-align: right;
+        }
+
+        /* Hero Section */
+        .hero-section {
+          background-color: #FCF8F3;
+          padding: 100px 80px;
+        }
+
+        .hero-content {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .hero-text {
+          flex: 1;
+          max-width: 600px;
+        }
+
+        .hero-image {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+        }
+
+        .hero-buttons {
+          margin-top: 32px;
+        }
+
+        .hero-features {
+          display: flex;
+          gap: 24px;
+          margin-top: 32px;
+        }
+
+        .feature-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
 
       `}</style>
