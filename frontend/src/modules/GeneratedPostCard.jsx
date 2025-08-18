@@ -16,7 +16,7 @@ import {
 } from "phosphor-react";
 import "./GeneratedPostCard.css";
 
-function GeneratedPostCard({ text, image, style = {}, ...props }) {
+function GeneratedPostCard({ text, image, platform = "Facebook", style = {}, ...props }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Truncate text to 350 characters initially
@@ -214,6 +214,7 @@ function GeneratedPostCard({ text, image, style = {}, ...props }) {
 GeneratedPostCard.propTypes = {
   text: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  platform: PropTypes.oneOf(["LinkedIn", "Facebook", "Blog"]),
   style: PropTypes.object,
 };
 

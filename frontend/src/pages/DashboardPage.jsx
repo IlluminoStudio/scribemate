@@ -20,6 +20,10 @@ import {
 } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 import TabNavigation from "../components/TabNavigation";
+import GeneratedPostCard from "../modules/GeneratedPostCard";
+import postImage1 from "../assets/post-img1.jpg";
+import postImage2 from "../assets/post-img2.jpg";
+import postImage3 from "../assets/post-img3.jpg";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -416,7 +420,7 @@ function DashboardPage() {
                            {/* Right side - Regenerate All button */}
                            <Button
                              testid="regenerate-all-btn"
-                             color="grey"
+                             color="neutral"
                              variant="outlined"
                              size="sm"
                              leftIcon={<ArrowClockwise weight="fill" size={16} />}
@@ -446,6 +450,30 @@ function DashboardPage() {
                            onTabChange={setSelectedTab}
                            variant="icon-left"
                            iconSize={16}
+                         />
+                         
+                         {/* Generated Post Card */}
+                         <GeneratedPostCard
+                           text="🎹 Spring is the perfect time to prepare for recitals! Here are my top 3 tips to help your child shine on stage:
+
+1. Practice performing - not just playing. Have mini-concerts at home!
+
+2. Focus on expression, not just notes. Music tells a story.
+
+3. Stay calm and breathe. Nerves are normal, even for pros!
+
+What questions do you have about recital prep? Drop them in the comments and I'll be happy to share tips, stories, and encouragement. Let's make this recital season your child's most confident and joyful yet!"
+                           image={
+                             selectedTab === "facebook" ? postImage2 :
+                             selectedTab === "linkedin" ? postImage1 :
+                             selectedTab === "blog" ? postImage3 : postImage2
+                           }
+                           platform={
+                             selectedTab === "facebook" ? "Facebook" :
+                             selectedTab === "linkedin" ? "LinkedIn" :
+                             selectedTab === "blog" ? "Blog" : "Facebook"
+                           }
+                           style={{ marginTop: '24px' }}
                          />
                        </div>
                      }
