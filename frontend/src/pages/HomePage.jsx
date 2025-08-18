@@ -20,21 +20,11 @@ const HomePage = () => {
             <img 
               src="/logo.svg" 
               alt="Scribemate Logo"
-              style={{
-                width: '32px',
-                height: '32px',
-                marginRight: '12px'
-              }}
+              className="header-logo"
             />
             <Text
               variant="body1"
-              style={{
-                color: 'var(--primary-main)',
-                fontSize: '18px',
-                fontWeight: 700,
-                margin: 0,
-                padding: 0
-              }}
+              className="header-title"
             >
               ScribeMate
             </Text>
@@ -43,10 +33,7 @@ const HomePage = () => {
             <Link
               to="/signin"
               state={{ tab: "signin" }}
-              style={{
-                marginRight: '16px',
-                textDecoration: 'none'
-              }}
+              className="header-link"
             >
               <Button variant="text" size="sm">
                 Sign In
@@ -55,9 +42,7 @@ const HomePage = () => {
             <Link
               to="/signin"
               state={{ tab: "signup" }}
-              style={{
-                textDecoration: 'none'
-              }}
+              className="header-link"
             >
               <Button size="sm">
                 Get Started
@@ -68,34 +53,20 @@ const HomePage = () => {
       </header>
 
       {/* Rack #1 - Hero Section */}
-      <div className="hero-section">
-        <div className="hero-content flex-row-wrap">
+      <div className="rack rack-warm hero-section">
+        <div className="rack-content flex-row-wrap">
           {/* Left side - Text content */}
           <div className="hero-text">
             <Text
               variant="h1"
-              style={{
-                fontSize: '48px',
-                fontWeight: 700,
-                color: 'var(--neutral-800)',
-                lineHeight: '48px',
-                margin: 0,
-                padding: 0
-              }}
+              className="hero-title"
             >
-              Create <span style={{ color: 'var(--primary-500)' }}>on-brand</span> social content in minutes
+              Create <span className="hero-highlight">on-brand</span> social content in minutes
             </Text>
             
             <Text
               variant="body1"
-              style={{
-                fontSize: '20px',
-                fontWeight: 400,
-                lineHeight: '33px',
-                color: 'var(--neutral-700)',
-                margin: '24px 0 0 0',
-                padding: 0
-              }}
+              className="hero-subtitle"
             >
               ScribeMate helps busy small business owners craft SEO-conscious social media posts that showcase expertise and nurture community growth.
             </Text>
@@ -113,27 +84,19 @@ const HomePage = () => {
             {/* Icon-text pairs */}
             <div className="hero-features">
               <div className="feature-item">
-                <Check weight="bold" size={16} color="var(--primary-500)" />
+                <Check weight="bold" size={16} className="feature-icon" />
                 <Text
                   variant="body1"
-                  style={{
-                    lineHeight: 1.5,
-                    margin: 0,
-                    padding: 0
-                  }}
+                  className="feature-text"
                 >
                   No posting required
                 </Text>
               </div>
               <div className="feature-item">
-                <Check weight="bold" size={16} color="var(--primary-500)" />
+                <Check weight="bold" size={16} className="feature-icon" />
                 <Text
                   variant="body1"
-                  style={{
-                    lineHeight: 1.5,
-                    margin: 0,
-                    padding: 0
-                  }}
+                  className="feature-text"
                 >
                   Brand-aligned content
                 </Text>
@@ -146,16 +109,11 @@ const HomePage = () => {
             <img 
               src="/landing.jpg" 
               alt="ScribeMate landing page illustration"
-              style={{
-                width: '100%',
-                height: 'auto',
-                maxWidth: '600px'
-              }}
+              className="hero-illustration"
             />
           </div>
         </div>
       </div>
-
 
       {/* Footer */}
       <footer className="homepage-footer">
@@ -163,13 +121,7 @@ const HomePage = () => {
           <div className="footer-left">
             <Text
               variant="body1"
-              style={{
-                color: 'rgb(150, 154, 157)',
-                fontSize: '14px',
-                fontWeight: 400,
-                margin: 0,
-                padding: 0
-              }}
+              className="footer-copyright"
             >
               © {getCurrentYear()} {APP_NAME}. All rights reserved.
             </Text>
@@ -179,14 +131,7 @@ const HomePage = () => {
               href="https://jialinwang.pro?utm_source=scribemate"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                color: 'rgb(150, 154, 157)',
-                fontSize: '14px',
-                fontWeight: 400,
-                textDecoration: 'none',
-                margin: 0,
-                padding: 0
-              }}
+              className="footer-credit"
             >
               By Jialin Wang - crafted, not cobbled
             </a>
@@ -196,15 +141,6 @@ const HomePage = () => {
 
       {/* Styles */}
       <style>{`
-        /* Base layout styles */
-        .homepage-wrapper {
-          background-color: var(--primary-50);
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-        }
-
-
         /* Base layout styles */
         .homepage-wrapper {
           background-color: var(--neutral-0);
@@ -235,15 +171,131 @@ const HomePage = () => {
           align-items: center;
         }
 
+        .header-logo {
+          width: 32px;
+          height: 32px;
+          margin-right: 12px;
+        }
+
+        .header-title {
+          color: var(--primary-main);
+          font-size: 18px;
+          font-weight: 700;
+          margin: 0;
+          padding: 0;
+        }
+
         .header-right {
           display: flex;
           align-items: center;
+        }
+
+        .header-link {
+          margin-right: 16px;
+          text-decoration: none;
+        }
+
+        .header-link:last-child {
+          margin-right: 0;
         }
 
         /* Main content area */
         .homepage-wrapper > div:not(.homepage-header):not(.homepage-footer) {
           flex: 1;
           padding: 80px 40px;
+        }
+
+        /* Rack System - Reusable Classes */
+        .rack {
+          padding: 100px 80px;
+        }
+
+        .rack-content {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        /* Rack Background Variants */
+        .rack-light {
+          background-color: var(--neutral-0);
+        }
+
+        .rack-warm {
+          background-color: #FCF8F3;
+        }
+
+        /* Hero Section - Now uses rack classes */
+        .hero-section {
+          /* Inherits from .rack and .rack-warm */
+        }
+
+        .hero-content {
+          /* Inherits from .rack-content */
+        }
+
+        .hero-text {
+          flex: 1;
+          max-width: 600px;
+        }
+
+        .hero-title {
+          font-size: 48px;
+          font-weight: 700;
+          color: var(--neutral-800);
+          line-height: 48px;
+          margin: 0;
+          padding: 0;
+        }
+
+        .hero-highlight {
+          color: var(--primary-500);
+        }
+
+        .hero-subtitle {
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 33px;
+          color: var(--neutral-700);
+          margin: 24px 0 0 0;
+          padding: 0;
+        }
+
+        .hero-buttons {
+          margin-top: 32px;
+        }
+
+        .hero-features {
+          display: flex;
+          gap: 24px;
+          margin-top: 32px;
+        }
+
+        .feature-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .feature-icon {
+          color: var(--primary-500);
+        }
+
+        .feature-text {
+          line-height: 1.5;
+          margin: 0;
+          padding: 0;
+        }
+
+        .hero-image {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+        }
+
+        .hero-illustration {
+          width: 100%;
+          height: auto;
+          max-width: 600px;
         }
 
         /* Footer */
@@ -270,44 +322,61 @@ const HomePage = () => {
           text-align: right;
         }
 
-        /* Hero Section */
-        .hero-section {
-          background-color: #FCF8F3;
-          padding: 100px 80px;
+        .footer-copyright {
+          color: var(--neutral-600);
+          font-size: 14px;
+          font-weight: 400;
+          margin: 0;
+          padding: 0;
         }
 
-        .hero-content {
-          max-width: 1200px;
-          margin: 0 auto;
+        .footer-credit {
+          color: var(--neutral-600);
+          font-size: 14px;
+          font-weight: 400;
+          text-decoration: none;
+          margin: 0;
+          padding: 0;
         }
 
-        .hero-text {
-          flex: 1;
-          max-width: 600px;
+        .footer-credit:hover {
+          color: var(--neutral-700);
         }
 
-        .hero-image {
-          flex: 1;
-          display: flex;
-          justify-content: center;
+        /* Responsive adjustments for rack system */
+        @media (max-width: 768px) {
+          .rack {
+            padding: 60px 40px;
+          }
+          
+          .hero-title {
+            font-size: 36px;
+            line-height: 40px;
+          }
+          
+          .hero-subtitle {
+            font-size: 18px;
+            line-height: 28px;
+          }
         }
 
-        .hero-buttons {
-          margin-top: 32px;
+        @media (max-width: 640px) {
+          .homepage-wrapper > div:not(.homepage-header):not(.homepage-footer) {
+            padding: 40px 20px;
+          }
+          
+          .rack {
+            padding: 40px 20px;
+          }
+          
+          .homepage-header {
+            padding: 12px 20px;
+          }
+          
+          .homepage-footer {
+            padding: 16px 20px;
+          }
         }
-
-        .hero-features {
-          display: flex;
-          gap: 24px;
-          margin-top: 32px;
-        }
-
-        .feature-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
       `}</style>
     </div>
   );
