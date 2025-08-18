@@ -105,8 +105,8 @@ const HomePage = () => {
               <Button size="lg">
                 Start Creating Content
               </Button>
-              <Button color="secondary" variant="outlined" size="lg">
-                Watch Demo
+              <Button color="primary" variant="outlined" size="lg">
+                See How It Works
               </Button>
             </div>
             
