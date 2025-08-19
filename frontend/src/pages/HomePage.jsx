@@ -13,6 +13,9 @@ import {
   CheckCircle,
 } from "phosphor-react";
 import Icon from "../components/Icon";
+import pianoStudioImage from "../assets/piano-studio.jpg";
+import cafeImage from "../assets/cafe.jpg";
+import gymImage from "../assets/gym.jpg";
 import "../styles/HomePage.css";
 
 /**
@@ -35,6 +38,35 @@ const FeatureCard = ({ icon: IconComponent, title, subtitle }) => {
       <Text variant="body1" className="card-card-subtitle">
         {subtitle}
       </Text>
+    </div>
+  );
+};
+
+/**
+ * SamplePost component for displaying example social media posts
+ * Shows an image with job title and description below
+ */
+const SamplePost = ({ image, jobTitle, description }) => {
+  return (
+    <div className="sample-post">
+      {/* Inner card with image */}
+      <div className="sample-post-inner">
+        <img 
+          src={image} 
+          alt={`Example post for ${jobTitle}`}
+          className="sample-post-image"
+        />
+      </div>
+      
+      {/* Job title and description */}
+      <div className="sample-post-content">
+        <Text variant="h6" className="sample-job-title">
+          {jobTitle}
+        </Text>
+        <Text variant="body2" className="sample-description">
+          {description}
+        </Text>
+      </div>
     </div>
   );
 };
@@ -84,6 +116,25 @@ const HomePage = () => {
     },
   ];
 
+  // Example cards data for "See ScribeMate in Action" section
+  const exampleCards = [
+    {
+      image: pianoStudioImage,
+      jobTitle: "Piano Teacher",
+      description: "Educational content that builds trust",
+    },
+    {
+      image: cafeImage,
+      jobTitle: "Local Cafe",
+      description: "Engaging community-focused posts",
+    },
+    {
+      image: gymImage,
+      jobTitle: "Personal Trainer",
+      description: "Motivational content that converts",
+    },
+  ];
+
   return (
     <div className="homepage-wrapper">
       {/* Top Bar */}
@@ -122,7 +173,7 @@ const HomePage = () => {
 
       {/* Rack #1 - Hero Section */}
       <div className="rack rack-warm hero-section">
-        <div className="rack-content flex-row-wrap">
+        <div className="rack-content flex-row-wrap-left">
           {/* Left side - Text content */}
           <div className="hero-text">
             <Text variant="h1" className="hero-title">
@@ -137,7 +188,7 @@ const HomePage = () => {
             </Text>
 
             {/* Buttons */}
-            <div className="hero-buttons flex-row-wrap">
+            <div className="hero-buttons flex-row-wrap-left">
               <Button size="lg">Start Creating Content</Button>
               <Button color="primary" variant="outlined" size="lg">
                 See How It Works
@@ -174,7 +225,7 @@ const HomePage = () => {
 
       {/* Rack #2 - Feature Cards */}
       <div className="rack rack-light">
-        <div className="rack-content flex-row-wrap">
+        <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
             <Text variant="h1" className="card-title">
@@ -187,7 +238,7 @@ const HomePage = () => {
           </div>
 
           {/* Feature Cards Grid */}
-          <div className="flex-row-wrap">
+          <div className="flex-row-wrap-center">
             {featureCards.map((card, index) => (
               <FeatureCard
                 key={index}
@@ -201,7 +252,7 @@ const HomePage = () => {
       </div>
 
       <div className="rack rack-warm">
-        <div className="rack-content flex-row-wrap">
+        <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
             <Text variant="h1" className="card-title">
@@ -215,7 +266,7 @@ const HomePage = () => {
       </div>
 
       <div className="rack rack-light">
-        <div className="rack-content flex-row-wrap">
+        <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
             <Text variant="h1" className="card-title">
@@ -225,11 +276,23 @@ const HomePage = () => {
               Real posts generated for businesses like yours
             </Text>
           </div>
+          
+          {/* Example Cards */}
+          <div className="flex-row-wrap-center">
+            {exampleCards.map((card, index) => (
+              <SamplePost
+                key={index}
+                image={card.image}
+                jobTitle={card.jobTitle}
+                description={card.description}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
       <div className="rack rack-warm">
-        <div className="rack-content flex-row-wrap">
+        <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
             <Text variant="h1" className="card-title">
@@ -243,7 +306,7 @@ const HomePage = () => {
       </div>
 
       <div className="rack rack-light">
-        <div className="rack-content flex-row-wrap">
+        <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
             <Text variant="h1" className="card-title">
@@ -254,7 +317,7 @@ const HomePage = () => {
       </div>
 
       <div className="rack rack-warm">
-        <div className="rack-content flex-row-wrap">
+        <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
             <Text variant="h1" className="card-title">

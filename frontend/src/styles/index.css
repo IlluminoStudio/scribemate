@@ -201,65 +201,92 @@ body {
   padding-right: 24px;
 }
 
-.flex-row-wrap {
+
+
+/* Left-aligned flex row (original behavior) */
+.flex-row-wrap-left {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 16px;
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
+  justify-content: flex-start;
 }
 
-.flex-row-wrap > * {
+.flex-row-wrap-left > * {
+  flex: 0 0 auto;
+}
+
+/* Centered flex row (new behavior) */
+.flex-row-wrap-center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: flex-start;
+  gap: 32px;
+  justify-content: center;
+}
+
+.flex-row-wrap-center > * {
   flex: 0 0 auto;
 }
 
 /* Large desktop - single row, no wrapping */
 @media (min-width: 1200px) {
-  .flex-row-wrap {
+  .flex-row-wrap-left {
     gap: 24px;
-    justify-content: flex-start;
   }
   
-  .flex-row-wrap > * {
-    flex: 0 0 auto;
+  .flex-row-wrap-center {
+    gap: 32px;
   }
 }
 
 /* Medium desktop - single row, no wrapping */
 @media (min-width: 768px) and (max-width: 1199px) {
-  .flex-row-wrap {
+  .flex-row-wrap-left {
     gap: 20px;
-    justify-content: flex-start;
   }
   
-  .flex-row-wrap > * {
-    flex: 0 0 auto;
+  .flex-row-wrap-center {
+    gap: 32px;
   }
 }
 
 /* Small desktop/tablet - allow wrapping if needed */
 @media (min-width: 640px) and (max-width: 767px) {
-  .flex-row-wrap {
+  .flex-row-wrap-left {
     gap: 16px;
-    justify-content: flex-start;
   }
   
-  .flex-row-wrap > * {
-    flex: 0 0 auto;
+  .flex-row-wrap-center {
+    gap: 32px;
   }
 }
 
 /* Mobile - stack vertically */
 @media (max-width: 639px) {
-  .flex-row-wrap {
+  .flex-row-wrap-left,
+  .flex-row-wrap-center {
     flex-direction: column;
-    gap: 12px;
     align-items: stretch;
   }
   
-  .flex-row-wrap > * {
+  .flex-row-wrap-left {
+    gap: 12px;
+  }
+  
+  .flex-row-wrap-center {
+    gap: 16px;
+  }
+  
+  .flex-row-wrap-left > *,
+  .flex-row-wrap-center > * {
     width: 100%;
     flex: 0 0 auto;
   }
 } 
+
+

@@ -325,3 +325,55 @@
     padding: 24px;
   }
 }
+
+/* Sample Post Styles */
+.sample-post {
+  display: flex;
+  max-width: 336px;
+  padding: 24px 24px 44px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: none;
+  background: var(--neutral-100);
+}
+
+
+
+.sample-post-inner {
+  border-radius: 12px;
+  border: none;
+  background: var(--neutral-0);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  width: 100%;
+}
+
+.sample-post-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sample-post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  width: 100%;
+}
+
+.sample-job-title {
+  color: var(--neutral-700);
+  text-align: center;
+  line-height: 24px;
+  margin: 0;
+}
+
+.sample-description {
+  color: var(--neutral-700);
+  text-align: center;
+  margin: 0;
+}

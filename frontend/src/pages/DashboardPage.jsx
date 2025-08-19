@@ -155,7 +155,7 @@ function DashboardPage() {
       <div className="content-block">
         <div className="page-container max-width" style={{ padding: "24px 0" }}>
           <div
-            className="flex-row-wrap"
+            className="flex-row-wrap-left"
             style={{ maxWidth: "100%", alignItems: "flex-start" }}
           >
             {/* Left column - 2 parts width*/}

@@ -141,7 +141,7 @@ function GeneratedPostCard({ text, image, platform = "Facebook", style = {}, ...
       </div>
 
       {/* Action Buttons Row - Outside the main card */}
-      <div className="flex-row-wrap">
+              <div className="flex-row-wrap-left">
         {/* Save to Drafts Button */}
         <Button
           variant="default"
@@ -184,7 +184,7 @@ function GeneratedPostCard({ text, image, platform = "Facebook", style = {}, ...
       </div>
 
         {/* Content Library and Brand Profile Actions */}
-        <div className="flex-row-wrap generated-post-card__bottom-actions">
+        <div className="flex-row-wrap-left generated-post-card__bottom-actions">
           {/* View All Drafts Button */}
           <Button
             variant="text"
