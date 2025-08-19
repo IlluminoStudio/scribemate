@@ -270,8 +270,23 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Rack #2 - Feature Cards */}
+      {/* Rack #2 - How ScribeMate Works */}
       <div className="rack rack-light">
+        <div className="rack-content flex-row-wrap-left">
+          {/* Title and Subtitle */}
+          <div className="feature-section-header">
+            <Text variant="h1" className="card-title">
+              How ScribeMate Works
+            </Text>
+            <Text variant="body1" className="card-subtitle">
+              Four simple steps to create engaging social content
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      {/* Rack #3 - Feature Cards */}
+      <div className="rack rack-warm">
         <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
@@ -298,20 +313,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="rack rack-warm">
-        <div className="rack-content flex-row-wrap-left">
-          {/* Title and Subtitle */}
-          <div className="feature-section-header">
-            <Text variant="h1" className="card-title">
-              How ScribeMate Works
-            </Text>
-            <Text variant="body1" className="card-subtitle">
-              Four simple steps to create engaging social content
-            </Text>
-          </div>
-        </div>
-      </div>
-
+      {/* Rack #4 - See ScribeMate in Action */}
       <div className="rack rack-light">
         <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
