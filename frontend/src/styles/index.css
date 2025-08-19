@@ -220,17 +220,19 @@ body {
 
 /* Centered flex row (new behavior) */
 .flex-row-wrap-center {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(336px, 1fr));
   width: 100%;
-  align-items: flex-start;
+  align-items: start;
   gap: 32px;
-  justify-content: center;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .flex-row-wrap-center > * {
-  flex: 0 0 auto;
+  width: 100%;
+  max-width: 336px;
 }
 
 /* Large desktop - single row, no wrapping */
@@ -262,30 +264,31 @@ body {
   }
   
   .flex-row-wrap-center {
-    gap: 32px;
+    gap: 16px;
   }
 }
 
 /* Mobile - stack vertically */
 @media (max-width: 639px) {
-  .flex-row-wrap-left,
-  .flex-row-wrap-center {
+  .flex-row-wrap-left {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
   }
   
-  .flex-row-wrap-left {
-    gap: 12px;
+  .flex-row-wrap-left > * {
+    width: 100%;
+    flex: 0 0 auto;
   }
   
   .flex-row-wrap-center {
     gap: 16px;
+    grid-template-columns: 1fr;
   }
   
-  .flex-row-wrap-left > *,
   .flex-row-wrap-center > * {
     width: 100%;
-    flex: 0 0 auto;
+    max-width: none;
   }
 } 
 

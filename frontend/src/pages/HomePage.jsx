@@ -11,11 +11,17 @@ import {
   Clock,
   ShareNetwork,
   CheckCircle,
+  HeartStraight,
+  ChatCircle,
 } from "phosphor-react";
 import Icon from "../components/Icon";
+import Avatar from "../components/Avatar";
 import pianoStudioImage from "../assets/piano-studio.jpg";
 import cafeImage from "../assets/cafe.jpg";
 import gymImage from "../assets/gym.jpg";
+import pianoTeacherImage from "../assets/piano-teacher.png";
+import cafeOwnerImage from "../assets/cafe-owner.png";
+import personalTrainerImage from "../assets/personal-trainer.png";
 import "../styles/HomePage.css";
 
 /**
@@ -46,7 +52,7 @@ const FeatureCard = ({ icon: IconComponent, title, subtitle }) => {
  * SamplePost component for displaying example social media posts
  * Shows an image with job title and description below
  */
-const SamplePost = ({ image, jobTitle, description }) => {
+const SamplePost = ({ image, jobTitle, description, businessName, avatarImage, postText, socialStats }) => {
   return (
     <div className="sample-post">
       {/* Inner card with image */}
@@ -56,6 +62,35 @@ const SamplePost = ({ image, jobTitle, description }) => {
           alt={`Example post for ${jobTitle}`}
           className="sample-post-image"
         />
+        
+        {/* Avatar and business name duo */}
+        <div className="sample-post-avatar-section">
+          <Avatar variant="sm" image={avatarImage} />
+          <Text variant="label" weight={600} className="sample-post-business-name">
+            {businessName}
+          </Text>
+        </div>
+        
+        {/* Paragraph text */}
+        <Text variant="body2" className="sample-post-text">
+          {postText}
+        </Text>
+        
+        {/* Social media widgets */}
+        <div className="sample-post-social-widgets">
+          <div className="sample-post-social-item">
+            <HeartStraight variant="light" size={12} className="sample-post-social-icon" />
+            <Text variant="caption" className="sample-post-social-count">{socialStats.likes}</Text>
+          </div>
+          <div className="sample-post-social-item">
+            <ChatCircle variant="light" size={12} className="sample-post-social-icon" />
+            <Text variant="caption" className="sample-post-social-count">{socialStats.comments}</Text>
+          </div>
+          <div className="sample-post-social-item">
+            <ShareNetwork variant="fill" size={12} className="sample-post-social-icon" />
+            <Text variant="caption" className="sample-post-social-count">{socialStats.reposts}</Text>
+          </div>
+        </div>
       </div>
       
       {/* Job title and description */}
@@ -122,16 +157,28 @@ const HomePage = () => {
       image: pianoStudioImage,
       jobTitle: "Piano Teacher",
       description: "Educational content that builds trust",
+      businessName: "Harmony Piano Studio",
+      avatarImage: pianoTeacherImage,
+      postText: "🎹 Did you know that playing piano can improve memory and cognitive function? Our adult beginner classes start next week - it's never too late to learn! #PianoLessons #AdultLearning #MusicEducation",
+      socialStats: { likes: 24, comments: 8, reposts: 3 }
     },
     {
       image: cafeImage,
       jobTitle: "Local Cafe",
       description: "Engaging community-focused posts",
+      businessName: "Bean & Brew Cafe",
+      avatarImage: cafeOwnerImage,
+      postText: "☕ Monday motivation starts with our signature Ethiopian blend! Ethically sourced, perfectly roasted. What's your go-to coffee order? #MondayMotivation #EthicalCoffee #LocalCafe",
+      socialStats: { likes: 18, comments: 12, reposts: 5 }
     },
     {
       image: gymImage,
       jobTitle: "Personal Trainer",
       description: "Motivational content that converts",
+      businessName: "FitLife Personal Training",
+      avatarImage: personalTrainerImage,
+      postText: "💪 Transformation Tuesday! Small consistent actions lead to big results. Here's a simple 10-minute morning routine to energize your day. DM for your free consultation! #TransformationTuesday #FitnessMotivation #PersonalTrainer",
+      socialStats: { likes: 31, comments: 15, reposts: 7 }
     },
   ];
 
@@ -285,6 +332,10 @@ const HomePage = () => {
                 image={card.image}
                 jobTitle={card.jobTitle}
                 description={card.description}
+                businessName={card.businessName}
+                avatarImage={card.avatarImage}
+                postText={card.postText}
+                socialStats={card.socialStats}
               />
             ))}
           </div>
