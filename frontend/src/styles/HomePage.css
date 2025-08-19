@@ -68,7 +68,7 @@
 }
 
 .rack-content {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   text-align: center;
 }
@@ -423,4 +423,39 @@
 
 .sample-post-social-count {
   color: var(--neutral-600);
+}
+
+/* Process Step Card Styles */
+.process-step-card {
+  display: flex;
+  max-width: 280px;
+  padding: 0 12px;
+  border: none;
+  background: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.process-step-title {
+  color: var(--secondary-500);
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+}
+
+.process-step-subtitle {
+  color: var(--neutral-700);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Process Steps Container - Single Row Layout */
+.process-steps-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  align-items: flex-start;
+  gap: 32px;
+  justify-content: center;
 }

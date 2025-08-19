@@ -13,6 +13,10 @@ import {
   CheckCircle,
   HeartStraight,
   ChatCircle,
+  Upload,
+  Question,
+  MagicWand,
+  Download,
 } from "phosphor-react";
 import Icon from "../components/Icon";
 import Avatar from "../components/Avatar";
@@ -102,6 +106,33 @@ const SamplePost = ({ image, jobTitle, description, businessName, avatarImage, p
           {description}
         </Text>
       </div>
+    </div>
+  );
+};
+
+/**
+ * ProcessStepCard component for displaying individual steps in the process
+ * Shows an icon, title, and description for each step
+ */
+const ProcessStepCard = ({ icon: IconComponent, title, subtitle }) => {
+  return (
+    <div className="process-step-card">
+      <Icon
+        testid="process-step-icon"
+        variant="circle"
+        size={56}
+        noBg={false}
+        color="var(--neutral-0)"
+        style={{ background: "var(--primary-500)", marginBottom: "24px" }}
+      >
+        <IconComponent weight="bold" size={32} />
+      </Icon>
+      <Text variant="h4" className="process-step-title">
+        {title}
+      </Text>
+      <Text variant="body1" className="process-step-subtitle">
+        {subtitle}
+      </Text>
     </div>
   );
 };
@@ -281,6 +312,30 @@ const HomePage = () => {
             <Text variant="body1" className="card-subtitle">
               Four simple steps to create engaging social content
             </Text>
+          </div>
+          
+          {/* Process Steps */}
+          <div className="process-steps-container">
+            <ProcessStepCard
+              icon={Upload}
+              title="Upload Brand Assets"
+              subtitle="Add your logo, colors, and brand guidelines to ensure consistent messaging"
+            />
+            <ProcessStepCard
+              icon={Question}
+              title="Choose Topics"
+              subtitle="Select from trending topics or input your own ideas for content generation"
+            />
+            <ProcessStepCard
+              icon={MagicWand}
+              title="Generate Content"
+              subtitle="AI creates on-brand posts with images optimized for your chosen platforms"
+            />
+            <ProcessStepCard
+              icon={Download}
+              title="Export & Post"
+              subtitle="Download your content and post directly to your social media platforms"
+            />
           </div>
         </div>
       </div>
