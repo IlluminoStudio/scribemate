@@ -449,13 +449,20 @@
   margin: 0;
 }
 
-/* Process Steps Container - Single Row Layout */
+/* Process Steps Container - Single Row on Desktop, Wrapping on Mobile */
 .process-steps-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100%;
   align-items: flex-start;
-  gap: 32px;
   justify-content: center;
+}
+
+/* Ensure single row on large screens */
+@media (min-width: 1280px) {
+  .process-steps-container {
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
 }
