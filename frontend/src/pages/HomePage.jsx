@@ -200,6 +200,73 @@ const HomePage = () => {
         </div>
       </div>
 
+      <div className="rack rack-warm">
+        <div className="rack-content flex-row-wrap">
+          {/* Title and Subtitle */}
+          <div className="feature-section-header">
+            <Text variant="h1" className="card-title">
+              How ScribeMate Works
+            </Text>
+            <Text variant="body1" className="card-subtitle">
+              Four simple steps to create engaging social content
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <div className="rack rack-light">
+        <div className="rack-content flex-row-wrap">
+          {/* Title and Subtitle */}
+          <div className="feature-section-header">
+            <Text variant="h1" className="card-title">
+              See ScribeMate in Action
+            </Text>
+            <Text variant="body1" className="card-subtitle">
+              Real posts generated for businesses like yours
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <div className="rack rack-warm">
+        <div className="rack-content flex-row-wrap">
+          {/* Title and Subtitle */}
+          <div className="feature-section-header">
+            <Text variant="h1" className="card-title">
+              Simple Pricing
+            </Text>
+            <Text variant="body1" className="card-subtitle">
+              Choose the plan that fits your business needs
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <div className="rack rack-light">
+        <div className="rack-content flex-row-wrap">
+          {/* Title and Subtitle */}
+          <div className="feature-section-header">
+            <Text variant="h1" className="card-title">
+              Frequently Asked Questions
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <div className="rack rack-warm">
+        <div className="rack-content flex-row-wrap">
+          {/* Title and Subtitle */}
+          <div className="feature-section-header">
+            <Text variant="h1" className="card-title">
+              Get in Touch
+            </Text>
+            <Text variant="body1" className="card-subtitle">
+              Have questions? Feature requests? Feedback? We'd love to hear from you!
+            </Text>
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
       <footer className="homepage-footer">
         <div className="footer-content">
