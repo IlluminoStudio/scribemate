@@ -29,6 +29,7 @@ import pianoTeacherImage from "../assets/piano-teacher.png";
 import cafeOwnerImage from "../assets/cafe-owner.png";
 import personalTrainerImage from "../assets/personal-trainer.png";
 import jwLogo from "../assets/jw-logo.svg";
+import curvePenSvg from "/curve-pen.svg";
 import "../styles/HomePage.css";
 
 /**
@@ -366,7 +367,15 @@ const HomePage = () => {
           {/* Title and Subtitle */}
           <div className="feature-section-header">
             <Text variant="h1" className="card-title">
-              Everything you need for social success
+              Everything you need for social{" "}
+              <span className="success-highlight">
+                success
+                <img 
+                  src={curvePenSvg} 
+                  alt="Decorative underline" 
+                  className="success-underline"
+                />
+              </span>
             </Text>
             <Text variant="body1" className="card-subtitle">
               Designed specifically for busy small business owners who need
