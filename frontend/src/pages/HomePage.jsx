@@ -314,7 +314,7 @@ const HomePage = () => {
           {/* Right side - Image */}
           <div className="hero-image">
             <img
-              src="/landing.jpg"
+              src="/landing.png"
               alt="ScribeMate landing page illustration"
               className="hero-illustration"
             />
