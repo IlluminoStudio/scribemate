@@ -466,3 +466,39 @@
     gap: 20px;
   }
 }
+
+/* FAQ Card Styles */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+  align-items: center;
+}
+
+.faq-card {
+  display: flex;
+  max-width: 848px;
+  padding: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+  background: var(--neutral-100);
+  width: 100%;
+  text-align: left;
+}
+
+.faq-question {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.faq-answer {
+  margin: 0;
+  line-height: 1.5;
+}

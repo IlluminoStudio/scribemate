@@ -138,6 +138,23 @@ const ProcessStepCard = ({ icon: IconComponent, title, subtitle }) => {
 };
 
 /**
+ * FAQCard component for displaying individual FAQ items
+ * Shows a question and answer in a styled card format
+ */
+const FAQCard = ({ question, answer }) => {
+  return (
+    <div className="faq-card">
+      <Text variant="h6" color="var(--secondary-500)" className="faq-question">
+        {question}
+      </Text>
+      <Text variant="body1" color="var(--neutral-700)" className="faq-answer">
+        {answer}
+      </Text>
+    </div>
+  );
+};
+
+/**
  * Landing page component that displays the main value proposition
  * and call-to-action for the Scribemate app
  */
@@ -413,6 +430,7 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* Rack #5 - Frequently Asked Questions */}
       <div className="rack rack-light">
         <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
@@ -420,6 +438,25 @@ const HomePage = () => {
             <Text variant="h1" className="card-title">
               Frequently Asked Questions
             </Text>
+            <Text variant="body1" className="card-subtitle">
+              Answers to common questions about ScribeMate
+            </Text>
+          </div>
+          
+          {/* FAQ Cards */}
+          <div className="faq-container">
+            <FAQCard
+              question="How does ScribeMate ensure content is on-brand?"
+              answer="ScribeMate analyzes your uploaded brand assets, including logos, colors, and voice guidelines, to generate content that perfectly matches your brand identity."
+            />
+            <FAQCard
+              question="Can I edit the generated content?"
+              answer="Absolutely! All generated content is fully editable. You can modify text, adjust images, and customize everything to your liking before downloading."
+            />
+            <FAQCard
+              question="What social platforms does ScribeMate support?"
+              answer="ScribeMate creates content optimized for Instagram, Facebook, LinkedIn, Twitter, and more. Each post is formatted specifically for your chosen platform."
+            />
           </div>
         </div>
       </div>
