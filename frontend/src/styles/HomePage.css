@@ -161,6 +161,9 @@
 .feature-section-header {
   margin-bottom: 40px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .card-title {
@@ -168,7 +171,6 @@
   font-weight: 700;
   line-height: 40px;
   color: var(--neutral-800);
-  margin: 0;
   padding: 0;
 }
 
@@ -220,6 +222,36 @@
   line-height: 1.5;
   margin: 0;
   padding: 0;
+}
+
+/* Contact Form */
+.contact-form-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 832px;
+  padding: 32px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: none;
+  background: var(--secondary-50);
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form-row {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+
+.contact-form-row .ff-input-group {
+  flex: 1;
+}
+
+.contact-submit-btn {
+  align-self: flex-start;
 }
 
 /* Footer */
@@ -488,7 +520,7 @@
   border-radius: 12px;
   border: none;
   box-shadow: none;
-  background: var(--neutral-100);
+  background: var(--neutral-0);
   width: 100%;
   text-align: left;
 }

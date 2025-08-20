@@ -1,6 +1,8 @@
 import React from "react";
 import Text from "../components/Text";
 import Button from "../components/Button";
+import Input from "../components/Input";
+import InputBox from "../components/InputBox";
 import { Link } from "react-router-dom";
 import { APP_NAME, getCurrentYear } from "../constants";
 import {
@@ -416,22 +418,8 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="rack rack-warm">
-        <div className="rack-content flex-row-wrap-left">
-          {/* Title and Subtitle */}
-          <div className="feature-section-header">
-            <Text variant="h1" className="card-title">
-              Simple Pricing
-            </Text>
-            <Text variant="body1" className="card-subtitle">
-              Choose the plan that fits your business needs
-            </Text>
-          </div>
-        </div>
-      </div>
-
       {/* Rack #5 - Frequently Asked Questions */}
-      <div className="rack rack-light">
+      <div className="rack rack-warm">
         <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
@@ -461,7 +449,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="rack rack-warm">
+      <div className="rack rack-light">
         <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
           <div className="feature-section-header">
@@ -469,8 +457,37 @@ const HomePage = () => {
               Get in Touch
             </Text>
             <Text variant="body1" className="card-subtitle">
-              Have questions? Feature requests? Feedback? We'd love to hear from you!
+              Questions? Feature requests? Drop us a line and we'll see what we can do!
             </Text>
+          </div>
+          
+          {/* Contact Form */}
+          <div className="contact-form-card">
+            <div className="contact-form-row">
+              <Input 
+                testid="contact-name"
+                placeholder="Your Name"
+              />
+              <Input 
+                testid="contact-email"
+                placeholder="Your Email"
+              />
+            </div>
+            <Input 
+              testid="contact-subject"
+              placeholder="Subject"
+            />
+            <InputBox 
+              testid="contact-message"
+              placeholder="Your Message"
+            />
+            <Button 
+              testid="contact-submit"
+              size="lg"
+              className="contact-submit-btn"
+            >
+              Send Message
+            </Button>
           </div>
         </div>
       </div>
