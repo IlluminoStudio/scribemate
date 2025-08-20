@@ -28,6 +28,7 @@ import gymImage from "../assets/gym.jpg";
 import pianoTeacherImage from "../assets/piano-teacher.png";
 import cafeOwnerImage from "../assets/cafe-owner.png";
 import personalTrainerImage from "../assets/personal-trainer.png";
+import jwLogo from "../assets/jw-logo.svg";
 import "../styles/HomePage.css";
 
 /**
@@ -496,7 +497,7 @@ const HomePage = () => {
       <footer className="homepage-footer">
         <div className="footer-content">
           <div className="footer-left">
-            <Text variant="body1" className="footer-copyright">
+            <Text variant="body2" className="footer-copyright">
               © {getCurrentYear()} {APP_NAME}. All rights reserved.
             </Text>
           </div>
@@ -507,6 +508,11 @@ const HomePage = () => {
               rel="noopener noreferrer"
               className="footer-credit"
             >
+              <img 
+                src={jwLogo} 
+                alt="JW Logo" 
+                className="footer-logo"
+              />
               By Jialin Wang - crafted, not cobbled
             </a>
           </div>
