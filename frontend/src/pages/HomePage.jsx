@@ -249,7 +249,7 @@ const HomePage = () => {
               ScribeMate
             </Text>
           </div>
-          <div className="header-right">
+          <div className="header-right" style={{ display: "none" }}>
             <Link
               to="/signin"
               state={{ tab: "signin" }}
