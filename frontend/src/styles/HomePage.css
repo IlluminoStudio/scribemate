@@ -79,7 +79,7 @@
 }
 
 .rack-warm {
-  background-color: #FCF8F3;
+  background-color: var(--primary-50);
 }
 
 /* Hero Section - Now uses rack classes */
