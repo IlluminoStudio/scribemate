@@ -435,16 +435,20 @@ const HomePage = () => {
           {/* FAQ Cards */}
           <div className="faq-container">
             <FAQCard
-              question="How does ScribeMate ensure content is on-brand?"
-              answer="ScribeMate analyzes your uploaded brand assets, including logos, colors, and voice guidelines, to generate content that perfectly matches your brand identity."
+              question="How does ScribeMate ensure content matches my brand?"
+              answer="Upload your logo, colours, and sample posts. ScribeMate learns your voice and style, ensuring every draft feels authentic and uniquely yours."
             />
             <FAQCard
-              question="Can I edit the generated content?"
-              answer="Absolutely! All generated content is fully editable. You can modify text, adjust images, and customize everything to your liking before downloading."
+              question="How does ScribeMate choose topics?"
+              answer="Our AI engine analyses search trends, industry insights, and seasonal events to suggest both evergreen and trending ideas. You'll always have engaging and timely content that connect with your audience."
             />
             <FAQCard
-              question="What social platforms does ScribeMate support?"
-              answer="ScribeMate creates content optimized for Instagram, Facebook, LinkedIn, Twitter, and more. Each post is formatted specifically for your chosen platform."
+              question="What social media platforms does ScribeMate support?"
+              answer="Currently Facebook, Instagram, LinkedIn, and Blogs. Each post is tailored to the platform's style - from audience preferences and word limits to hashtag formats, image sizing, and orientation."
+            />
+            <FAQCard
+              question="Will using ScribeMate break social media rules?"
+              answer="Not at all. ScribeMate only generates drafts. You stay in control of posting, ensuring compliance with each platform's terms while saving valuable time. Every draft can also be edited before you publish."
             />
           </div>
         </div>
