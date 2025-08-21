@@ -326,7 +326,7 @@ const HomePage = () => {
       <div className="rack rack-light">
         <div className="rack-content flex-row-wrap-left">
           {/* Title and Subtitle */}
-          <div className="feature-section-header">
+          <div className="feature-section-header" style={{ marginBottom: "-10px" }}>
             <Text variant="h1" className="card-title">
               How ScribeMate Works
             </Text>
