@@ -7,6 +7,7 @@ import SignInPage from "./pages/SignInPage";
 import SandboxPage from "./pages/SandboxPage";
 import PlayPage from "./pages/PlayPage";
 import DashboardPage from "./pages/DashboardPage";
+import Jane from "./pages/Jane";
 import MainLayout from "./layout/MainLayout";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<LayoutWrapper><DashboardPage /></LayoutWrapper>} />
+        <Route path="/jane" element={<LayoutWrapper><Jane /></LayoutWrapper>} />
         <Route path="/demo" element={<LayoutWrapper><DemoPage /></LayoutWrapper>} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/sandbox" element={<LayoutWrapper><SandboxPage /></LayoutWrapper>} />
