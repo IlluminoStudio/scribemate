@@ -51,32 +51,18 @@ app.use((error, req, res, next) => {
 })
 
 // Import API routes
-import usersHandler from '../api/user.js'
-import messageHandler from '../api/message.js'
-import myMessagesHandler from '../api/my-message.js'
-import myCareEventHandler from '../api/my-care-event.js'
-import myClockStatusHandler from '../api/my-clock-status.js'
-import careEventHandler from '../api/care-event/today.js'
-import databaseTestHandler from './database-test.js'
 import loginHandler from '../api/auth/login.js'
 import logoutHandler from '../api/auth/logout.js'
 
 // API routes - use specific HTTP methods to handle URL parameters properly
-app.get('/api/user', usersHandler)
-app.get('/api/message', messageHandler)
-app.post('/api/message', messageHandler)
-app.get('/api/my-message', myMessagesHandler)
-app.post('/api/my-message', myMessagesHandler)
-app.post('/api/my-care-event', myCareEventHandler)
-app.get('/api/my-clock-status', myClockStatusHandler)
-app.get('/api/care-event/today', careEventHandler)
+// Add your new API endpoints here
 
 // Auth routes
 app.post('/api/auth/login', loginHandler)
 app.post('/api/auth/logout', logoutHandler)
 
 // Database connection test
-app.get('/api/test', databaseTestHandler)
+// app.get('/api/test', databaseTestHandler) // Uncomment when you add database test functionality
 
 // API Documentation routes
 app.get('/api/docs', (req, res) => {
@@ -120,14 +106,6 @@ app.listen(PORT, () => {
   log(`🚀 API Server running on http://localhost:${PORT}`)
   log(`📝 Available endpoints:`)
   log(`   GET  /api/health`)
-  log(`   GET  /api/test`)
-  log(`   GET  /api/user`)
-  log(`   GET  /api/message`)
-  log(`   POST /api/message`)
-  log(`   GET  /api/my-message`)
-  log(`   GET  /api/my-clock-status`)
-  log(`   GET  /api/care-event/today`)
-  log(`   POST /api/my-care-event`)
   log(`   POST /api/auth/login`)
   log(`   POST /api/auth/logout`)
   log(`📚 API Documentation:`)

@@ -1,5 +1,4 @@
 import { getSupabaseClient } from '../../lib/supabase.js'
-import { logApiEvent } from '../../lib/eventLoggerHelper.js'
 import bcrypt from 'bcryptjs'
 
 export default async function handler(req, res) {
@@ -43,14 +42,6 @@ export default async function handler(req, res) {
       .single()
 
     if (userError || !user) {
-      // Log failed login attempt (no user found)
-      await logApiEvent(
-        null, // No user ID for failed login
-        'login_failed',
-        { username, reason: 'user_not_found' },
-        username
-      )
-
       return res.status(401).json({
         status: 'error',
         message: 'Invalid username or password'
@@ -62,27 +53,13 @@ export default async function handler(req, res) {
     const isPasswordValid = await bcrypt.compare(saltedPassword, user.password_hash)
 
     if (!isPasswordValid) {
-      // Log failed login attempt (wrong password)
-      await logApiEvent(
-        user.id,
-        'login_failed',
-        { username, reason: 'invalid_password' },
-        username
-      )
-
       return res.status(401).json({
         status: 'error',
         message: 'Invalid username or password'
       })
     }
 
-    // Password is valid - log successful login
-    await logApiEvent(
-      user.id,
-      'login',
-      { username },
-      username
-    )
+    // Password is valid - login successful
 
     // Return user profile (without sensitive data)
     const profile = {

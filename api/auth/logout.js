@@ -1,5 +1,4 @@
 import { getSupabaseClient } from '../../lib/supabase.js'
-import { logApiEvent } from '../../lib/eventLoggerHelper.js'
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -19,16 +18,6 @@ export default async function handler(req, res) {
 
     // Validate required user_id parameter
     if (!user_id) {
-      // Log failed logout attempt (no user_id provided) - pass null user_id and simple context
-      await logApiEvent(
-        null,
-        'logout_failed',
-        null,
-        'missing_user_id',
-        req.headers['user-agent'] || 'unknown',
-        req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown'
-      )
-
       return res.status(401).json({
         status: 'error',
         message: 'user_id parameter is required'
@@ -43,29 +32,13 @@ export default async function handler(req, res) {
       .single()
 
     if (userError || !user) {
-      // Log failed logout attempt (invalid user_id) - pass null user_id and simple context
-      await logApiEvent(
-        null,
-        'logout_failed',
-        null,
-        'invalid_user_id',
-        user_id,
-        userError ? userError.message : 'user_not_found'
-      )
-
       return res.status(401).json({
         status: 'error',
         message: 'Invalid or unknown user_id'
       })
     }
 
-    // Log logout event
-    await logApiEvent(
-      user.id,
-      'logout',
-      { username: user.username },
-      user.username
-    )
+    // Logout successful
 
     // Return success response
     return res.status(200).json({
@@ -76,15 +49,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('[Logout] Handler error:', error)
     
-    // Log error event - pass null user_id and simple context
-    await logApiEvent(
-      null,
-      'logout_failed',
-      null,
-      'logout_error',
-      req.query?.user_id || 'unknown',
-      error.message
-    )
+    // Error occurred during logout
     
     return res.status(500).json({
       status: 'error',
