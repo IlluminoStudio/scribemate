@@ -1,7 +1,7 @@
 {
-  "name": "saas-template-dev-scripts",
+  "name": "scribemate-dev-scripts",
   "version": "1.0.0",
-  "description": "Development scripts and tests for SaaS Template",
+  "description": "Development scripts and tests for ScribeMate",
   "type": "module",
   "scripts": {
     "test": "node tests/run-tests.js",
