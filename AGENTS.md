@@ -41,14 +41,17 @@
 
 # ARCHITECTURE OVERVIEW
 - **Frontend**: React + Vite (deployed on Vercel)
-- **BFF**:
+- **BFF**: Vercel API Routes (Node.js serverless functions) - handles business logic and data processing
 - **Database**:
-- **Deployment**:
+- **Deployment**: Vercel for both frontend and BFF
 
 # TECH STACK
 ## Core Technologies
 - Cursor as my IDE (it's a fork of VSCode)
+- Node.js serverless functions (Vercel) for the BFF (Backend for Frontend)
 - React for the frontend
+- Supabase for the database (PostgreSQL) (not implemented yet)
+- Backend and frontend are deployed on Vercel
 
 ## UI MANDATORY REQUIREMENTS
 - NEVER DEVIATE FROM THESE
@@ -66,11 +69,21 @@
   - `modules/` — secondary components built by combining atomic components from `components/` (e.g. MessageBox)
   - `pages/` — for top-level route components/pages (e.g. HomePage, AboutPage)
   - `layout/` — for layout components that wrap or arrange pages/components (e.g. MainLayout, AuthLayout, SidebarLayout)
+- API routes are in `api/` directory:
+  - `lib/` — shared utilities and configurations
+  - `api/v1/*.js` — individual API route handlers
+- Development scripts and tests are in `dev-scripts/` directory:
+  - `dev-scripts/tests/` — API endpoint tests
+  - `dev-scripts/server.js` — local development server
+  - `dev-scripts/debug-env.js` — environment debugging utilities
+- Database migrations are in `supabase/migrations/`
 
   Example usage:
   - `components/Button.jsx` — a reusable button
   - `pages/HomePage.jsx` — the main landing page
   - `layout/MainLayout.jsx` — a layout that provides the app's main structure (header, sidebar, etc)
+  - `api/users.js` — API route for user management
+  - `dev-scripts/tests/test-users.js` — tests for users endpoint
   
 # FRONTEND RULES
 ## UI DESIGN PRINCIPLES
@@ -97,4 +110,20 @@
 - **COMPONENT OVERRIDE**: Only create custom elements if NO existing component can handle the requirement, and document why.
 
 # BACKEND RULES
+## API DEVELOPMENT (BFF)
+- API routes handlers are in `api/v1`
+- Use `lib/supabase.js` for server-side Supabase client (not implemented yet)
+- Use proper error handling and status codes
+- Keep API routes focused and simple - one route per resource/action
+- Use ES modules syntax (import/export)
+- Return consistent JSON responses with proper status codes
+- Do not Use try-catch for error handling, let error bubble up
+- Error during logging should be allowed to bubble up, ie. do not try-catch
+- Validate input data before processing
+- Keep API routes focused on single responsibility
+- Use environment variables for configuration
+- All backend database queries must go through views, never directly on tables. Use the views defined in migrations (not implemented yet)
+- All endpoint operations MUST be logged to the user_event_logs table using `lib/eventLogger.js` (see api/auth/login.js for example) (not implemented yet)
+
+## TESTING REQUIREMENTS
 TBA
