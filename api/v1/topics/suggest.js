@@ -2,8 +2,8 @@ import {
   MODEL, 
   TOOL, 
   ROLE_USER, 
-  OPENAI_API_KEY, 
-  OPENAI_RESPONSE_API 
+  OPENAI_RESPONSE_API,
+  SUGGEST_TOPICS_PROMPT
 } from '../../../dev-scripts/constants.js'
 import { log, logError } from '../../../lib/consoleLogger.js'
 
@@ -13,6 +13,16 @@ import { log, logError } from '../../../lib/consoleLogger.js'
  */
 export default async function suggestTopics(req, res) {
   try {
+    // Get API key from environment variables at runtime
+    const OPENAI_API_KEY = process.env.OPENAI_API_KEY
+    
+    if (!OPENAI_API_KEY) {
+      logError('OPENAI_API_KEY not found in environment variables')
+      return res.status(500).json({
+        status: 'error',
+        message: 'OpenAI API key not configured'
+      })
+    }
     
     // Validate request body
     const { industry } = req.body
@@ -25,7 +35,15 @@ export default async function suggestTopics(req, res) {
       })
     }
 
-    // Prepare OpenAI request
+    // Prepare OpenAI request with dynamic industry replacement
+    const promptText = SUGGEST_TOPICS_PROMPT.replace('{{industry}}', industry)
+    
+    // Debug: Log the exact prompt being sent
+    log(`=== OUTGOING PROMPT ===`)
+    log(`Industry: ${industry}`)
+    log(`Prompt text: ${promptText}`)
+    log(`======================`)
+    
     const openaiRequest = {
       model: MODEL,
       tools: [
@@ -39,7 +57,7 @@ export default async function suggestTopics(req, res) {
           content: [
             {
               type: "input_text",
-              text: `Suggest 5 trending social media topics for the ${industry} industry. Focus on current trends, challenges, and opportunities that would engage audiences. Return only the topic titles, one per line.`
+              text: promptText
             }
           ]
         }
@@ -67,28 +85,37 @@ export default async function suggestTopics(req, res) {
 
     const openaiData = await response.json()
     
+    // Debug: Log the raw OpenAI response
+    log(`=== OPENAI RESPONSE ===`)
+    log(`Raw response: ${JSON.stringify(openaiData, null, 2)}`)
+    log(`=======================`)
+    
     // Extract topics from OpenAI response
     let topics = []
     if (openaiData.output && openaiData.output.length > 0) {
       const content = openaiData.output[0].content
       if (content && content.length > 0 && content[0].text) {
+        // Debug: Log the raw text content
+        log(`=== RAW TEXT CONTENT ===`)
+        log(`Content: ${content[0].text}`)
+        log(`========================`)
+        
         // Split by newlines and clean up
         topics = content[0].text
           .split('\n')
           .map(topic => topic.trim())
           .filter(topic => topic.length > 0)
-          .slice(0, 5) // Limit to 5 topics
+          .slice(0, 4) // Limit to 4 topics as per prompt requirement
       }
     }
 
     // Fallback if no topics extracted
     if (topics.length === 0) {
       topics = [
-        `Latest trends in ${industry}`,
-        `Common challenges in ${industry}`,
-        `Best practices for ${industry}`,
-        `Future of ${industry}`,
-        `Success stories in ${industry}`
+        `Latest trends in ${industry} [Trending]`,
+        `Common challenges in ${industry} [Evergreen]`,
+        `Best practices for ${industry} [Evergreen]`,
+        `Future of ${industry} [Trending]`
       ]
     }
 
