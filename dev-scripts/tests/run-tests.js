@@ -1,12 +1,5 @@
-import { runTests as runLoginTests } from './test-login.js'
-import { runTests as runUserTests } from './test-user.js'
-import { runTests as runLogoutTests } from './test-logout.js'
-import { runTests as runMessageTests } from './test-message.js'
-import { runTests as runMyMessageTests } from './test-my-message.js'
-import { runTests as runMyCareEventTests } from './test-my-care-event.js'
-import { runTests as runMyClockStatusTests } from './test-my-clock-status.js'
-import { runTests as runCareEventTests } from './test-care-event.js'
-import { TestRunner } from './test-helper.js'
+import { runTests as runPostsTests } from './test-posts.js'
+import { runTests as runTopicsTests } from './test-topics.js'
 
 console.log('🚀 Starting API Tests...\n')
 
@@ -19,84 +12,23 @@ console.log('⚠️  Make sure the API server is running with: npm run dev\n')
 async function runAllTests() {
   const testResults = []
   let allTestsPassed = true
-  const allFailedTests = []
   
   try {
-    // Run login tests
-    console.log('🔐 Running Login Tests...')
-    const loginResult = await runLoginTests()
-    testResults.push({ suite: 'Login', result: loginResult })
-    if (loginResult === false) {
+    // Run posts tests
+    console.log('📝 Running Posts Tests...')
+    const postsResult = await runPostsTests()
+    testResults.push({ suite: 'Posts', result: postsResult })
+    if (postsResult === false) {
       allTestsPassed = false
     }
     
     console.log('\n' + '='.repeat(50) + '\n')
     
-    // Run user tests
-    console.log('👤 Running User Tests...')
-    const userResult = await runUserTests()
-    testResults.push({ suite: 'User', result: userResult })
-    if (userResult === false) {
-      allTestsPassed = false
-    }
-    
-    console.log('\n' + '='.repeat(50) + '\n')
-    
-    // Run logout tests
-    console.log('🚪 Running Logout Tests...')
-    const logoutResult = await runLogoutTests()
-    testResults.push({ suite: 'Logout', result: logoutResult })
-    if (logoutResult === false) {
-      allTestsPassed = false
-    }
-    
-    console.log('\n' + '='.repeat(50) + '\n')
-    
-    // Run message tests
-    console.log('💬 Running Message Tests...')
-    const messageResult = await runMessageTests()
-    testResults.push({ suite: 'Message', result: messageResult })
-    if (messageResult === false) {
-      allTestsPassed = false
-    }
-    
-    console.log('\n' + '='.repeat(50) + '\n')
-    
-    // Run my-message tests (now includes acknowledgment tests)
-    console.log('📨 Running My Message Tests...')
-    const myMessageResult = await runMyMessageTests()
-    testResults.push({ suite: 'My Message', result: myMessageResult })
-    if (myMessageResult === false) {
-      allTestsPassed = false
-    }
-    
-    console.log('\n' + '='.repeat(50) + '\n')
-    
-    // Run my-care-event tests
-    console.log('🏥 Running My Care Event Tests...')
-    const myCareEventResult = await runMyCareEventTests()
-    testResults.push({ suite: 'My Care Event', result: myCareEventResult })
-    if (myCareEventResult === false) {
-      allTestsPassed = false
-    }
-    
-    console.log('\n' + '='.repeat(50) + '\n')
-    
-    // Run my-clock-status tests
-    console.log('⏰ Running My Clock Status Tests...')
-    const myClockStatusResult = await runMyClockStatusTests()
-    testResults.push({ suite: 'My Clock Status', result: myClockStatusResult })
-    if (myClockStatusResult === false) {
-      allTestsPassed = false
-    }
-    
-    console.log('\n' + '='.repeat(50) + '\n')
-    
-    // Run care-event tests
-    console.log('📋 Running Care Event Tests...')
-    const careEventResult = await runCareEventTests()
-    testResults.push({ suite: 'Care Event', result: careEventResult })
-    if (careEventResult === false) {
+    // Run topics tests
+    console.log('📋 Running Topics Tests...')
+    const topicsResult = await runTopicsTests()
+    testResults.push({ suite: 'Topics', result: topicsResult })
+    if (topicsResult === false) {
       allTestsPassed = false
     }
     

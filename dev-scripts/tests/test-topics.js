@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import { TestRunner } from './test-helper.js'
 
 // Test the suggest topics endpoint
 async function testSuggestEndpoint() {
@@ -6,33 +7,39 @@ async function testSuggestEndpoint() {
     industry: "private piano teaching"
   }
 
-  try {
-    console.log('🧪 Testing /api/v1/topics:suggest endpoint...')
-    console.log('📤 Sending request:', JSON.stringify(testData, null, 2))
+  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(testData)
+  })
 
-    const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(testData)
-    })
+  const responseData = await response.json()
 
-    console.log('📥 Response status:', response.status)
-    
-    const responseData = await response.json()
-    console.log('📥 Response data:', JSON.stringify(responseData, null, 2))
-
-    if (response.ok) {
-      console.log('✅ Test passed! Endpoint is working correctly.')
-    } else {
-      console.log('❌ Test failed! Check the error above.')
-    }
-
-  } catch (error) {
-    console.error('❌ Test error:', error.message)
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}: ${responseData.message || 'Request failed'}`)
   }
+
+  if (!responseData.topics || !Array.isArray(responseData.topics)) {
+    throw new Error('Response missing topics array')
+  }
+
+  if (responseData.topics.length === 0) {
+    throw new Error('Response topics array is empty')
+  }
+
+  console.log('📋 Suggested topics:')
+  responseData.topics.forEach((topic, index) => {
+    console.log(`   ${index + 1}. ${topic}`)
+  })
 }
 
-// Run the test
-testSuggestEndpoint()
+// Export function to run tests using TestRunner
+export async function runTests() {
+  const runner = new TestRunner('Topics')
+  
+  await runner.test('should suggest topics for industry', testSuggestEndpoint)
+  
+  return await runner.run()
+}
