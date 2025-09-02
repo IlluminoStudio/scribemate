@@ -12,6 +12,16 @@ import { log, logError } from '../../../lib/consoleLogger.js'
  * Suggest trending social media topics for an industry
  */
 export default async function suggestTopics(req, res) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
+
   try {
     // Get API key from environment variables at runtime
     const OPENAI_API_KEY = process.env.OPENAI_API_KEY
