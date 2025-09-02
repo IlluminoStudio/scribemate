@@ -93,15 +93,19 @@ export default async function suggestTopics(req, res) {
     // Extract topics from OpenAI response
     let topics = []
     if (openaiData.output && openaiData.output.length > 0) {
-      const content = openaiData.output[0].content
-      if (content && content.length > 0 && content[0].text) {
+      // Look for the message output (usually the second item after web_search_call)
+      const messageOutput = openaiData.output.find(item => item.type === 'message')
+      
+      if (messageOutput && messageOutput.content && messageOutput.content.length > 0) {
+        const textContent = messageOutput.content[0].text
+        
         // Debug: Log the raw text content
         log(`=== RAW TEXT CONTENT ===`)
-        log(`Content: ${content[0].text}`)
+        log(`Content: ${textContent}`)
         log(`========================`)
         
         // Split by newlines and clean up
-        topics = content[0].text
+        topics = textContent
           .split('\n')
           .map(topic => topic.trim())
           .filter(topic => topic.length > 0)
