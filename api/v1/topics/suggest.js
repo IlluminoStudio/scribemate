@@ -3,7 +3,8 @@ import {
   TOOL, 
   ROLE_USER, 
   OPENAI_RESPONSE_API,
-  SUGGEST_TOPICS_PROMPT
+  SUGGEST_TOPICS_PROMPT,
+  ALLOWED_ORIGINS
 } from '../../../dev-scripts/constants.js'
 import { log, logError } from '../../../lib/consoleLogger.js'
 
@@ -12,8 +13,12 @@ import { log, logError } from '../../../lib/consoleLogger.js'
  * Suggest trending social media topics for an industry
  */
 export default async function suggestTopics(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  // CORS headers - allow both production and localhost
+  const origin = req.headers.origin
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 

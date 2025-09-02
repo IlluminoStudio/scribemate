@@ -9,6 +9,14 @@ export const MESSAGE = "message";
 export const OUTPUT_TEXT = "output_text";
 export const EVERGREEN = "Evergreen";
 export const TRENDING = "Trending";
+
+// CORS configuration
+export const PRODUCTION_DOMAIN = "https://scribemate.jialinwang.pro";
+export const ALLOWED_ORIGINS = [
+  PRODUCTION_DOMAIN,
+  'http://localhost:3000',
+  'http://localhost:5173' // Vite default port
+];
 export const GENERATE_POST_STYLE_GUIDE = "The author's tone is conversational and enthusiastic, characterized by an informal and personal voice. Sentence structure varies between short and medium lengths, contributing to a relaxed feel, and the vocabulary is accessible and straightforward. Punctuation habits include the use of exclamation points to express excitement, while the overall style employs relatable and encouraging language to engage readers. \n\nvoice:first-person; tone_adjectives:conversational, enthusiastic; sentence_length:varied; punctuation_habits:casual with exclamation points; vocabulary_level:basic; rhetorical_devices:anecdote; formatting_habits:none; dos:use clear explanations, be relatable; donts:use jargon, sound overly formal; sample_paragraph:When the sun sets, the sky transforms into a canvas of colors. Birds return to their nests, filling the air with soft chirps. It is a peaceful time to reflect on the day and plan for tomorrow."
 
 export const SUGGEST_TOPICS_PROMPT = "You are a senior social strategist; generate exactly 4 social media suitable topic titles for the {{industry}} sector in British English for Australia - two Evergreen FAQs and two Trending items; when web search is available, ground the Trending items in Australian interest from the last 90 days and ignore sources older than 120 days; never include years or dates in any title; each title must be 8-12 words, specific, non-overlapping, audience-centred, no hashtags, no em dashes - use single hyphen, and end each title with [Evergreen] or [Trending]; output only a numbered list of the four titles. Keep topics specific, not generic. Anchor them in audience concerns, myths, or hot issues. Do not generate the full article, only the 4 topic titles. Always adapt phrasing to be suitable for Facebook posts that spark curiosity and interest. Output - A simple numbered list with 4 topic titles. - Each title should end with its label in brackets: [Evergreen] or [Trending]."

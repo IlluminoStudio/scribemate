@@ -3,7 +3,8 @@ import {
   TOOL, 
   ROLE_USER, 
   OPENAI_RESPONSE_API,
-  GENERATE_POST_PROMPT
+  GENERATE_POST_PROMPT,
+  ALLOWED_ORIGINS
 } from '../../../dev-scripts/constants.js'
 import { log, logError } from '../../../lib/consoleLogger.js'
 
@@ -12,8 +13,12 @@ import { log, logError } from '../../../lib/consoleLogger.js'
  * Generate a social media post for a specific topic
  */
 export default async function generatePost(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  // CORS headers - allow both production and localhost
+  const origin = req.headers.origin
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
