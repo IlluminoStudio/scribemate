@@ -19,6 +19,5 @@ if (!process.env.OPENAI_API_KEY) {
   console.error('❌ OPENAI_API_KEY not found in environment variables')
   console.error('Make sure .env.local contains: OPENAI_API_KEY=your_key_here')
 }
->>>>>>> d946629 (parameterised topic:suggest prompt)
 export const OPENAI_BASE_URL = "https://api.openai.com/v1";
 export const OPENAI_RESPONSE_API = `${OPENAI_BASE_URL}/responses`;

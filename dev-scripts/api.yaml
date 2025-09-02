@@ -14,6 +14,9 @@ servers:
 
 tags:
   - name: Auth
+    description: Authentication endpoints
+  - name: AI Content
+    description: AI-generated content endpoints
 
 components:
   schemas:
@@ -31,29 +34,33 @@ components:
     UserProfile:
       type: object
       properties:
-        id:
+        user_id:
           type: string
-          format: uuid
-        username:
+          example: usr_123
+        email:
           type: string
-        full_name:
+          format: email
+          example: user@example.com
+        name:
           type: string
+          example: Jamie Example
         role:
           type: string
-          enum: [coordinator, carer]
-        created_at:
-          type: string
-          format: date-time
-      required: [id, username, full_name, role, created_at]
+          example: user
+      required: [user_id, email]
 
     LoginRequest:
       type: object
       properties:
-        username:
+        email:
           type: string
+          format: email
+          example: user@example.com
         password:
           type: string
-      required: [username, password]
+          format: password
+          example: hunter2
+      required: [email, password]
 
     LoginSuccess:
       type: object
@@ -61,9 +68,13 @@ components:
         status:
           type: string
           example: success
-        profile:
+        token:
+          type: string
+          description: Bearer token to authorise future requests
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+        user:
           $ref: "#/components/schemas/UserProfile"
-      required: [status, profile]
+      required: [status, token, user]
 
     LogoutSuccess:
       type: object
@@ -71,10 +82,80 @@ components:
         status:
           type: string
           example: success
-        logged_out_at:
+      required: [status]
+    TopicSuggestRequest:
+      type: object
+      properties:
+        industry:
+          type: string
+          description: The industry or niche to suggest topics for
+          example: "private piano teaching"
+      required: [industry]
+
+    TopicSuggestResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        topics:
+          type: array
+          items:
+            type: string
+          description: List of suggested social media topics
+          example: ["How to Make Piano Lessons Affordable Amid Rising Costs", "Effective Strategies for Teaching Neurodiverse Piano Students"]
+        created_at:
           type: string
           format: date-time
-      required: [status, logged_out_at]
+      required: [status, topics, created_at]
+
+    PostGenerateRequest:
+      type: object
+      properties:
+        topic:
+          type: string
+          description: The topic to generate a post about
+          example: How To Make Piano Lessons Affordable Amid Rising Costs
+        social_media:
+          type: array
+          description: Target social media platforms
+          items:
+            type: string
+            enum: [facebook, linkedin, blog]
+          example: [facebook, linkedin]
+        max_word_count:
+          type: integer
+          minimum: 10
+          maximum: 500
+          description: Maximum word count for the generated post
+        tone_guide:
+          type: string
+          description: Tone and style guide for the post
+          example: "professional yet friendly, educational"
+      required: [topic, social_media, max_word_count, tone_guide]
+
+    PostGenerateResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        post_content:
+          type: string
+          description: The generated social media post content
+        word_count:
+          type: integer
+          description: Actual word count of the generated post
+        created_at:
+          type: string
+          format: date-time
+      required: [status, post_content, word_count, created_at]
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 
 paths:
   /auth/login:
@@ -133,3 +214,77 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
+  /v1/topics/suggest:
+    post:
+      tags: [AI Content]
+      summary: Suggest trending social media topics for an industry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TopicSuggestRequest"
+      responses:
+        "200":
+          description: Topics suggested successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TopicSuggestResponse"
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized - invalid or missing token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error or OpenAI API failure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/posts/generate:
+    post:
+      tags: [AI Content]
+      summary: Generate a social media post for a specific topic
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostGenerateRequest"
+      responses:
+        "200":
+          description: Post generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostGenerateResponse"
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized - invalid or missing token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error or OpenAI API failure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
