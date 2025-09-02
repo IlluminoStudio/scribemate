@@ -9,3 +9,5 @@ export const MESSAGE = "message";
 export const OUTPUT_TEXT = "output_text";
 export const EVERGREEN = "Evergreen";
 export const TRENDING = "Trending";
+export const OPENAI_BASE_URL = "https://api.openai.com/v1";
+export const OPENAI_RESPONSE_API = `${OPENAI_BASE_URL}/responses`;
