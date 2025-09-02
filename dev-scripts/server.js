@@ -54,6 +54,7 @@ app.use((error, req, res, next) => {
 import loginHandler from '../api/auth/login.js'
 import logoutHandler from '../api/auth/logout.js'
 import suggestTopicsHandler from '../api/v1/topics/suggest.js'
+import generatePostHandler from '../api/v1/posts/generate.js'
 
 // API routes - use specific HTTP methods to handle URL parameters properly
 // Add your new API endpoints here
@@ -64,6 +65,7 @@ app.post('/api/auth/logout', logoutHandler)
 
 // AI Content routes
 app.post('/api/v1/topics:suggest', suggestTopicsHandler)
+app.post('/api/v1/posts:generate', generatePostHandler)
 
 // Database connection test
 // app.get('/api/test', databaseTestHandler) // Uncomment when you add database test functionality
@@ -113,6 +115,7 @@ app.listen(PORT, () => {
   log(`   POST /api/auth/login`)
   log(`   POST /api/auth/logout`)
   log(`   POST /api/v1/topics:suggest`)
+  log(`   POST /api/v1/posts:generate`)
   log(`📚 API Documentation:`)
   log(`   GET  /api/docs`)
   log(`   GET  /api/api.yaml`)
