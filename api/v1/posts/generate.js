@@ -9,7 +9,7 @@ import {
 import { log, logError } from '../../../lib/consoleLogger.js'
 
 // Fallback tone guide when none is provided
-const FALLBACK_TONE_GUIDE = "The author's tone is conversational and enthusiastic, characterized by an informal and personal voice. Sentence structure varies between short and medium lengths, contributing to a relaxed feel, and the vocabulary is accessible and straightforward. Punctuation habits include the use of exclamation points to express excitement, while the overall style employs relatable and encouraging language to engage readers. \n\nvoice:first-person; tone_adjectives:conversational, enthusiastic; sentence_length:varied; punctuation_habits:casual with exclamation points; vocabulary_level:basic; rhetorical_devices:anecdote; formatting_habits:none; dos:use clear explanations, be relatable; donts:use jargon, sound overly formal; sample_paragraph:When the sun sets, the sky transforms into a canvas of colors. Birds return to their nests, filling the air with soft chirps. It is a peaceful time to reflect on the day and plan for tomorrow."
+const FALLBACK_TONE_GUIDE = "a social media post for {{social_media}} with tone aligned to platform norms: Facebook - conversational and community-focused, LinkedIn - professional and value-driven, Blog - informative and reflective; ensure clarity, engagement, and audience alignment."
 
 /**
  * POST /api/v1/posts:generate
@@ -98,10 +98,10 @@ export default async function generatePost(req, res) {
       })
     }
     
-    // tone_guide is now optional - use fallback if not provided
+    // tone_guide is now optional - use fallback if not provided or empty
     let finalToneGuide = tone_guide
     
-    if (!tone_guide) {
+    if (!tone_guide || tone_guide.trim() === '') {
       // Use fallback tone guide with social_media substitution
       finalToneGuide = FALLBACK_TONE_GUIDE.replace('{{social_media}}', social_media)
       log(`Using fallback tone guide for social media: ${social_media}`)
@@ -127,7 +127,7 @@ export default async function generatePost(req, res) {
       .replace('{{social_media}}', social_media)
       .replace('{{max_word_count}}', max_word_count.toString())
       .replace('{{topic}}', topic)
-      .replace('${TONE_GUIDE}', finalToneGuide)
+      .replace('{{tone_guide}}', finalToneGuide)
     
     // Debug: Log the exact prompt being sent
     log(`=== OUTGOING PROMPT ===`)

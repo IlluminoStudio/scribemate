@@ -25,12 +25,12 @@ async function runAllTests() {
     console.log('\n' + '='.repeat(50) + '\n')
     
     // Run topics tests
-    // console.log('📋 Running Topics Tests...')
-    // const topicsResult = await runTopicsTests()
-    // testResults.push({ suite: 'Topics', result: topicsResult })
-    // if (topicsResult === false) {
-    //   allTestsPassed = false
-    // }
+    console.log('📋 Running Topics Tests...')
+    const topicsResult = await runTopicsTests()
+    testResults.push({ suite: 'Topics', result: topicsResult })
+    if (topicsResult === false) {
+      allTestsPassed = false
+    }
     
     console.log('\n🎉 All test suites completed!')
     
