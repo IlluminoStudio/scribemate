@@ -137,9 +137,9 @@ components:
         tone_guide:
           type: string
           pattern: "^[a-zA-Z0-9\\s\\-.,!?()]+$"
-          description: Tone and style guide for the post (keyboard-typable characters only)
+          description: Tone and style guide for the post (keyboard-typable characters only). Optional - if not provided, a default tone guide will be used.
           example: "professional yet friendly, educational"
-      required: [topic, social_media, max_word_count, tone_guide]
+      required: [topic, social_media, max_word_count]
 
     PostGenerateResponse:
       type: object
