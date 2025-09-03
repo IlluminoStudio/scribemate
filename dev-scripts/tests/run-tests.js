@@ -40,7 +40,9 @@ async function runAllTests() {
     
     console.log('\n📈 Test Suite Summary:')
     console.log(`   ✅ Passed: ${passedSuites.length} test suites`)
-    console.log(`   ❌ Failed: ${failedSuites.length} test suites`)
+    if (failedSuites.length > 0) {
+      console.log(`   ❌ Failed: ${failedSuites.length} test suites`)
+    }
     console.log(`   📊 Total: ${testResults.length} test suites`)
     
     if (allTestsPassed) {

@@ -356,7 +356,7 @@ async function testMaxWordCountTooHigh() {
 async function testMaxWordCountExactLimit() {
   const testData = {
     topic: "How to Make Piano Lessons Affordable Amid Rising Costs",
-    social_media: ["facebook"],
+    social_media: "facebook",
     max_word_count: 2000, // Exactly 2000
     tone_guide: "professional yet friendly, educational"
   }
@@ -517,7 +517,7 @@ async function testFallbackResponse() {
   // We'll test with parameters that might trigger the fallback
   const testData = {
     topic: "xyz unknown topic that might not generate content",
-    social_media: ["facebook"],
+    social_media: "facebook",
     max_word_count: 150,
     tone_guide: "professional yet friendly, educational"
   }
