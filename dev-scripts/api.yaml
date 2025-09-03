@@ -123,12 +123,10 @@ components:
           description: The topic to generate a post about (5-160 chars, keyboard-typable characters only)
           example: How To Make Piano Lessons Affordable Amid Rising Costs
         social_media:
-          type: array
-          description: Target social media platforms
-          items:
-            type: string
-            enum: [facebook, linkedin, blog]
-          example: [facebook, linkedin]
+          type: string
+          enum: [facebook, linkedin, blog]
+          description: Target social media platform
+          example: facebook
         max_word_count:
           type: integer
           minimum: 5

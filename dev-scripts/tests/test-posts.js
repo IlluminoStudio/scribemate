@@ -5,7 +5,7 @@ import { TestRunner } from './test-helper.js'
 async function testGenerateEndpoint() {
   const testData = {
     topic: "How to Make Piano Lessons Affordable Amid Rising Costs",
-    social_media: ["facebook"],
+    social_media: "facebook",
     max_word_count: 150,
     tone_guide: "professional yet friendly, educational"
   }
@@ -195,7 +195,7 @@ async function testTopicTooLong() {
 async function testTopicExactMinLength() {
   const testData = {
     topic: "abcde", // Exactly 5 characters
-    social_media: ["facebook"],
+    social_media: "facebook",
     max_word_count: 150,
     tone_guide: "professional yet friendly, educational"
   }
@@ -222,7 +222,7 @@ async function testTopicExactMinLength() {
 async function testTopicExactMaxLength() {
   const testData = {
     topic: "a".repeat(160), // Exactly 160 characters
-    social_media: ["facebook"],
+    social_media: "facebook",
     max_word_count: 150,
     tone_guide: "professional yet friendly, educational"
   }
@@ -250,7 +250,7 @@ async function testTopicExactMaxLength() {
 async function testTopicAsNumber() {
   const testData = {
     topic: 123,
-    social_media: ["facebook"],
+    social_media: "facebook",
     max_word_count: 150,
     tone_guide: "professional yet friendly, educational"
   }
@@ -276,7 +276,7 @@ async function testTopicAsNumber() {
 async function testTopicAsNull() {
   const testData = {
     topic: null,
-    social_media: ["facebook"],
+    social_media: "facebook",
     max_word_count: 150,
     tone_guide: "professional yet friendly, educational"
   }
@@ -303,59 +303,7 @@ async function testTopicAsNull() {
 async function testInvalidSocialMediaPlatform() {
   const testData = {
     topic: "How to Make Piano Lessons Affordable Amid Rising Costs",
-    social_media: ["twitter"], // Invalid platform
-    max_word_count: 150,
-    tone_guide: "professional yet friendly, educational"
-  }
-
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(testData)
-  })
-
-  if (response.status !== 400) {
-    throw new Error(`Expected 400 status, got ${response.status}`)
-  }
-
-  const responseData = await response.json()
-  if (responseData.status !== 'error') {
-    throw new Error('Expected error status in response')
-  }
-}
-
-async function testMultipleInvalidSocialMediaPlatforms() {
-  const testData = {
-    topic: "How to Make Piano Lessons Affordable Amid Rising Costs",
-    social_media: ["instagram", "tiktok"], // Multiple invalid platforms
-    max_word_count: 150,
-    tone_guide: "professional yet friendly, educational"
-  }
-
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(testData)
-  })
-
-  if (response.status !== 400) {
-    throw new Error(`Expected 400 status, got ${response.status}`)
-  }
-
-  const responseData = await response.json()
-  if (responseData.status !== 'error') {
-    throw new Error('Expected error status in response')
-  }
-}
-
-async function testMixedValidInvalidSocialMediaPlatforms() {
-  const testData = {
-    topic: "How to Make Piano Lessons Affordable Amid Rising Costs",
-    social_media: ["facebook", "twitter"], // Mix of valid and invalid
+    social_media: "twitter", // Invalid platform
     max_word_count: 150,
     tone_guide: "professional yet friendly, educational"
   }
@@ -632,8 +580,6 @@ export async function runTests() {
   
   // Invalid social media platform tests
   await runner.test('should reject invalid social media platform', testInvalidSocialMediaPlatform)
-  await runner.test('should reject multiple invalid social media platforms', testMultipleInvalidSocialMediaPlatforms)
-  await runner.test('should reject mixed valid and invalid social media platforms', testMixedValidInvalidSocialMediaPlatforms)
   
   // Max word count tests
   await runner.test('should reject max_word_count too high (> 2000)', testMaxWordCountTooHigh)
