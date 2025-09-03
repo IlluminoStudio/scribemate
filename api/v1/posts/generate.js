@@ -187,8 +187,10 @@ export default async function generatePost(req, res) {
     // Extract post content from OpenAI response
     let postContent = ''
     if (openaiData.output && openaiData.output.length > 0) {
-      // Look for the message output (usually the second item after web_search_call)
-      const messageOutput = openaiData.output.find(item => item.type === 'message')
+      // Look for the assistant's message output
+      const messageOutput = openaiData.output.find(item => 
+        item.type === 'message' && item.role === 'assistant'
+      )
       
       if (messageOutput && messageOutput.content && messageOutput.content.length > 0) {
         postContent = messageOutput.content[0].text
@@ -197,6 +199,13 @@ export default async function generatePost(req, res) {
         log(`=== RAW TEXT CONTENT ===`)
         log(`Content: ${postContent}`)
         log(`========================`)
+      } else {
+        // Fallback: if no assistant message found, try any message type
+        const fallbackMessage = openaiData.output.find(item => item.type === 'message')
+        if (fallbackMessage && fallbackMessage.content && fallbackMessage.content.length > 0) {
+          postContent = fallbackMessage.content[0].text
+          log(`Using fallback message (no assistant role found)`)
+        }
       }
     }
 

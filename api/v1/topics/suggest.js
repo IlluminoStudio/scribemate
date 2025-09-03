@@ -127,18 +127,35 @@ export default async function suggestTopics(req, res) {
     // Extract topics from OpenAI response
     let topics = []
     if (openaiData.output && openaiData.output.length > 0) {
-      // Look for the message output (usually the second item after web_search_call)
-      const messageOutput = openaiData.output.find(item => item.type === 'message')
+      // Look for the assistant's message output
+      const messageOutput = openaiData.output.find(item => 
+        item.type === 'message' && item.role === 'assistant'
+      )
       
+      let textContent = ''
       if (messageOutput && messageOutput.content && messageOutput.content.length > 0) {
-        const textContent = messageOutput.content[0].text
+        textContent = messageOutput.content[0].text
         
         // Debug: Log the raw text content
         log(`=== RAW TEXT CONTENT ===`)
         log(`Content: ${textContent}`)
         log(`========================`)
-        
-        // Split by newlines and clean up
+      } else {
+        // Fallback: if no assistant message found, try any message type
+        const fallbackMessage = openaiData.output.find(item => item.type === 'message')
+        if (fallbackMessage && fallbackMessage.content && fallbackMessage.content.length > 0) {
+          textContent = fallbackMessage.content[0].text
+          log(`Using fallback message (no assistant role found)`)
+          
+          // Debug: Log the raw text content
+          log(`=== RAW TEXT CONTENT ===`)
+          log(`Content: ${textContent}`)
+          log(`========================`)
+        }
+      }
+      
+      // Split by newlines and clean up
+      if (textContent) {
         topics = textContent
           .split('\n')
           .map(topic => topic.trim())
