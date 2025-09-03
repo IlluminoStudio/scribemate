@@ -4,7 +4,9 @@
     "users.js",
     "database-test.js",
     "lib/",
-    "auth/"
+    "auth/",
+    "../api/",
+    "../lib/"
   ],
   "ext": "js,json",
   "ignore": [

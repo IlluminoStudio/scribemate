@@ -88,7 +88,10 @@ components:
       properties:
         industry:
           type: string
-          description: The industry or niche to suggest topics for
+          minLength: 3
+          maxLength: 80
+          pattern: "^[a-zA-Z0-9\\s\\-.,!?()]+$"
+          description: The industry or niche to suggest topics for (3-80 chars, keyboard-typable characters only)
           example: "private piano teaching"
       required: [industry]
 
@@ -114,7 +117,10 @@ components:
       properties:
         topic:
           type: string
-          description: The topic to generate a post about
+          minLength: 5
+          maxLength: 160
+          pattern: "^[a-zA-Z0-9\\s\\-.,!?()]+$"
+          description: The topic to generate a post about (5-160 chars, keyboard-typable characters only)
           example: How To Make Piano Lessons Affordable Amid Rising Costs
         social_media:
           type: array
@@ -125,12 +131,13 @@ components:
           example: [facebook, linkedin]
         max_word_count:
           type: integer
-          minimum: 10
-          maximum: 500
-          description: Maximum word count for the generated post
+          minimum: 5
+          maximum: 2000
+          description: Maximum word count for the generated post (5-2000 words)
         tone_guide:
           type: string
-          description: Tone and style guide for the post
+          pattern: "^[a-zA-Z0-9\\s\\-.,!?()]+$"
+          description: Tone and style guide for the post (keyboard-typable characters only)
           example: "professional yet friendly, educational"
       required: [topic, social_media, max_word_count, tone_guide]
 

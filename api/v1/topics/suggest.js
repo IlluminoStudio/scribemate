@@ -50,6 +50,25 @@ export default async function suggestTopics(req, res) {
       })
     }
 
+    // Validate industry length (3-80 characters)
+    if (industry.length < 3 || industry.length > 80) {
+      logError(`Validation failed - industry length: ${industry.length}`)
+      return res.status(400).json({
+        status: 'error',
+        message: 'Industry must be between 3 and 80 characters'
+      })
+    }
+
+    // Validate industry contains only keyboard-typable characters
+    const keyboardTypablePattern = /^[a-zA-Z0-9\s\-.,!?()]+$/
+    if (!keyboardTypablePattern.test(industry)) {
+      logError(`Validation failed - industry contains invalid characters: ${industry}`)
+      return res.status(400).json({
+        status: 'error',
+        message: 'Industry must contain only keyboard-typable characters (letters, numbers, spaces, hyphens, periods, commas, exclamation marks, question marks, and parentheses)'
+      })
+    }
+
     // Prepare OpenAI request with dynamic industry replacement
     const promptText = SUGGEST_TOPICS_PROMPT.replace('{{industry}}', industry)
     

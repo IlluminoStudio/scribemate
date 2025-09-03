@@ -49,6 +49,25 @@ export default async function generatePost(req, res) {
         message: 'Topic parameter is required and must be a string'
       })
     }
+
+    // Validate topic length (5-160 characters)
+    if (topic.length < 5 || topic.length > 160) {
+      logError(`Validation failed - topic length: ${topic.length}`)
+      return res.status(400).json({
+        status: 'error',
+        message: 'Topic must be between 5 and 160 characters'
+      })
+    }
+
+    // Validate topic contains only keyboard-typable characters
+    const keyboardTypablePattern = /^[a-zA-Z0-9\s\-.,!?()]+$/
+    if (!keyboardTypablePattern.test(topic)) {
+      logError(`Validation failed - topic contains invalid characters: ${topic}`)
+      return res.status(400).json({
+        status: 'error',
+        message: 'Topic must contain only keyboard-typable characters (letters, numbers, spaces, hyphens, periods, commas, exclamation marks, question marks, and parentheses)'
+      })
+    }
     
     if (!social_media || typeof social_media !== 'string') {
       logError(`Validation failed - social_media: ${social_media}, type: ${typeof social_media}`)
@@ -57,12 +76,22 @@ export default async function generatePost(req, res) {
         message: 'Social media parameter is required and must be a string'
       })
     }
+
+    // Validate social_media contains only allowed values
+    const allowedSocialMedia = ['facebook', 'linkedin', 'blog']
+    if (!allowedSocialMedia.includes(social_media)) {
+      logError(`Validation failed - invalid social media platform: ${social_media}`)
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid social media platform specified'
+      })
+    }
     
-    if (!max_word_count || typeof max_word_count !== 'number' || max_word_count < 10 || max_word_count > 500) {
+    if (!max_word_count || typeof max_word_count !== 'number' || max_word_count < 5 || max_word_count > 2000) {
       logError(`Validation failed - max_word_count: ${max_word_count}, type: ${typeof max_word_count}`)
       return res.status(400).json({
         status: 'error',
-        message: 'Max word count parameter is required and must be a number between 10 and 500'
+        message: 'Max word count parameter is required and must be a number between 5 and 2000'
       })
     }
     
@@ -71,6 +100,15 @@ export default async function generatePost(req, res) {
       return res.status(400).json({
         status: 'error',
         message: 'Tone guide parameter is required and must be a string'
+      })
+    }
+
+    // Validate tone_guide contains only keyboard-typable characters
+    if (!keyboardTypablePattern.test(tone_guide)) {
+      logError(`Validation failed - tone_guide contains invalid characters: ${tone_guide}`)
+      return res.status(400).json({
+        status: 'error',
+        message: 'Tone guide must contain only keyboard-typable characters (letters, numbers, spaces, hyphens, periods, commas, exclamation marks, question marks, and parentheses)'
       })
     }
 
