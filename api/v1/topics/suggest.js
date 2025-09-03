@@ -164,15 +164,7 @@ export default async function suggestTopics(req, res) {
       }
     }
 
-    // Fallback if no topics extracted
-    if (topics.length === 0) {
-      topics = [
-        `Latest trends in ${industry} [Trending]`,
-        `Common challenges in ${industry} [Evergreen]`,
-        `Best practices for ${industry} [Evergreen]`,
-        `Future of ${industry} [Trending]`
-      ]
-    }
+
 
     log(`Generated ${topics.length} topics for industry: ${industry}`)
 

@@ -209,10 +209,7 @@ export default async function generatePost(req, res) {
       }
     }
 
-    // Fallback if no content extracted
-    if (!postContent || postContent.trim().length === 0) {
-      postContent = `Here's an engaging post about ${topic} for ${social_media}. This topic is relevant and timely, offering valuable insights for your audience. The content is crafted to be informative while maintaining an engaging tone that encourages interaction and discussion.`
-    }
+
 
     // Calculate word count
     const wordCount = postContent.trim().split(/\s+/).length
