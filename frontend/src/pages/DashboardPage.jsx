@@ -454,7 +454,8 @@ function DashboardPage() {
                          
                          {/* Generated Post Card */}
                          <GeneratedPostCard
-                           text="🎹 Spring is the perfect time to prepare for recitals! Here are my top 3 tips to help your child shine on stage:
+                           title="Spring Recital Preparation: Essential Tips for Young Musicians"
+                           post="🎹 Spring is the perfect time to prepare for recitals! Here are my top 3 tips to help your child shine on stage:
 
 1. Practice performing - not just playing. Have mini-concerts at home!
 

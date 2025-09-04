@@ -16,14 +16,14 @@ import {
 } from "phosphor-react";
 import "./GeneratedPostCard.css";
 
-function GeneratedPostCard({ text, image, platform = "Facebook", style = {}, ...props }) {
+function GeneratedPostCard({ title, post, image, platform = "Facebook", style = {}, ...props }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Truncate text to 350 characters initially
+  // Truncate post to 350 characters initially
   const truncatedText =
-    text.length > 350 ? text.substring(0, 350) + "..." : text;
-  const displayText = isExpanded ? text : truncatedText;
-  const shouldShowSeeMore = text.length > 350;
+    post.length > 350 ? post.substring(0, 350) + "..." : post;
+  const displayText = isExpanded ? post : truncatedText;
+  const shouldShowSeeMore = post.length > 350;
 
   const handleToggleText = () => {
     setIsExpanded(!isExpanded);
@@ -34,11 +34,43 @@ function GeneratedPostCard({ text, image, platform = "Facebook", style = {}, ...
   };
 
   return (
-    <div className="generated-post-card" style={style} {...props}>
-      {/* Main Content Card */}
-      <div className="generated-post-card__main">
-        {/* Text Content Section */}
-        <div className="generated-post-card__text-section">
+          <div className="generated-post-card" style={style} {...props}>
+        {/* Main Content Card */}
+        <div className="generated-post-card__main">
+          {/* Title */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "-16px",
+            }}
+          >
+            <Text
+              variant="h5"
+              color="var(--neutral-900)"
+            >
+              {title}
+            </Text>
+            <Button
+              variant="text"
+              size="sm"
+              style={{ padding: "4px" }}
+            >
+              <Copy size={20} weight="fill" color="var(--neutral-500)" />
+            </Button>
+          </div>
+
+          {/* Platform Preview */}
+          <Text
+            variant="muted2"
+            color="var(--neutral-700)"
+          >
+            {platform} Post Preview
+          </Text>
+
+          {/* Text Content Section */}
+          <div className="generated-post-card__text-section">
           <Text
             variant="body1"
             color="var(--neutral-900)"
@@ -212,7 +244,8 @@ function GeneratedPostCard({ text, image, platform = "Facebook", style = {}, ...
 }
 
 GeneratedPostCard.propTypes = {
-  text: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  post: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   platform: PropTypes.oneOf(["LinkedIn", "Facebook", "Blog"]),
   style: PropTypes.object,
