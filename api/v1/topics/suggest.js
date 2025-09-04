@@ -154,13 +154,39 @@ export default async function suggestTopics(req, res) {
         }
       }
       
-      // Split by newlines and clean up
+      // Parse topics and extract type and content
       if (textContent) {
-        topics = textContent
+        const rawTopics = textContent
           .split('\n')
           .map(topic => topic.trim())
           .filter(topic => topic.length > 0)
           .slice(0, 4) // Limit to 4 topics as per prompt requirement
+        
+        // Parse each topic to extract type and content
+        topics = rawTopics.map(rawTopic => {
+          // Remove numbering (e.g., "1. ", "2. ")
+          let cleanTopic = rawTopic.replace(/^\d+\.\s*/, '')
+          
+          // Extract type from brackets [Evergreen] or [Trending]
+          const typeMatch = cleanTopic.match(/\[(Evergreen|Trending)\]/)
+          const type = typeMatch ? typeMatch[1] : 'Evergreen' // Default to Evergreen if not specified
+          
+          // Remove the type brackets and quotes
+          const topicText = cleanTopic
+            .replace(/\[Evergreen\]/g, '') // Remove [Evergreen] brackets
+            .replace(/\[Trending\]/g, '') // Remove [Trending] brackets
+            .replace(/Evergreen\|/g, '') // Remove "Evergreen|" pattern
+            .replace(/Trending\|/g, '') // Remove "Trending|" pattern
+            .replace(/[\u2013\u2014]/g, '-') // Replace en dash and em dash with regular hyphen
+            .replace(/^["']+|["']+$/g, '') // Remove leading/trailing quotes (one or more)
+            .replace(/["']+/g, '') // Remove any remaining quotes
+            .trim()
+          
+          return {
+            type: type,
+            topic: topicText
+          }
+        })
       }
     }
 

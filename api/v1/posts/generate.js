@@ -209,6 +209,11 @@ export default async function generatePost(req, res) {
       }
     }
 
+    // Clean up post content - replace smart dashes with regular hyphens
+    if (postContent) {
+      postContent = postContent.replace(/[\u2013\u2014]/g, '-') // Replace en dash and em dash with regular hyphen
+    }
+
 
 
     // Calculate word count

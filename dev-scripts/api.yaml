@@ -104,9 +104,20 @@ components:
         topics:
           type: array
           items:
-            type: string
-          description: List of suggested social media topics
-          example: ["How to Make Piano Lessons Affordable Amid Rising Costs", "Effective Strategies for Teaching Neurodiverse Piano Students"]
+            type: object
+            properties:
+              type:
+                type: string
+                enum: [Evergreen, Trending]
+                description: Topic category type
+                example: Evergreen
+              topic:
+                type: string
+                description: The actual topic title
+                example: "How to Make Piano Lessons Affordable Amid Rising Costs"
+            required: [type, topic]
+          description: List of suggested social media topics with their categories
+          example: [{"type": "Evergreen", "topic": "How to Make Piano Lessons Affordable Amid Rising Costs"}, {"type": "Trending", "topic": "Effective Strategies for Teaching Neurodiverse Piano Students"}]
         created_at:
           type: string
           format: date-time
