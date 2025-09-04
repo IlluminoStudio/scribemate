@@ -37,11 +37,6 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
   const handleCopyTitle = async () => {
     if (title) {
       const success = await copyText(title);
-      if (success) {
-        console.log("Title copied to clipboard");
-      } else {
-        console.error("Failed to copy title");
-      }
     }
   };
 
@@ -77,11 +72,12 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
             </Text>
             <Button
               variant="text"
+              color="neutral"
               size="sm"
               style={{ padding: "4px" }}
               onClick={handleCopyTitle}
             >
-              <Copy size={20} weight="fill" color="var(--neutral-500)" />
+              <Copy size={20} weight="fill" />
             </Button>
           </div>
 
@@ -129,7 +125,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
               </Button>
             )}
 
-            {/* Regenerate Text Button */}
+            {/* Regenerate Post Button */}
             <Button
               variant="text"
               color="primary"
@@ -137,7 +133,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
               onClick={handleRegenerateText}
               leftIcon={<ArrowClockwise weight="fill" size={16} />}
             >
-                Regenerate Text
+                Regenerate Post
             </Button>
           </div>
         </div>
