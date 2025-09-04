@@ -14,6 +14,7 @@ import {
   Trash,
   Palette,
 } from "phosphor-react";
+import { copyText } from "../utils/copyText";
 import "./GeneratedPostCard.css";
 
 function GeneratedPostCard({ title, post, image, platform = "Facebook", style = {}, ...props }) {
@@ -31,6 +32,28 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
 
   const handleRegenerateText = () => {
     console.log("Regenerate text clicked");
+  };
+
+  const handleCopyTitle = async () => {
+    if (title) {
+      const success = await copyText(title);
+      if (success) {
+        console.log("Title copied to clipboard");
+      } else {
+        console.error("Failed to copy title");
+      }
+    }
+  };
+
+  const handleCopyPost = async () => {
+    if (post) {
+      const success = await copyText(post);
+      if (success) {
+        console.log("Post copied to clipboard");
+      } else {
+        console.error("Failed to copy post");
+      }
+    }
   };
 
   return (
@@ -56,6 +79,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
               variant="text"
               size="sm"
               style={{ padding: "4px" }}
+              onClick={handleCopyTitle}
             >
               <Copy size={20} weight="fill" color="var(--neutral-500)" />
             </Button>
@@ -126,48 +150,77 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
           {/* Icon Buttons Overlay */}
           <div className="generated-post-card__icon-overlay">
             {/* Refresh Button */}
-            <Icon
-              variant="circle"
-              size={32}
-              noBg={false}
+            <Button
+              color="neutral"
+              size="sm"
               className="generated-post-card__icon-button"
-              color="var(--neutral-900)"
+              style={{ 
+                padding: "8px",
+                borderRadius: "50%",
+                minWidth: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
             >
-              <ArrowClockwise weight="bold" />
-            </Icon>
+              <ArrowClockwise size={16} weight="bold" />
+            </Button>
 
             {/* Download Button */}
-            <Icon
-              variant="circle"
-              size={32}
-              noBg={false}
+            <Button
+              color="neutral"
+              size="sm"
               className="generated-post-card__icon-button"
-              color="var(--neutral-900)"
+              style={{ 
+                padding: "8px",
+                borderRadius: "50%",
+                minWidth: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
             >
-              <Download weight="bold" />
-            </Icon>
+              <Download size={16} weight="bold" />
+            </Button>
 
             {/* Copy Button */}
-            <Icon
-              variant="circle"
-              size={32}
-              noBg={false}
+            <Button
+              color="neutral"
+              size="sm"
               className="generated-post-card__icon-button"
-              color="var(--neutral-900)"
+              style={{ 
+                padding: "8px",
+                borderRadius: "50%",
+                minWidth: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+              onClick={handleCopyPost}
             >
-              <Copy weight="bold" />
-            </Icon>
+              <Copy size={16} weight="bold" />
+            </Button>
 
             {/* Lock Button */}
-            <Icon
-              variant="circle"
-              size={32}
-              noBg={false}
+            <Button
+              color="neutral"
+              size="sm"
               className="generated-post-card__icon-button"
-              color="var(--neutral-900)"
+              style={{ 
+                padding: "8px",
+                borderRadius: "50%",
+                minWidth: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
             >
-              <LockOpen weight="bold" />
-            </Icon>
+              <LockOpen size={16} weight="bold" />
+            </Button>
           </div>
         </div>
       </div>
@@ -190,6 +243,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
           color="neutral"
           size="md"
           leftIcon={<Copy weight="bold" size={20} />}
+          onClick={handleCopyPost}
         >
             Copy Text
         </Button>
