@@ -2,13 +2,16 @@ import fetch from 'node-fetch'
 import { TestRunner } from './test-helper.js'
 import { EVERGREEN, TRENDING } from '../constants.js'
 
+// Module-level API URL - set by runTests function and accessible to all test functions
+let API_URL
+
 // Test the suggest topics endpoint - happy path
 async function testSuggestEndpoint() {
   const testData = {
     industry: "private piano teaching"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -65,7 +68,7 @@ async function testEmptyIndustryString() {
     industry: ""
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -86,7 +89,7 @@ async function testEmptyIndustryString() {
 async function testMissingIndustryField() {
   const testData = {}
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -109,7 +112,7 @@ async function testInvalidIndustryType() {
     industry: 123
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -132,7 +135,7 @@ async function testNullIndustry() {
     industry: null
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -155,7 +158,7 @@ async function testVeryLongIndustryString() {
     industry: "a".repeat(1000) // Very long string
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -179,7 +182,7 @@ async function testIndustryTooShort() {
     industry: "ab" // Less than 3 characters
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -202,7 +205,7 @@ async function testIndustryTooLong() {
     industry: "a".repeat(81) // More than 80 characters
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -225,7 +228,7 @@ async function testIndustryExactMinLength() {
     industry: "abc" // Exactly 3 characters
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -249,7 +252,7 @@ async function testIndustryExactMaxLength() {
     industry: "a".repeat(80) // Exactly 80 characters
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -274,7 +277,7 @@ async function testIndustryWithEmoji() {
     industry: "private piano teaching 🎹💰"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -297,7 +300,7 @@ async function testIndustryWithSpecialCharacters() {
     industry: "private piano teaching ©®™"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -320,7 +323,7 @@ async function testIndustryWithUnicodeSymbols() {
     industry: "private piano teaching αβγδε"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -343,7 +346,7 @@ async function testIndustryWithMathematicalSymbols() {
     industry: "private piano teaching ∑∏∆∇"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/topics:suggest', {
+  const response = await fetch(`${API_URL}/api/v1/topics:suggest`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -364,7 +367,10 @@ async function testIndustryWithMathematicalSymbols() {
 
 
 // Export function to run tests using TestRunner
-export async function runTests() {
+export async function runTests(apiUrl) {
+  // Set the global API URL for all test functions
+  API_URL = apiUrl
+  
   const runner = new TestRunner('Topics')
   
   // Happy path test

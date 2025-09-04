@@ -12,6 +12,8 @@ export const TRENDING = "Trending";
 
 // CORS configuration
 export const PRODUCTION_DOMAIN = "https://scribemate.jialinwang.pro";
+export const LOCAL_DOMAIN = "http://localhost:3001";
+export const MOCKAROO_DOMAIN = "https://my.api.mockaroo.com";
 export const ALLOWED_ORIGINS = [
   PRODUCTION_DOMAIN,
   'http://localhost:3000',

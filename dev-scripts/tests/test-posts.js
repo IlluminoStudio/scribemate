@@ -1,6 +1,9 @@
 import fetch from 'node-fetch'
 import { TestRunner } from './test-helper.js'
 
+// Module-level API URL - set by runTests function and accessible to all test functions
+let API_URL
+
 // Test the generate posts endpoint - happy path
 async function testGenerateEndpoint() {
   const testData = {
@@ -10,7 +13,7 @@ async function testGenerateEndpoint() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -46,7 +49,7 @@ async function testMissingTopic() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -71,7 +74,7 @@ async function testMissingSocialMedia() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -96,7 +99,7 @@ async function testMissingMaxWordCount() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -125,7 +128,7 @@ async function testTopicTooShort() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -151,7 +154,7 @@ async function testTopicTooLong() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -177,7 +180,7 @@ async function testTopicExactMinLength() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -204,7 +207,7 @@ async function testTopicExactMaxLength() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -232,7 +235,7 @@ async function testTopicAsNumber() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -258,7 +261,7 @@ async function testTopicAsNull() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -285,7 +288,7 @@ async function testInvalidSocialMediaPlatform() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -312,7 +315,7 @@ async function testMaxWordCountTooHigh() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -338,7 +341,7 @@ async function testMaxWordCountExactLimit() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -366,7 +369,7 @@ async function testTopicWithEmoji() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -392,7 +395,7 @@ async function testTopicWithSpecialCharacters() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -418,7 +421,7 @@ async function testTopicWithUnicodeSymbols() {
     tone_guide: "professional yet friendly, educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -444,7 +447,7 @@ async function testToneGuideWithEmoji() {
     tone_guide: "professional yet friendly 😊 educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -470,7 +473,7 @@ async function testToneGuideWithSpecialCharacters() {
     tone_guide: "professional yet friendly ★ educational"
   }
 
-  const response = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -498,7 +501,7 @@ async function testFallbackToneGuide() {
     // tone_guide is intentionally omitted
   }
 
-  const response1 = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response1 = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -533,7 +536,7 @@ async function testFallbackToneGuide() {
     tone_guide: "" // Empty string
   }
 
-  const response2 = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response2 = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -568,7 +571,7 @@ async function testFallbackToneGuide() {
     tone_guide: "   \t\n   " // Whitespace only
   }
 
-  const response3 = await fetch('http://localhost:3001/api/v1/posts:generate', {
+  const response3 = await fetch(`${API_URL}/api/v1/posts:generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -597,7 +600,10 @@ async function testFallbackToneGuide() {
 }
 
 // Export function to run tests using TestRunner
-export async function runTests() {
+export async function runTests(apiUrl) {
+  // Set the global API URL for all test functions
+  API_URL = apiUrl
+  
   const runner = new TestRunner('Posts')
   
   // Happy path test
