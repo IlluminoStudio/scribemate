@@ -4,7 +4,9 @@ import {
   ROLE_USER, 
   OPENAI_RESPONSE_API,
   SUGGEST_TOPICS_PROMPT,
-  ALLOWED_ORIGINS
+  ALLOWED_ORIGINS,
+  EVERGREEN,
+  TRENDING
 } from '../../../dev-scripts/constants.js'
 import { log, logError } from '../../../lib/consoleLogger.js'
 
@@ -167,16 +169,16 @@ export default async function suggestTopics(req, res) {
           // Remove numbering (e.g., "1. ", "2. ")
           let cleanTopic = rawTopic.replace(/^\d+\.\s*/, '')
           
-          // Extract type from brackets [Evergreen] or [Trending]
-          const typeMatch = cleanTopic.match(/\[(Evergreen|Trending)\]/)
-          const type = typeMatch ? typeMatch[1] : 'Evergreen' // Default to Evergreen if not specified
+          // Extract type from pipe format Evergreen| or Trending|
+          const typeMatch = cleanTopic.match(new RegExp(`^(${EVERGREEN}|${TRENDING})\\|`))
+          const type = typeMatch ? typeMatch[1] : EVERGREEN // Default to Evergreen if not specified
           
           // Remove the type brackets and quotes
           const topicText = cleanTopic
-            .replace(/\[Evergreen\]/g, '') // Remove [Evergreen] brackets
-            .replace(/\[Trending\]/g, '') // Remove [Trending] brackets
-            .replace(/Evergreen\|/g, '') // Remove "Evergreen|" pattern
-            .replace(/Trending\|/g, '') // Remove "Trending|" pattern
+            .replace(new RegExp(`\\[${EVERGREEN}\\]`, 'g'), '') // Remove [Evergreen] brackets
+            .replace(new RegExp(`\\[${TRENDING}\\]`, 'g'), '') // Remove [Trending] brackets
+            .replace(new RegExp(`${EVERGREEN}\\|`, 'g'), '') // Remove "Evergreen|" pattern
+            .replace(new RegExp(`${TRENDING}\\|`, 'g'), '') // Remove "Trending|" pattern
             .replace(/[\u2013\u2014]/g, '-') // Replace en dash and em dash with regular hyphen
             .replace(/^["']+|["']+$/g, '') // Remove leading/trailing quotes (one or more)
             .replace(/["']+/g, '') // Remove any remaining quotes
