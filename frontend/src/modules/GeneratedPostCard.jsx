@@ -235,8 +235,8 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
 
         {/* Copy Text Button */}
         <Button
-          variant="default"
-          color="neutral"
+          variant="outlined"
+          color="secondary"
           size="md"
           leftIcon={<Copy weight="bold" size={20} />}
           onClick={handleCopyPost}
@@ -246,8 +246,8 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
 
         {/* Download Image Button */}
         <Button
-          variant="default"
-          color="neutral"
+          variant="outlined"
+          color="secondary"
           size="md"
           leftIcon={<Download weight="bold" size={20} />}
         >

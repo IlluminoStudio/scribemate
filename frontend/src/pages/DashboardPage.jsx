@@ -420,7 +420,7 @@ function DashboardPage() {
                            {/* Right side - Regenerate All button */}
                            <Button
                              testid="regenerate-all-btn"
-                             color="neutral"
+                             color="secondary"
                              variant="outlined"
                              size="sm"
                              leftIcon={<ArrowClockwise weight="fill" size={16} />}

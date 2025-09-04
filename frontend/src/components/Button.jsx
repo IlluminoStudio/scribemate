@@ -98,8 +98,8 @@ function Button({
         color: "var(--neutral-500)",
         WebkitTextFillColor: "var(--neutral-500)",
         border: "none",
-        hoverBg: "var(--neutral-100)",
-        activeBg: "var(--neutral-100)",
+        hoverBg: "var(--neutral-50)",
+        activeBg: "var(--neutral-50)",
         disabledBg: "var(--neutral-100)",
         disabledColor: "var(--neutral-200)",
       },
@@ -110,7 +110,7 @@ function Button({
         border: "2px solid var(--neutral-400)",
         hoverBg: "rgba(179, 179, 179, 0.08)",
         activeBg: "rgba(179, 179, 179, 0.12)",
-        disabledBorder: "2px solid var(--neutral-100)",
+        disabledBorder: "2px solid var(--neutral-50)",
         disabledColor: "var(--neutral-200)",
       },
       text: {
@@ -121,7 +121,7 @@ function Button({
         border: "none",
         hoverColor: "var(--neutral-500)",
         activeColor: "var(--neutral-600)",
-        disabledColor: "var(--neutral-100)",
+        disabledColor: "var(--neutral-50)",
       },
     },
     error: {
