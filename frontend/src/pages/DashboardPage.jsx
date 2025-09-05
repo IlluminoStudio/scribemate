@@ -109,7 +109,7 @@ function DashboardPage() {
   // Handle refresh topics button click
   const handleRefreshTopics = async () => {
     try {
-      const newTopics = await fetchTopicSuggestions();
+      const newTopics = await fetchTopicSuggestions(industry);
       console.log('Fetched new topics:', newTopics);
       // TODO: Update the topics display with new data
     } catch (error) {

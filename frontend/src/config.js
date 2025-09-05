@@ -22,4 +22,12 @@ export const X_API_KEY = import.meta.env.VITE_X_API_KEY;
 export const getUrl = (path) => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${BASE_DOMAIN}${cleanPath}`;
+};
+
+// API Endpoints
+export const API_ENDPOINTS = {
+  // TOPICS_SUGGEST: 'http://localhost:3001/api/v1/topics:suggest',
+  TOPICS_SUGGEST: 'https://my.api.mockaroo.com/api/v1/topics:suggest',
+  // POSTS_GENERATE: 'http://localhost:3001/api/v1/posts:generate',
+  POSTS_GENERATE: 'https://my.api.mockaroo.com/api/v1/posts:generate',
 }; 

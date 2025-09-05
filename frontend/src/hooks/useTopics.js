@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useAuthenticatedApi } from './useAuthenticatedApi';
+import { API_ENDPOINTS } from '../config';
 
 export function useTopics() {
   const [loading, setLoading] = useState(false);
@@ -7,18 +8,17 @@ export function useTopics() {
   const makeAuthenticatedApiCall = useAuthenticatedApi();
 
   // Fetch topic suggestions from external API
-  const fetchTopicSuggestions = useCallback(async () => {
+  const fetchTopicSuggestions = useCallback(async (industry) => {
     try {
       setLoading(true);
       setError(null);
       
-      // Hardcoded endpoint as requested
-    //   const endpoint = 'http://localhost:3001/api/v1/topics:suggest';
-      const endpoint = 'https://my.api.mockaroo.com/api/v1/topics:suggest';
+      // Use endpoint from config
+      // const endpoint = API_ENDPOINTS.POSTS_GENERATE;
+      const endpoint = API_ENDPOINTS.TOPICS_SUGGEST;
       
-      // Hardcoded body as requested
       const requestBody = {
-        industry: 'private piano teaching'
+        industry: industry
       };
       
       const response = await makeAuthenticatedApiCall(endpoint, {
