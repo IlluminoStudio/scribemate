@@ -19,6 +19,7 @@ import Checkbox from "../components/Checkbox";
 import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
 import TabNavigation from "../components/TabNavigation";
+import Slider from "../components/Slider";
 import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen, ChartLine, FileText, Users as UsersIcon, Copy, Download } from "phosphor-react";
 import userSvg from "../assets/avatar.svg";
 
@@ -35,6 +36,7 @@ function DemoPage() {
   const [selectedDoctor, setSelectedDoctor] = React.useState([]);
   const [socialMediaDemo, setSocialMediaDemo] = React.useState("facebook");
   const [selectedTab, setSelectedTab] = React.useState("analytics");
+  const [wordCount, setWordCount] = React.useState(200);
 
   const allSpecialties = [
     "Dermatology",
@@ -693,6 +695,28 @@ function DemoPage() {
             iconSize={20}
           />
         </div>
+      </div>
+
+      {/* Slider Component Showcase */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "600px",
+          margin: "48px auto",
+          display: "flex",
+          flexDirection: "column",
+          gap: "24px",
+        }}
+      >
+        <Text testid="slider-title" variant="h4">Word Count Slider</Text>
+        <Slider
+          testid="word-count-slider"
+          min={50}
+          max={1000}
+          unit="words"
+          value={wordCount}
+          onChange={setWordCount}
+        />
       </div>
 
       {/* Color Showcase */}
