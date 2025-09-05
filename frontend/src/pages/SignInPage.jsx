@@ -3,7 +3,7 @@ import Text from "../components/Text";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import SegmentedControl from "../components/SegmentedControl";
-import { getCurrentYear } from "../constants";
+import { getCurrentYear, TAGLINE } from "../constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UsersThree, Ticket } from "phosphor-react";
 
@@ -45,7 +45,7 @@ function SignInPage() {
           </Text>
         </div>
         <Text variant="body2" style={{ marginTop: -16, marginBottom: 0, color: "#b0b0b0" }}>
-          friends helping friends stick out till the end
+          {TAGLINE}
         </Text>
         <SegmentedControl
           options={[{ label: "Sign In", value: "signin" }, { label: "Sign Up", value: "signup" }]}
@@ -92,7 +92,7 @@ function SignInPage() {
               fontWeight: 400,
               color: "var(--neutral-600)"
             }}>
-              Create your account and start building lasting habits with friends
+              {TAGLINE}
             </Text>
             <form style={{ width: "100%", display: "flex", flexDirection: "column", gap: 16 }}>
               <Input label="Full Name" placeholder="John Doe" type="text" required />

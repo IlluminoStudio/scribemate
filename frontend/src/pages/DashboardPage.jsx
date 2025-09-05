@@ -24,6 +24,7 @@ import GeneratedPostCard from "../modules/GeneratedPostCard";
 import postImage1 from "../assets/post-img1.jpg";
 import postImage2 from "../assets/post-img2.jpg";
 import postImage3 from "../assets/post-img3.jpg";
+import { mockLogin } from "../mock_login.js";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -95,6 +96,11 @@ function DashboardPage() {
   const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
   const [selectedTab, setSelectedTab] = React.useState("facebook");
   const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
+
+  // Trigger mock login when component mounts
+  React.useEffect(() => {
+    mockLogin();
+  }, []);
   
   return (
     <>
