@@ -8,20 +8,28 @@ export function usePosts() {
   const makeAuthenticatedApiCall = useAuthenticatedApi();
 
   // Generate post content from external API
-  const generatePost = useCallback(async () => {
+  const generatePost = useCallback(async (topic, tone_guide, social_media = 'facebook', max_word_count = 150) => {
     try {
       setLoading(true);
       setError(null);
       
+      // Validate required parameters
+      if (!topic) {
+        throw new Error('Topic is required');
+      }
+      if (!tone_guide) {
+        throw new Error('Tone guide is required');
+      }
+      
       // Use endpoint from config
       const endpoint = API_ENDPOINTS.POSTS_GENERATE;
       
-      // Hardcoded request body as specified
+      // Build request body with provided parameters
       const requestBody = {
-        topic: "How to Make Piano Lessons Affordable Amid Rising Costs",
-        social_media: "linkedin",
-        max_word_count: 150,
-        tone_guide: "professional yet friendly, educational"
+        topic,
+        social_media,
+        max_word_count,
+        tone_guide
       };
       
       const response = await makeAuthenticatedApiCall(endpoint, {

@@ -60,7 +60,7 @@ function DashboardCard({ title, subtitle, body }) {
   );
 }
 
-function TopicCard({ title, tag, tagVariant }) {
+function TopicCard({ title, tag, tagVariant, onClick }) {
   return (
     <div
       style={{
@@ -72,6 +72,17 @@ function TopicCard({ title, tag, tagVariant }) {
         flexDirection: "column",
         gap: "8px",
         height: "100%",
+        cursor: "pointer",
+        transition: "all 0.2s ease",
+      }}
+      onClick={onClick}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = "var(--primary-300)";
+        e.currentTarget.style.boxShadow = "var(--shadow-sm)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "var(--neutral-300)";
+        e.currentTarget.style.boxShadow = "none";
       }}
     >
       <Text variant="h6" style={{ marginBottom: "4px" }}>
@@ -128,7 +139,9 @@ function DashboardPage() {
   const handleGenerateContent = async () => {
     try {
       console.log('Generating post content...');
-      const generatedPost = await generatePost();
+      // Use a default topic since no specific topic is selected
+      const defaultTopic = "Create engaging content for your audience";
+      const generatedPost = await generatePost(defaultTopic, tone_guide, selectedTab);
       console.log('Generated post:', generatedPost);
       
       // Store the generated post data
@@ -138,6 +151,23 @@ function DashboardPage() {
       setShowGeneratedPost(true);
     } catch (error) {
       console.error('Failed to generate content:', error);
+    }
+  };
+  
+  // Handle topic card click
+  const handleTopicClick = async (topicTitle) => {
+    try {
+      console.log('Generating post for topic:', topicTitle);
+      const generatedPost = await generatePost(topicTitle, tone_guide, selectedTab);
+      console.log('Generated post:', generatedPost);
+      
+      // Store the generated post data
+      setGeneratedPostData(generatedPost);
+      
+      // Show the generated post
+      setShowGeneratedPost(true);
+    } catch (error) {
+      console.error('Failed to generate content for topic:', error);
     }
   };
   
@@ -265,6 +295,7 @@ function DashboardPage() {
                             title={topic.topic}
                             tag={topic.type}
                             tagVariant={topic.type === "Trending" ? "light" : "success"}
+                            onClick={() => handleTopicClick(topic.topic)}
                           />
                         ))}
                       </div>
