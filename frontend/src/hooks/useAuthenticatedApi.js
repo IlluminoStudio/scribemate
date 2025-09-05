@@ -15,7 +15,8 @@ export function useAuthenticatedApi() {
     
     // Build URL with user_id parameter
     const separator = endpoint.includes('?') ? '&' : '?';
-    const url = `${endpoint}${separator}user_id=${userId}`;
+    const url = `${endpoint}${separator}key=${X_API_KEY}`;
+    // const url = `${endpoint}${separator}user_id=${userId}`;
     
     // Make the API call
     return fetch(url, {
