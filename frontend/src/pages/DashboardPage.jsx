@@ -25,6 +25,7 @@ import postImage1 from "../assets/post-img1.jpg";
 import postImage2 from "../assets/post-img2.jpg";
 import postImage3 from "../assets/post-img3.jpg";
 import { mockLogin } from "../mock_login.js";
+import { useUserData } from "../hooks/useSession";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -76,11 +77,12 @@ function TopicCard({ title, body, tag, tagVariant }) {
         {title}
       </Text>
       <Text
-        variant="body2"
+        variant="muted2"
         style={{
-          color: "var(--neutral-700)",
+          color: "var(--neutral-600)",
           lineHeight: "20px",
           marginBottom: "8px",
+          display: "none",
         }}
       >
         {body}
@@ -96,6 +98,25 @@ function DashboardPage() {
   const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
   const [selectedTab, setSelectedTab] = React.useState("facebook");
   const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
+  
+  // Get user data from localStorage
+  const { userData } = useUserData();
+  const { first_name, last_name, business, industry, tone_guide, topics, pro_tips } = userData || {};
+  
+  // Get random pro tip
+  const randomProTip = pro_tips && pro_tips.length > 0 
+    ? pro_tips[Math.floor(Math.random() * pro_tips.length)]
+    : "Try combining seasonal topics with your teaching expertise for higher engagement rates!";
+  
+  // Get first 4 topics for display
+  const displayTopics = topics && topics.length > 0 
+    ? topics.slice(0, 4)
+    : [
+        { type: "Trending", topic: "Spring Recital Preparation Tips" },
+        { type: "Evergreen", topic: "Benefits of Learning Piano for Kids" },
+        { type: "Trending", topic: "Adult Piano Lessons: It's Never Too Late" },
+        { type: "Evergreen", topic: "Practice Tips for Busy Families" }
+      ];
 
   // Trigger mock login when component mounts
   React.useEffect(() => {
@@ -131,7 +152,7 @@ function DashboardPage() {
                 color: "var(--color-text-primary)",
               }}
             >
-              Welcome back, {DEFAULT_USER_NAME.split(" ")[0]}!
+              Welcome back, {first_name || DEFAULT_USER_NAME.split(" ")[0]}!
             </Text>
             <Text
               variant="body1"
@@ -139,7 +160,7 @@ function DashboardPage() {
                 color: "var(--neutral-700)",
               }}
             >
-              Ready to create engaging content for your piano studio?
+              Ready to create engaging content for your {business || "piano studio"}?
             </Text>
           </div>
 
@@ -207,30 +228,14 @@ function DashboardPage() {
                           width: "100%",
                         }}
                       >
-                        <TopicCard
-                          title="Spring Recital Preparation Tips"
-                          body="Help students prepare for their upcoming performances"
-                          tag="Trending"
-                          tagVariant="light"
-                        />
-                        <TopicCard
-                          title="Benefits of Learning Piano for Kids"
-                          body="Showcase the cognitive benefits of music education"
-                          tag="Evergreen"
-                          tagVariant="success"
-                        />
-                        <TopicCard
-                          title="Adult Piano Lessons: It's Never Too Late"
-                          body="Encourage adult learners to start their musical journey"
-                          tag="Trending"
-                          tagVariant="light"
-                        />
-                        <TopicCard
-                          title="Practice Tips for Busy Families"
-                          body="Share strategies for consistent practice routines"
-                          tag="Evergreen"
-                          tagVariant="success"
-                        />
+                        {displayTopics.map((topic, index) => (
+                          <TopicCard
+                            key={index}
+                            title={topic.topic}
+                            tag={topic.type}
+                            tagVariant={topic.type === "Trending" ? "light" : "success"}
+                          />
+                        ))}
                       </div>
                       {/* Or Create Your Own Topic Card */}
                       <div
@@ -640,8 +645,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                     >
                       <Text variant="h6">Pro Tip</Text>
                       <Text variant="body2" style={{ lineHeight: "20px" }}>
-                        Try combining seasonal topics with your teaching
-                        expertise for higher engagement rates!
+                        {randomProTip}
                       </Text>
                     </div>
                   </div>
