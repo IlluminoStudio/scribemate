@@ -141,7 +141,7 @@ function DashboardPage() {
       console.log('Generating post content...');
       // Use a default topic since no specific topic is selected
       const defaultTopic = "Create engaging content for your audience";
-      const generatedPost = await generatePost(defaultTopic, tone_guide, selectedTab);
+      const generatedPost = await generatePost(defaultTopic, tone_guide, socialMediaOption);
       console.log('Generated post:', generatedPost);
       
       // Store the generated post data
@@ -158,7 +158,7 @@ function DashboardPage() {
   const handleTopicClick = async (topicTitle) => {
     try {
       console.log('Generating post for topic:', topicTitle);
-      const generatedPost = await generatePost(topicTitle, tone_guide, selectedTab);
+      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption);
       console.log('Generated post:', generatedPost);
       
       // Store the generated post data
