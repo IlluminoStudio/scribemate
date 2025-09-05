@@ -33,7 +33,10 @@ export function useTopics() {
       }
       
       const data = await response.json();
-      return data;
+      console.log('API response data:', data);
+      
+      // Return the topics array from the response
+      return data.topics || [];
     } catch (err) {
       console.error('Error fetching topic suggestions:', err);
       setError(err.message);

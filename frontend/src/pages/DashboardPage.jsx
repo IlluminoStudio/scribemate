@@ -87,9 +87,10 @@ function DashboardPage() {
   const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
   const [selectedTab, setSelectedTab] = React.useState("facebook");
   const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
+  const [fetchedTopics, setFetchedTopics] = React.useState([]);
   
   // Get user data from localStorage
-  const { userData } = useUserData();
+  const { userData, updateUserData } = useUserData();
   const { first_name, last_name, business, industry, tone_guide, topics, pro_tips } = userData || {};
   
   // Topics hook for fetching topic suggestions
@@ -98,9 +99,21 @@ function DashboardPage() {
   // Handle refresh topics button click
   const handleRefreshTopics = async () => {
     try {
+      console.log('Fetching topics for industry:', industry);
       const newTopics = await fetchTopicSuggestions(industry);
       console.log('Fetched new topics:', newTopics);
-      // TODO: Update the topics display with new data
+      
+      // Update topics in localStorage
+      const success = updateUserData({ topics: newTopics });
+      if (success) {
+        console.log('Topics updated in localStorage');
+        // Clear fetchedTopics state since we're now using localStorage data
+        setFetchedTopics([]);
+      } else {
+        console.error('Failed to update topics in localStorage');
+        // Fallback: still update local state
+        setFetchedTopics(newTopics);
+      }
     } catch (error) {
       console.error('Failed to refresh topics:', error);
     }
@@ -111,15 +124,17 @@ function DashboardPage() {
     ? pro_tips[Math.floor(Math.random() * pro_tips.length)]
     : "Try combining seasonal topics with your teaching expertise for higher engagement rates!";
   
-  // Get first 4 topics for display
+  // Get first 4 topics for display from localStorage
   const displayTopics = topics && topics.length > 0 
     ? topics.slice(0, 4)
-    : [
-        { type: "Trending", topic: "Spring Recital Preparation Tips" },
-        { type: "Evergreen", topic: "Benefits of Learning Piano for Kids" },
-        { type: "Trending", topic: "Adult Piano Lessons: It's Never Too Late" },
-        { type: "Evergreen", topic: "Practice Tips for Busy Families" }
-      ];
+    : [];
+
+  // Debug logging
+  console.log('Current state:', {
+    userTopics: topics,
+    displayTopics,
+    topicsLength: topics?.length || 0
+  });
 
   
   return (

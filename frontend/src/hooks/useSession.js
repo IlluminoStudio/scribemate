@@ -104,6 +104,31 @@ export function useUserData() {
     return currentUser.id;
   }, [checkSessionBeforeApiCall]);
 
+  // Update user data in localStorage
+  const updateUserData = useCallback((updates) => {
+    try {
+      const currentUserStr = localStorage.getItem('currentUser');
+      if (!currentUserStr) {
+        console.error('No currentUser found in localStorage');
+        return false;
+      }
+      
+      const currentUser = JSON.parse(currentUserStr);
+      const updatedUserData = {
+        ...currentUser,
+        ...updates
+      };
+      
+      localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
+      setUserData(updatedUserData);
+      console.log('User data updated in localStorage:', updates);
+      return true;
+    } catch (error) {
+      console.error('Error updating user data:', error);
+      return false;
+    }
+  }, []);
+
   // Initialize on mount
   useEffect(() => {
     readUserData();
@@ -129,6 +154,7 @@ export function useUserData() {
     updateSessionExpiry,
     checkSessionBeforeApiCall,
     checkSessionFresh,
-    getUserId
+    getUserId,
+    updateUserData
   };
 } 
