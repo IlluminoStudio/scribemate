@@ -77,7 +77,6 @@ export function useUserData() {
         };
         localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
         setUserData(updatedUserData);
-        console.log('Session expiry updated');
       } catch (error) {
         console.error('Error updating session expiry:', error);
       }

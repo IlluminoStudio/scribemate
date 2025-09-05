@@ -129,13 +129,6 @@ function DashboardPage() {
     ? topics.slice(0, 4)
     : [];
 
-  // Debug logging
-  console.log('Current state:', {
-    userTopics: topics,
-    displayTopics,
-    topicsLength: topics?.length || 0
-  });
-
   
   return (
     <>

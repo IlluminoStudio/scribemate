@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
+  envDir: '../', // Look for .env files in the parent directory (repo root)
   plugins: [
     react(),
     svgr({

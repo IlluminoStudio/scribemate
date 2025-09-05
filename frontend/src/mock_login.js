@@ -29,14 +29,6 @@ export function mockLogin() {
     // Write to localStorage
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     
-    console.log('Mock login successful:', {
-      username: currentUser.username,
-      first_name: currentUser.first_name,
-      last_name: currentUser.last_name,
-      industry: currentUser.industry,
-      session_expires: new Date(currentUser.expiry).toLocaleString()
-    });
-
     return currentUser;
   } catch (error) {
     console.error('Mock login failed:', error);
