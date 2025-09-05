@@ -26,6 +26,7 @@ import postImage2 from "../assets/post-img2.jpg";
 import postImage3 from "../assets/post-img3.jpg";
 import { useUserData } from "../hooks/useSession";
 import { useTopics } from "../hooks/useTopics";
+import { usePosts } from "../hooks/usePosts";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -88,6 +89,7 @@ function DashboardPage() {
   const [selectedTab, setSelectedTab] = React.useState("facebook");
   const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
   const [fetchedTopics, setFetchedTopics] = React.useState([]);
+  const [generatedPostData, setGeneratedPostData] = React.useState(null);
   
   // Get user data from localStorage
   const { userData, updateUserData } = useUserData();
@@ -95,6 +97,9 @@ function DashboardPage() {
   
   // Topics hook for fetching topic suggestions
   const { loading: topicsLoading, error: topicsError, fetchTopicSuggestions } = useTopics();
+  
+  // Posts hook for generating content
+  const { loading: postsLoading, error: postsError, generatePost } = usePosts();
   
   // Handle refresh topics button click
   const handleRefreshTopics = async () => {
@@ -116,6 +121,23 @@ function DashboardPage() {
       }
     } catch (error) {
       console.error('Failed to refresh topics:', error);
+    }
+  };
+  
+  // Handle generate content button click
+  const handleGenerateContent = async () => {
+    try {
+      console.log('Generating post content...');
+      const generatedPost = await generatePost();
+      console.log('Generated post:', generatedPost);
+      
+      // Store the generated post data
+      setGeneratedPostData(generatedPost);
+      
+      // Show the generated post
+      setShowGeneratedPost(true);
+    } catch (error) {
+      console.error('Failed to generate content:', error);
     }
   };
   
@@ -363,9 +385,10 @@ function DashboardPage() {
                       <Button
                         testid="generate-content-btn"
                         leftIcon={<MagicWand weight="fill" size={20} />}
-                        onClick={() => setShowGeneratedPost(true)}
+                        onClick={handleGenerateContent}
+                        disabled={postsLoading}
                       >
-                        Generate Content
+                        {postsLoading ? 'Generating...' : 'Generate Content'}
                       </Button>
                       <Text
                         variant="muted2"
@@ -474,16 +497,8 @@ function DashboardPage() {
                          
                          {/* Generated Post Card */}
                          <GeneratedPostCard
-                           title="Spring Recital Preparation: Essential Tips for Young Musicians"
-                           post="🎹 Spring is the perfect time to prepare for recitals! Here are my top 3 tips to help your child shine on stage:
-
-1. Practice performing - not just playing. Have mini-concerts at home!
-
-2. Focus on expression, not just notes. Music tells a story.
-
-3. Stay calm and breathe. Nerves are normal, even for pros!
-
-What questions do you have about recital prep? Drop them in the comments and I'll be happy to share tips, stories, and encouragement. Let's make this recital season your child's most confident and joyful yet!"
+                           title={generatedPostData?.title || "Generated Post"}
+                           post={generatedPostData?.post_content || "No content generated yet"}
                            image={
                              selectedTab === "facebook" ? postImage2 :
                              selectedTab === "linkedin" ? postImage1 :
