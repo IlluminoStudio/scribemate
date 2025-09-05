@@ -23,7 +23,6 @@ export function useAuthenticatedApi() {
       ...options,
       headers: {
         'Content-Type': 'application/json',
-        'X-API-Key': X_API_KEY,
         ...options.headers,
       },
     });
