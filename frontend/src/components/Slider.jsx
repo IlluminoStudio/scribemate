@@ -31,6 +31,11 @@ const Slider = ({
     const range = max - min;
     const step = range * 0.1; // 10% of the range
     const rawValue = min + (percent / 100) * range;
+    
+    // Special handling for min and max values to ensure they're always selectable
+    if (percent <= 5) return min; // First 5% always selects min
+    if (percent >= 95) return max; // Last 5% always selects max
+    
     const steppedValue = Math.round(rawValue / step) * step;
     return Math.max(min, Math.min(max, steppedValue));
   }, [min, max]);
