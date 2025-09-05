@@ -5,6 +5,7 @@ import Footer from './Footer';
 import { handleLogout, getInitials } from '../utils/common';
 import { useUserData } from '../hooks/useSession';
 import { DEFAULT_USER_NAME } from '../constants';
+import { mockLogin } from '../mock_login.js';
 import '../styles/App.css';
 
 function MainLayout({ children }) {
@@ -23,6 +24,11 @@ function MainLayout({ children }) {
     if (path === '/play') return 'Play';
     return 'Dashboard'; // default
   };
+
+  // Trigger mock login when component mounts
+  useEffect(() => {
+    mockLogin();
+  }, []);
 
   useEffect(() => {
     // Update initials when userData changes
@@ -66,7 +72,6 @@ function MainLayout({ children }) {
   return (
     <div style={layoutStyle}>
       <TopBar 
-        userName={userData?.full_name || DEFAULT_USER_NAME} 
         initials={initials || getInitials(DEFAULT_USER_NAME)} 
         onLogout={handleLogout}
         currentPage={getCurrentPage()}

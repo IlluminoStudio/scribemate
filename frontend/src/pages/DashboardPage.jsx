@@ -24,7 +24,6 @@ import GeneratedPostCard from "../modules/GeneratedPostCard";
 import postImage1 from "../assets/post-img1.jpg";
 import postImage2 from "../assets/post-img2.jpg";
 import postImage3 from "../assets/post-img3.jpg";
-import { mockLogin } from "../mock_login.js";
 import { useUserData } from "../hooks/useSession";
 
 function DashboardCard({ title, subtitle, body }) {
@@ -118,10 +117,6 @@ function DashboardPage() {
         { type: "Evergreen", topic: "Practice Tips for Busy Families" }
       ];
 
-  // Trigger mock login when component mounts
-  React.useEffect(() => {
-    mockLogin();
-  }, []);
   
   return (
     <>

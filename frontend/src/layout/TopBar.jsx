@@ -1,15 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { APP_NAME } from '../constants';
+import { APP_NAME, DEFAULT_USER_NAME } from '../constants';
 import Text from '../components/Text';
 import Avatar from '../components/Avatar';
 import Button from '../components/Button';
 import { SignOut } from 'phosphor-react';
+import { useUserData } from '../hooks/useSession';
 import '../styles/TopBar.css';
 
-const TopBar = ({ onLogout, currentPage = 'Dashboard', userName }) => {
+const TopBar = ({ onLogout, currentPage = 'Dashboard' }) => {
   const navigate = useNavigate();
+  const { userData } = useUserData();
+  const { first_name, last_name } = userData || {};
+  
+  // Combine first_name and last_name to form userName
+  const userName = first_name && last_name 
+    ? `${first_name} ${last_name}` 
+    : DEFAULT_USER_NAME;
   
   const navigationItems = [
     { id: 'dashboard', label: 'Dashboard', path: '/dashboard' },
