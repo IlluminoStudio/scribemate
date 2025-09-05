@@ -59,7 +59,7 @@ function DashboardCard({ title, subtitle, body }) {
   );
 }
 
-function TopicCard({ title, body, tag, tagVariant }) {
+function TopicCard({ title, tag, tagVariant }) {
   return (
     <div
       style={{
@@ -75,17 +75,6 @@ function TopicCard({ title, body, tag, tagVariant }) {
     >
       <Text variant="h6" style={{ marginBottom: "4px" }}>
         {title}
-      </Text>
-      <Text
-        variant="muted2"
-        style={{
-          color: "var(--neutral-600)",
-          lineHeight: "20px",
-          marginBottom: "8px",
-          display: "none",
-        }}
-      >
-        {body}
       </Text>
       <div style={{ alignSelf: "flex-start", marginTop: "auto" }}>
         <Chip label={tag} variant={tagVariant} size="xs" />
@@ -588,7 +577,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                   >
                     <Button
                       testid="content-library"
-                      color="grey"
+                      color="primary"
                       variant="text"
                       size="sm"
                       leftIcon={<Folder weight="fill" size={20} />}
@@ -598,7 +587,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                     </Button>
                     <Button
                       testid="brand-assets"
-                      color="grey"
+                      color="primary"
                       variant="text"
                       size="sm"
                       leftIcon={<Palette weight="fill" size={20} />}
@@ -608,7 +597,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                     </Button>
                     <Button
                       testid="help-support"
-                      color="grey"
+                      color="primary"
                       variant="text"
                       size="sm"
                       leftIcon={<Question weight="fill" size={20} />}

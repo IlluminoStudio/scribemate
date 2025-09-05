@@ -97,7 +97,7 @@ const Chip = ({ testid = "chip", label, variant = 'primary', icon, rightIcon, si
 Chip.propTypes = {
   testid: PropTypes.string,
   label: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'light']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'light', 'success', 'warning', 'error']),
   icon: PropTypes.node,
   rightIcon: PropTypes.node,
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
