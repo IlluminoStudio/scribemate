@@ -194,9 +194,85 @@ function PlayPage() {
             </Text>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               <Text variant="body1"><strong>Username:</strong> {userData.username}</Text>
-              <Text variant="body1"><strong>Full Name:</strong> {userData.full_name}</Text>
               <Text variant="body1"><strong>Role:</strong> {userData.role}</Text>
               <Text variant="body1"><strong>Session Expires:</strong> {new Date(userData.expiry).toLocaleString()}</Text>
+              
+              {/* Display all additional userData fields */}
+              {userData.id && (
+                <Text variant="body1"><strong>ID:</strong> {userData.id}</Text>
+              )}
+              {userData.first_name && (
+                <Text variant="body1"><strong>First Name:</strong> {userData.first_name}</Text>
+              )}
+              {userData.last_name && (
+                <Text variant="body1"><strong>Last Name:</strong> {userData.last_name}</Text>
+              )}
+              {userData.industry && (
+                <Text variant="body1"><strong>Industry:</strong> {userData.industry}</Text>
+              )}
+              {userData.business && (
+                <Text variant="body1"><strong>Business:</strong> {userData.business}</Text>
+              )}
+              {userData.tone_guide && (
+                <div style={{ marginTop: 8 }}>
+                  <Text variant="body1" style={{ fontWeight: 600, marginBottom: 4 }}>Tone Guide:</Text>
+                  <Text variant="body2" style={{ 
+                    padding: 8, 
+                    backgroundColor: 'var(--neutral-50)', 
+                    borderRadius: 4,
+                    border: '1px solid var(--neutral-200)',
+                    whiteSpace: 'pre-wrap',
+                    maxHeight: '150px',
+                    overflow: 'auto'
+                  }}>
+                    {userData.tone_guide}
+                  </Text>
+                </div>
+              )}
+              {userData.topics && userData.topics.length > 0 && (
+                <div style={{ marginTop: 8 }}>
+                  <Text variant="body1" style={{ fontWeight: 600, marginBottom: 4 }}>Topics ({userData.topics.length}):</Text>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                    {userData.topics.map((topic, index) => (
+                      <div key={index} style={{ 
+                        padding: 6, 
+                        backgroundColor: 'var(--neutral-50)', 
+                        borderRadius: 4,
+                        border: '1px solid var(--neutral-200)'
+                      }}>
+                        <Text variant="body2">
+                          <strong>{topic.type}:</strong> {topic.topic}
+                        </Text>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {userData.pro_tips && userData.pro_tips.length > 0 && (
+                <div style={{ marginTop: 8 }}>
+                  <Text variant="body1" style={{ fontWeight: 600, marginBottom: 4 }}>Pro Tips ({userData.pro_tips.length}):</Text>
+                  <div style={{ 
+                    maxHeight: '200px', 
+                    overflow: 'auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 4
+                  }}>
+                    {userData.pro_tips.map((tip, index) => (
+                      <div key={index} style={{ 
+                        padding: 6, 
+                        backgroundColor: 'var(--neutral-50)', 
+                        borderRadius: 4,
+                        border: '1px solid var(--neutral-200)'
+                      }}>
+                        <Text variant="body2">
+                          <strong>{index + 1}.</strong> {tip}
+                        </Text>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -218,7 +294,7 @@ function PlayPage() {
             disabled={newApiLoading || !currentSessionStatus.isValid}
             style={{ background: 'var(--primary-600)' }}
           >
-            {newApiLoading ? 'Loading...' : 'Fetch All Users (New Method)'}
+            {newApiLoading ? 'Loading...' : 'Call An API'}
           </Button>
         </div>
         
@@ -233,7 +309,7 @@ function PlayPage() {
             gap: 8
           }}>
             <Text variant="body1" style={{ color: 'var(--error-700)', fontWeight: 600 }}>
-              Error (New Method)
+              Error
             </Text>
             <Text variant="body1" style={{ color: 'var(--error-600)' }}>
               {newApiError}

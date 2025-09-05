@@ -25,6 +25,7 @@ import postImage1 from "../assets/post-img1.jpg";
 import postImage2 from "../assets/post-img2.jpg";
 import postImage3 from "../assets/post-img3.jpg";
 import { useUserData } from "../hooks/useSession";
+import { useTopics } from "../hooks/useTopics";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -101,6 +102,20 @@ function DashboardPage() {
   // Get user data from localStorage
   const { userData } = useUserData();
   const { first_name, last_name, business, industry, tone_guide, topics, pro_tips } = userData || {};
+  
+  // Topics hook for fetching topic suggestions
+  const { loading: topicsLoading, error: topicsError, fetchTopicSuggestions } = useTopics();
+  
+  // Handle refresh topics button click
+  const handleRefreshTopics = async () => {
+    try {
+      const newTopics = await fetchTopicSuggestions();
+      console.log('Fetched new topics:', newTopics);
+      // TODO: Update the topics display with new data
+    } catch (error) {
+      console.error('Failed to refresh topics:', error);
+    }
+  };
   
   // Get random pro tip
   const randomProTip = pro_tips && pro_tips.length > 0 
@@ -208,8 +223,10 @@ function DashboardPage() {
                           variant="text"
                           size="sm"
                           leftIcon={<ArrowClockwise weight="fill" size={16} />}
+                          onClick={handleRefreshTopics}
+                          disabled={topicsLoading}
                         >
-                          Refresh
+                          {topicsLoading ? 'Loading...' : 'Refresh'}
                         </Button>
                       </div>
 

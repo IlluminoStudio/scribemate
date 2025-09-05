@@ -15,6 +15,9 @@ export const getApiUrl = (endpoint) => {
   return `${API_BASE_URL}${cleanEndpoint}`;
 };
 
+// API Key for authentication
+export const X_API_KEY = import.meta.env.VITE_X_API_KEY;
+
 // Helper function to construct any URL from base domain
 export const getUrl = (path) => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;

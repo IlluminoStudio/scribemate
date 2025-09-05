@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useUserData } from './useSession';
+import { X_API_KEY } from '../config';
 
 /**
  * Custom hook for making authenticated API calls
