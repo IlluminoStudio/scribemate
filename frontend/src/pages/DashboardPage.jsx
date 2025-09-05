@@ -20,6 +20,7 @@ import {
 } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 import TabNavigation from "../components/TabNavigation";
+import Slider from "../components/Slider";
 import GeneratedPostCard from "../modules/GeneratedPostCard";
 import postImage1 from "../assets/post-img1.jpg";
 import postImage2 from "../assets/post-img2.jpg";
@@ -101,6 +102,8 @@ function DashboardPage() {
   const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
   const [fetchedTopics, setFetchedTopics] = React.useState([]);
   const [generatedPostData, setGeneratedPostData] = React.useState(null);
+  const [wordCount, setWordCount] = React.useState(200);
+  const [customTopic, setCustomTopic] = React.useState("");
   
   // Get user data from localStorage
   const { userData, updateUserData } = useUserData();
@@ -137,29 +140,19 @@ function DashboardPage() {
   
   // Handle generate content button click
   const handleGenerateContent = async () => {
-    try {
-      console.log('Generating post content...');
-      // Use a default topic since no specific topic is selected
-      const defaultTopic = "Create engaging content for your audience";
-      const generatedPost = await generatePost(defaultTopic, tone_guide, socialMediaOption);
-      console.log('Generated post:', generatedPost);
-      
-      // Store the generated post data
-      setGeneratedPostData(generatedPost);
-      
-      // Show the generated post
-      setShowGeneratedPost(true);
-    } catch (error) {
-      console.error('Failed to generate content:', error);
+    // Only proceed if custom topic is not empty
+    if (!customTopic.trim()) {
+      return;
     }
+    
+    // Call generatePostContent with the custom topic
+    await generatePostContent(customTopic.trim());
   };
   
-  // Handle topic card click
-  const handleTopicClick = async (topicTitle) => {
+  // Generate post content for a given topic
+  const generatePostContent = async (topicTitle) => {
     try {
-      console.log('Generating post for topic:', topicTitle);
-      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption);
-      console.log('Generated post:', generatedPost);
+      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption, wordCount);
       
       // Store the generated post data
       setGeneratedPostData(generatedPost);
@@ -295,7 +288,7 @@ function DashboardPage() {
                             title={topic.topic}
                             tag={topic.type}
                             tagVariant={topic.type === "Trending" ? "light" : "success"}
-                            onClick={() => handleTopicClick(topic.topic)}
+                            onClick={() => generatePostContent(topic.topic)}
                           />
                         ))}
                       </div>
@@ -315,11 +308,34 @@ function DashboardPage() {
                           testid="topic-input"
                           label="Topic/Heading"
                           placeholder="Enter your topic idea..."
+                          value={customTopic}
+                          onChange={(e) => setCustomTopic(e.target.value)}
                         />
                         <InputBox
                           testid="context-inputbox"
                           title="Additional Context"
                           placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..."
+                        />
+                      </div>
+                      {/*  Word Limit */}
+                      <div
+                        style={{
+                          background: "var(--primary-bg)",
+                          borderTop: "1px solid var(--neutral-300)",
+                          paddingTop: "25px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "12px",
+                        }}
+                      >
+                        <Text variant="label">Word Limit</Text>
+                        <Slider
+                          testid="word-count-slider"
+                          min={50}
+                          max={1000}
+                          unit="words"
+                          value={wordCount}
+                          onChange={setWordCount}
                         />
                       </div>
                     </div>
@@ -417,7 +433,7 @@ function DashboardPage() {
                         testid="generate-content-btn"
                         leftIcon={<MagicWand weight="fill" size={20} />}
                         onClick={handleGenerateContent}
-                        disabled={postsLoading}
+                        disabled={postsLoading || !customTopic.trim()}
                       >
                         {postsLoading ? 'Generating...' : 'Generate Content'}
                       </Button>
