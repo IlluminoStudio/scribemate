@@ -227,7 +227,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
         <Button
           variant="default"
           color="primary"
-          size="md"
+          size="sm"
           leftIcon={<Folder weight="bold" size={20} />}
         >
             Save to Drafts
@@ -237,7 +237,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
         <Button
           variant="outlined"
           color="secondary"
-          size="md"
+          size="sm"
           leftIcon={<Copy weight="bold" size={20} />}
           onClick={handleCopyPost}
         >
@@ -248,7 +248,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
         <Button
           variant="outlined"
           color="secondary"
-          size="md"
+          size="sm"
           leftIcon={<Download weight="bold" size={20} />}
         >
             Download Image
@@ -258,7 +258,7 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
         <Button
           variant="text"
           color="error"
-          size="md"
+          size="sm"
           leftIcon={<Trash weight="bold" size={20} />}
         >
             Discard Post
