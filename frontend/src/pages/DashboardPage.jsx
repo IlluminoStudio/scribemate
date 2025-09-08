@@ -164,9 +164,9 @@ function DashboardPage() {
     }
   };
   
-  // Get random pro tip
+  // Get first pro tip
   const randomProTip = pro_tips && pro_tips.length > 0 
-    ? pro_tips[Math.floor(Math.random() * pro_tips.length)]
+    ? pro_tips[0]
     : "Try combining seasonal topics with your teaching expertise for higher engagement rates!";
   
   // Get first 4 topics for display from localStorage
