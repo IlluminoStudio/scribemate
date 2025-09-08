@@ -169,7 +169,7 @@ function Button({
     lineHeight: "normal",
     letterSpacing: 0,
     borderRadius: 12,
-    padding: "8px 16px",
+    padding: "16px 24px",
     cursor: "pointer",
     outline: "none",
     border: "none",
@@ -191,13 +191,13 @@ function Button({
     sizeStyle = {
       borderRadius: 12,
       fontSize: 18,
-      padding: "18px 32px",
+      padding: "20px 32px",
     };
   } else if (size === "sm") {
     sizeStyle = {
       borderRadius: 10,
       fontSize: 14,
-      padding: "8px 12px",
+      padding: "8px 16px",
     };
   }
 
