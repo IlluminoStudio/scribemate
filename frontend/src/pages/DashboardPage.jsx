@@ -101,7 +101,8 @@ function DashboardPage() {
   const [selectedTab, setSelectedTab] = React.useState("facebook");
   const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
   const [fetchedTopics, setFetchedTopics] = React.useState([]);
-  const [generatedPostData, setGeneratedPostData] = React.useState(null);
+  const [generatedPostContent, setGeneratedPostContent] = React.useState(null);
+  const [generatedPostTopic, setGeneratedPostTopic] = React.useState("");
   const [wordCount, setWordCount] = React.useState(200);
   const [customTopic, setCustomTopic] = React.useState("");
   
@@ -154,8 +155,9 @@ function DashboardPage() {
     try {
       const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption, wordCount);
       
-      // Store the generated post data
-      setGeneratedPostData(generatedPost);
+      // Store the generated post content and topic
+      setGeneratedPostContent(generatedPost);
+      setGeneratedPostTopic(topicTitle);
       
       // Show the generated post
       setShowGeneratedPost(true);
@@ -165,7 +167,7 @@ function DashboardPage() {
   };
   
   // Get first pro tip
-  const randomProTip = pro_tips && pro_tips.length > 0 
+  const proTip = pro_tips && pro_tips.length > 0 
     ? pro_tips[0]
     : "Try combining seasonal topics with your teaching expertise for higher engagement rates!";
   
@@ -542,10 +544,10 @@ function DashboardPage() {
                            iconSize={16}
                          />
                          
-                         {/* Generated Post Card */}
-                         <GeneratedPostCard
-                           title={generatedPostData?.title || "Generated Post"}
-                           post={generatedPostData?.post_content || "No content generated yet"}
+                        {/* Generated Post Card */}
+                        <GeneratedPostCard
+                          title={generatedPostTopic || "Generated Post"}
+                          post={generatedPostContent?.post_content || "No content generated yet"}
                            image={
                              selectedTab === "facebook" ? postImage2 :
                              selectedTab === "linkedin" ? postImage1 :
@@ -716,7 +718,7 @@ function DashboardPage() {
                     >
                       <Text variant="h6">Pro Tip</Text>
                       <Text variant="body2" style={{ lineHeight: "20px" }}>
-                        {randomProTip}
+                        {proTip}
                       </Text>
                     </div>
                   </div>
