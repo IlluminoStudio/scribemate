@@ -170,7 +170,7 @@ function DashboardPage() {
   // Get first pro tip
   const proTip = pro_tips && pro_tips.length > 0 
     ? pro_tips[0]
-    : "Try combining seasonal topics with your teaching expertise for higher engagement rates!";
+    : "Share behind-the-scenes content from your piano lessons to build trust with potential students. Parents love seeing the teaching environment!";
   
   // Get first 4 topics for display from localStorage
   const displayTopics = topics && topics.length > 0 

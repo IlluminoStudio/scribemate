@@ -41,5 +41,7 @@ export const userData = {
     "Post engaging polls, such as “Which song should we learn next?” to involve your audience.",
     "Educate your followers with fun piano trivia or facts about famous composers in a bite-sized format.",
     "Tie piano learning to lifestyle benefits, such as stress relief, brain health, or creativity boosts.",
+    "Share behind-the-scenes content from your piano lessons to build trust with potential students. Parents love seeing the teaching environment!",
+    "Try combining seasonal topics with your teaching expertise for higher engagement rates!",
   ],
 };
