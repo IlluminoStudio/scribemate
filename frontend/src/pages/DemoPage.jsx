@@ -20,6 +20,7 @@ import Radio from "../components/Radio";
 import Dropdown from "../components/Dropdown";
 import TabNavigation from "../components/TabNavigation";
 import Slider from "../components/Slider";
+import Spinner from "../components/Spinner";
 import { X, Bell, UsersThree, Trophy, Rocket, Flame, Cursor, Users, MagnifyingGlass, Calendar, Check, Folder, FacebookLogo, LinkedinLogo, BookOpen, ChartLine, FileText, Users as UsersIcon, Copy, Download } from "phosphor-react";
 import userSvg from "../assets/avatar.svg";
 
@@ -717,6 +718,18 @@ function DemoPage() {
           value={wordCount}
           onChange={setWordCount}
         />
+      </div>
+
+      {/* Spinner Component Showcase */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "48px 0",
+        }}
+      >
+        <Spinner testid="loading-spinner" />
       </div>
 
       {/* Color Showcase */}
