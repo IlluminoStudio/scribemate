@@ -355,7 +355,7 @@ function DashboardPage() {
                         </div>
                         
                         {/* Input box */}
-                        <Input
+                        <InputBox
                           testid="topics-to-avoid-input"
                           placeholder="Enter topics to filter out (eg. competition, advanced theory, performance anxiety)"
                         />
@@ -365,7 +365,7 @@ function DashboardPage() {
                           variant="caption" 
                           color="var(--neutral-600)"
                         >
-                          Separate topics with semicolons. This helps us suggest more relevant content for your business.
+                          Separate topics with semicolon. This helps us suggest more relevant content for your business.
                         </Text>
                       </div>
                       
