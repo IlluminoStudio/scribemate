@@ -7,6 +7,9 @@ import {
   ALLOWED_ORIGINS,
   EVERGREEN,
   TRENDING,
+  generateRandomGuid,
+  generateRandomInt,
+  generateRandomModifiers,
 } from "../../../dev-scripts/constants.js";
 import { log, logError } from "../../../lib/consoleLogger.js";
 
@@ -76,13 +79,25 @@ export default async function suggestTopics(req, res) {
       });
     }
 
-    // Prepare OpenAI request with dynamic industry replacement
-    const promptText = SUGGEST_TOPICS_PROMPT.replace('{{industry}}', industry)
+    // Generate random values for prompt enhancement
+    const randomGuid = generateRandomGuid();
+    const randomInt = generateRandomInt();
+    const randomModifiers = generateRandomModifiers();
+    
+    // Prepare OpenAI request with dynamic replacements
+    let promptText = SUGGEST_TOPICS_PROMPT
+      .replace('{{industry}}', industry)
+      .replace('{{RANDOM_GUID}}', randomGuid)
+      .replace('{{RANDOM_INT}}', randomInt)
+      .replace('{{RAND_MODIFIERS}}', randomModifiers);
     
     // Debug: Log the exact prompt being sent
     log(`=== OUTGOING PROMPT ===`)
     log(`Industry: ${industry}`)
-    log(`Prompt text: ${promptText}`)
+    // log(`Random GUID: ${randomGuid}`)
+    // log(`Random Int: ${randomInt}`)
+    log(`Random Modifiers: ${randomModifiers}`)
+    // log(`Prompt text: ${promptText}`)
     log(`======================`)
 
     const openaiRequest = {
@@ -129,9 +144,9 @@ export default async function suggestTopics(req, res) {
     const openaiData = await response.json();
 
     // Debug: Log the raw OpenAI response
-    log(`=== OPENAI RESPONSE ===`);
-    log(`Raw response: ${JSON.stringify(openaiData, null, 2)}`);
-    log(`=======================`);
+    // log(`=== OPENAI RESPONSE ===`);
+    // log(`Raw response: ${JSON.stringify(openaiData, null, 2)}`);
+    // log(`=======================`);
 
     // Extract topics from OpenAI response
     let topics = [];

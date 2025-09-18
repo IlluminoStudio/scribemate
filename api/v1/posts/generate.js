@@ -207,9 +207,9 @@ export default async function generatePost(req, res) {
     const openaiData = await response.json();
 
     // Debug: Log the raw OpenAI response
-    log(`=== OPENAI RESPONSE ===`);
-    log(`Raw response: ${JSON.stringify(openaiData, null, 2)}`);
-    log(`=======================`);
+    // log(`=== OPENAI RESPONSE ===`);
+    // log(`Raw response: ${JSON.stringify(openaiData, null, 2)}`);
+    // log(`=======================`);
 
     // Extract post content from OpenAI response
     let postContent = "";
