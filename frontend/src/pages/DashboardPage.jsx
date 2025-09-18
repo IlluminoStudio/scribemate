@@ -21,6 +21,7 @@ import {
 import { DEFAULT_USER_NAME } from "../constants";
 import TabNavigation from "../components/TabNavigation";
 import Slider from "../components/Slider";
+import Spinner from "../components/Spinner";
 import GeneratedPostCard from "../modules/GeneratedPostCard";
 import postImage1 from "../assets/post-img1.jpg";
 import postImage2 from "../assets/post-img2.jpg";
@@ -277,6 +278,7 @@ function DashboardPage() {
                       {/* Topic Cards Grid */}
                       <div
                         style={{
+                          position: "relative",
                           display: "grid",
                           gridTemplateColumns:
                             "repeat(auto-fit, minmax(280px, 1fr))",
@@ -293,6 +295,26 @@ function DashboardPage() {
                             onClick={() => generatePostContent(topic.topic)}
                           />
                         ))}
+                        
+                        {/* Spinner Overlay */}
+                        {topicsLoading && (
+                          <div
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              backgroundColor: "rgba(255, 255, 255, 0.8)",
+                              zIndex: 10,
+                            }}
+                          >
+                            <Spinner testid="topics-loading-spinner" />
+                          </div>
+                        )}
                       </div>
                       {/* Or Create Your Own Topic Card */}
                       <div
