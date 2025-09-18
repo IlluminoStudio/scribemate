@@ -316,6 +316,59 @@ function DashboardPage() {
                           </div>
                         )}
                       </div>
+                      
+                      {/* Topics to Avoid Section */}
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "12px",
+                        }}
+                      >
+                        {/* Header with title and help icon */}
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: "100%",
+                          }}
+                        >
+                          <Text variant="body2" color="var(--neutral-700)">
+                            Topics to Avoid
+                          </Text>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "4px",
+                              color: "var(--neutral-500)",
+                              cursor: "help",
+                            }}
+                            title="Filtering topics helps avoid suggestions that are repetitive, irrelevant, or not useful for your audience."
+                          >
+                            <Question weight="fill" size={16} />
+                            <Text variant="body2" color="var(--neutral-500)">
+                              Why filter topics?
+                            </Text>
+                          </div>
+                        </div>
+                        
+                        {/* Input box */}
+                        <Input
+                          testid="topics-to-avoid-input"
+                          placeholder="Enter topics to filter out (eg. competition, advanced theory, performance anxiety)"
+                        />
+                        
+                        {/* Helper text */}
+                        <Text 
+                          variant="caption" 
+                          color="var(--neutral-600)"
+                        >
+                          Separate topics with semicolons. This helps us suggest more relevant content for your business.
+                        </Text>
+                      </div>
+                      
                       {/* Or Create Your Own Topic Card */}
                       <div
                         style={{
