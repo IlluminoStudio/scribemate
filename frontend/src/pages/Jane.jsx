@@ -29,6 +29,7 @@ import postImage3 from "../assets/post-img3.jpg";
 import { useUserData } from "../hooks/useSession";
 import { useTopicsJane } from "../hooks/useTopicsJane";
 import { usePostsJane } from "../hooks/usePostsJane";
+import { mockLogin } from "../mock_login.js";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -112,6 +113,11 @@ function DashboardPage() {
   // Get user data from localStorage
   const { userData, updateUserData } = useUserData();
   const { first_name, last_name, business, industry, tone_guide, topics, pro_tips } = userData || {};
+  
+  // Ensure mock login data is seeded for Jane route
+  React.useEffect(() => {
+    mockLogin();
+  }, []);
   
   // Topics hook for fetching topic suggestions (using localhost endpoints)
   const { loading: topicsLoading, error: topicsError, fetchTopicSuggestions } = useTopicsJane();
