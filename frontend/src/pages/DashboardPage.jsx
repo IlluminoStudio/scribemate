@@ -361,6 +361,7 @@ function DashboardPage() {
                         <Text 
                           variant="caption" 
                           color="var(--neutral-600)"
+                          style={{ marginTop: "-8px" }}
                         >
                           Separate topics with semicolon. This helps us suggest more relevant content for your business.
                         </Text>

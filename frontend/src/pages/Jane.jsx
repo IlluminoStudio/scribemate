@@ -20,10 +20,15 @@ import {
 } from "phosphor-react";
 import { DEFAULT_USER_NAME } from "../constants";
 import TabNavigation from "../components/TabNavigation";
+import Slider from "../components/Slider";
+import Spinner from "../components/Spinner";
 import GeneratedPostCard from "../modules/GeneratedPostCard";
 import postImage1 from "../assets/post-img1.jpg";
 import postImage2 from "../assets/post-img2.jpg";
 import postImage3 from "../assets/post-img3.jpg";
+import { useUserData } from "../hooks/useSession";
+import { useTopicsJane } from "../hooks/useTopicsJane";
+import { usePostsJane } from "../hooks/usePostsJane";
 
 function DashboardCard({ title, subtitle, body }) {
   return (
@@ -57,7 +62,7 @@ function DashboardCard({ title, subtitle, body }) {
   );
 }
 
-function TopicCard({ title, body, tag, tagVariant }) {
+function TopicCard({ title, tag, tagVariant, onClick }) {
   return (
     <div
       style={{
@@ -69,20 +74,21 @@ function TopicCard({ title, body, tag, tagVariant }) {
         flexDirection: "column",
         gap: "8px",
         height: "100%",
+        cursor: "pointer",
+        transition: "all 0.2s ease",
+      }}
+      onClick={onClick}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = "var(--primary-300)";
+        e.currentTarget.style.boxShadow = "var(--shadow-sm)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "var(--neutral-300)";
+        e.currentTarget.style.boxShadow = "none";
       }}
     >
       <Text variant="h6" style={{ marginBottom: "4px" }}>
         {title}
-      </Text>
-      <Text
-        variant="body2"
-        style={{
-          color: "var(--neutral-700)",
-          lineHeight: "20px",
-          marginBottom: "8px",
-        }}
-      >
-        {body}
       </Text>
       <div style={{ alignSelf: "flex-start", marginTop: "auto" }}>
         <Chip label={tag} variant={tagVariant} size="xs" />
@@ -91,9 +97,94 @@ function TopicCard({ title, body, tag, tagVariant }) {
   );
 }
 
-function Jane() {
+function DashboardPage() {
   const [socialMediaOption, setSocialMediaOption] = React.useState("facebook");
   const [selectedTab, setSelectedTab] = React.useState("facebook");
+  const [showGeneratedPost, setShowGeneratedPost] = React.useState(false);
+  const [fetchedTopics, setFetchedTopics] = React.useState([]);
+  const [generatedPostContent, setGeneratedPostContent] = React.useState(null);
+  const [generatedPostTopic, setGeneratedPostTopic] = React.useState("");
+  const [wordCount, setWordCount] = React.useState(200);
+  const [customTopic, setCustomTopic] = React.useState("");
+  const [topicsToAvoid, setTopicsToAvoid] = React.useState("");
+  const [additionalContext, setAdditionalContext] = React.useState("");
+  
+  // Get user data from localStorage
+  const { userData, updateUserData } = useUserData();
+  const { first_name, last_name, business, industry, tone_guide, topics, pro_tips } = userData || {};
+  
+  // Topics hook for fetching topic suggestions (using localhost endpoints)
+  const { loading: topicsLoading, error: topicsError, fetchTopicSuggestions } = useTopicsJane();
+  
+  // Posts hook for generating content (using localhost endpoints)
+  const { loading: postsLoading, error: postsError, generatePost } = usePostsJane();
+  
+  // Handle refresh topics button click
+  const handleRefreshTopics = async () => {
+    try {
+      console.log('Fetching topics for industry:', industry);
+      console.log('Topics to avoid:', topicsToAvoid);
+      const newTopics = await fetchTopicSuggestions(industry, topicsToAvoid);
+      console.log('Fetched new topics:', newTopics);
+      
+      // Update topics in localStorage
+      const success = updateUserData({ topics: newTopics });
+      if (success) {
+        console.log('Topics updated in localStorage');
+        // Clear fetchedTopics state since we're now using localStorage data
+        setFetchedTopics([]);
+      } else {
+        console.error('Failed to update topics in localStorage');
+        // Fallback: still update local state
+        setFetchedTopics(newTopics);
+      }
+    } catch (error) {
+      console.error('Failed to refresh topics:', error);
+    }
+  };
+  
+  // Handle generate content button click
+  const handleGenerateContent = async () => {
+    // Only proceed if custom topic is not empty
+    if (!customTopic.trim()) {
+      return;
+    }
+    
+    // Call generatePostContent with the custom topic
+    await generatePostContent(customTopic.trim());
+  };
+  
+  // Generate post content for a given topic
+  const generatePostContent = async (topicTitle, customWordCount = wordCount, customContext = additionalContext) => {
+    try {
+      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption, customWordCount, customContext);
+      
+      // Store the generated post content and topic
+      setGeneratedPostContent(generatedPost);
+      setGeneratedPostTopic(topicTitle);
+      
+      // Show the generated post
+      setShowGeneratedPost(true);
+    } catch (error) {
+      console.error('Failed to generate content for topic:', error);
+    }
+  };
+  
+  // Handle regenerate post from GeneratedPostCard
+  const handleRegeneratePost = async (topicTitle, customWordCount, customContext) => {
+    await generatePostContent(topicTitle, customWordCount, customContext);
+  };
+  
+  // Get first pro tip
+  const proTip = pro_tips && pro_tips.length > 0 
+    ? pro_tips[0]
+    : "Share behind-the-scenes content from your piano lessons to build trust with potential students. Parents love seeing the teaching environment!";
+  
+  // Get first 4 topics for display from localStorage
+  const displayTopics = topics && topics.length > 0 
+    ? topics.slice(0, 4)
+    : [];
+
   
   return (
     <>
@@ -124,7 +215,7 @@ function Jane() {
                 color: "var(--color-text-primary)",
               }}
             >
-              Welcome back, {DEFAULT_USER_NAME.split(" ")[0]}!
+              Welcome back, {first_name || DEFAULT_USER_NAME.split(" ")[0]}!
             </Text>
             <Text
               variant="body1"
@@ -132,7 +223,7 @@ function Jane() {
                 color: "var(--neutral-700)",
               }}
             >
-              Ready to create engaging content for your piano studio?
+              Ready to create engaging content for your {business || "piano studio"}?
             </Text>
           </div>
 
@@ -185,14 +276,17 @@ function Jane() {
                           variant="text"
                           size="sm"
                           leftIcon={<ArrowClockwise weight="fill" size={16} />}
+                          onClick={handleRefreshTopics}
+                          disabled={topicsLoading}
                         >
-                          Refresh
+                          {topicsLoading ? 'Loading...' : 'Refresh'}
                         </Button>
                       </div>
 
                       {/* Topic Cards Grid */}
                       <div
                         style={{
+                          position: "relative",
                           display: "grid",
                           gridTemplateColumns:
                             "repeat(auto-fit, minmax(280px, 1fr))",
@@ -200,31 +294,79 @@ function Jane() {
                           width: "100%",
                         }}
                       >
-                        <TopicCard
-                          title="Spring Recital Preparation Tips"
-                          body="Help students prepare for their upcoming performances"
-                          tag="Trending"
-                          tagVariant="light"
-                        />
-                        <TopicCard
-                          title="Benefits of Learning Piano for Kids"
-                          body="Showcase the cognitive benefits of music education"
-                          tag="Evergreen"
-                          tagVariant="success"
-                        />
-                        <TopicCard
-                          title="Adult Piano Lessons: It's Never Too Late"
-                          body="Encourage adult learners to start their musical journey"
-                          tag="Trending"
-                          tagVariant="light"
-                        />
-                        <TopicCard
-                          title="Practice Tips for Busy Families"
-                          body="Share strategies for consistent practice routines"
-                          tag="Evergreen"
-                          tagVariant="success"
-                        />
+                        {displayTopics.map((topic, index) => (
+                          <TopicCard
+                            key={index}
+                            title={topic.topic}
+                            tag={topic.type}
+                            tagVariant={topic.type === "Trending" ? "light" : "success"}
+                            onClick={() => generatePostContent(topic.topic)}
+                          />
+                        ))}
+                        
+                        {/* Spinner Overlay */}
+                        {topicsLoading && (
+                          <div className="spinner-overlay">
+                            <Spinner testid="topics-loading-spinner" />
+                          </div>
+                        )}
                       </div>
+                      
+                      {/* Topics to Avoid Section */}
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "12px",
+                        }}
+                      >
+                        {/* Header with title and help icon */}
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: "100%",
+                          }}
+                        >
+                          <Text variant="body2" color="var(--neutral-700)">
+                            Topics to Avoid
+                          </Text>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "4px",
+                              color: "var(--neutral-500)",
+                              cursor: "help",
+                            }}
+                            title="Filtering topics helps avoid suggestions that are repetitive, irrelevant, or not useful for your audience."
+                          >
+                            <Question weight="fill" size={16} />
+                            <Text variant="body2" color="var(--neutral-500)">
+                              Why filter topics?
+                            </Text>
+                          </div>
+                        </div>
+                        
+                        {/* Input box */}
+                        <InputBox
+                          testid="topics-to-avoid-input"
+                          placeholder="Enter topics to filter out (eg. competition, advanced theory, performance anxiety)"
+                          value={topicsToAvoid}
+                          onChange={setTopicsToAvoid}
+                        />
+                        
+                        {/* Helper text */}
+                        <Text 
+                          variant="caption" 
+                          color="var(--neutral-600)"
+                          style={{ marginTop: "-8px" }}
+                        >
+                          Separate topics with semicolon. This helps us suggest more relevant content for your business.
+                        </Text>
+                      </div>
+                      
                       {/* Or Create Your Own Topic Card */}
                       <div
                         style={{
@@ -241,11 +383,36 @@ function Jane() {
                           testid="topic-input"
                           label="Topic/Heading"
                           placeholder="Enter your topic idea..."
+                          value={customTopic}
+                          onChange={(e) => setCustomTopic(e.target.value)}
                         />
                         <InputBox
                           testid="context-inputbox"
                           title="Additional Context"
                           placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..."
+                          value={additionalContext}
+                          onChange={setAdditionalContext}
+                        />
+                      </div>
+                      {/*  Word Limit */}
+                      <div
+                        style={{
+                          background: "var(--primary-bg)",
+                          borderTop: "1px solid var(--neutral-300)",
+                          paddingTop: "25px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "12px",
+                        }}
+                      >
+                        <Text variant="label">Word Limit</Text>
+                        <Slider
+                          testid="word-count-slider"
+                          min={50}
+                          max={1000}
+                          unit="words"
+                          value={wordCount}
+                          onChange={setWordCount}
                         />
                       </div>
                     </div>
@@ -293,6 +460,7 @@ function Jane() {
                           background: "none",
                           flex: "1",
                           minWidth: "200px",
+                          display: "none",
                         }}
                       >
                         <Radio
@@ -313,6 +481,7 @@ function Jane() {
                           background: "none",
                           flex: "1",
                           minWidth: "200px",
+                          display: "none",
                         }}
                       >
                         <Radio
@@ -342,8 +511,10 @@ function Jane() {
                       <Button
                         testid="generate-content-btn"
                         leftIcon={<MagicWand weight="fill" size={20} />}
+                        onClick={handleGenerateContent}
+                        disabled={postsLoading || !customTopic.trim()}
                       >
-                        Generate Content
+                        {postsLoading ? 'Generating...' : 'Generate Content'}
                       </Button>
                       <Text
                         variant="muted2"
@@ -355,126 +526,134 @@ function Jane() {
                   }
                 />
                                  
-                 <DashboardCard
-                   body={
-                     <div
-                       style={{
-                         display: "flex",
-                         flexDirection: "column",
-                         gap: "24px",
-                       }}
-                     >
-                       {/* Header Section */}
-                       <div
-                         style={{
-                           display: "flex",
-                           justifyContent: "space-between",
-                           alignItems: "flex-start",
-                         }}
-                       >
-                         {/* Left side - Checkmark icon + title/subtitle stack */}
+                 {showGeneratedPost && (
+                   <div style={{ position: "relative" }}>
+                     <DashboardCard
+                       body={
                          <div
                            style={{
                              display: "flex",
-                             alignItems: "flex-start",
-                             gap: "12px",
+                             flexDirection: "column",
+                             gap: "24px",
                            }}
                          >
-                           {/* Green checkmark icon */}
-                           <Icon 
-                             variant="circle" 
-                             size={40} 
-                             noBg={false}
-                             style={{ 
-                               background: "var(--success-100)",
-                               flexShrink: 0,
-                             }}
-                           >
-                             <Check weight="bold" size={20} style={{ color: "var(--success-600)" }} />
-                           </Icon>
-                           
-                           {/* Title and subtitle stack */}
+                         {/* Header Section */}
+                         <div
+                           style={{
+                             display: "flex",
+                             justifyContent: "space-between",
+                             alignItems: "flex-start",
+                           }}
+                         >
+                           {/* Left side - Checkmark icon + title/subtitle stack */}
                            <div
                              style={{
                                display: "flex",
-                               flexDirection: "column",
-                               gap: "0px",
+                               alignItems: "flex-start",
+                               gap: "12px",
                              }}
                            >
-                             <Text variant="h5">Here's your generated post</Text>
-                             <Text
-                               variant="body2"
-                               style={{
-                                 color: "var(--neutral-700)",
-                                 marginTop: "0px",
+                             {/* Green checkmark icon */}
+                             <Icon 
+                               variant="circle" 
+                               size={40} 
+                               noBg={false}
+                               style={{ 
+                                 background: "var(--success-100)",
+                                 flexShrink: 0,
                                }}
                              >
-                               AI-generated content ready for your review
-                             </Text>
+                               <Check weight="bold" size={20} style={{ color: "var(--success-600)" }} />
+                             </Icon>
+                             
+                             {/* Title and subtitle stack */}
+                             <div
+                               style={{
+                                 display: "flex",
+                                 flexDirection: "column",
+                                 gap: "0px",
+                               }}
+                             >
+                               <Text variant="h5">Here's your generated post</Text>
+                               <Text
+                                 variant="body2"
+                                 style={{
+                                   color: "var(--neutral-700)",
+                                   marginTop: "0px",
+                                 }}
+                               >
+                                 AI-generated content ready for your review
+                               </Text>
+                             </div>
                            </div>
+                           
+                           {/* Right side - Regenerate All button */}
+                           <Button
+                             testid="regenerate-all-btn"
+                             color="secondary"
+                             variant="outlined"
+                             size="sm"
+                             leftIcon={<ArrowClockwise weight="fill" size={16} />}
+                             style={{ display: "none" }}
+                           >
+                             Regenerate All
+                           </Button>
                          </div>
                          
-                         {/* Right side - Regenerate All button */}
-                         <Button
-                           testid="regenerate-all-btn"
-                           color="neutral"
-                           variant="outlined"
-                           size="sm"
-                           leftIcon={<ArrowClockwise weight="fill" size={16} />}
-                         >
-                           Regenerate All
-                         </Button>
-                       </div>
-                       
-                       {/* Divider line */}
-                       <div
-                         style={{
-                           height: "1px",
-                           background: "var(--neutral-300)",
-                           width: "100%",
-                         }}
-                       />
-                       
-                       {/* Tab Navigation */}
-                       <TabNavigation
-                         testid="social-media-tabs"
-                         tabs={[
-                           { label: "Facebook", value: "facebook", icon: <FacebookLogo weight="fill" size={16} /> },
-                           { label: "LinkedIn", value: "linkedin", icon: <LinkedinLogo weight="fill" size={16} /> },
-                           { label: "Blog", value: "blog", icon: <BookOpen weight="fill" size={16} /> },
+                         {/* Divider line */}
+                         <div
+                           style={{
+                             height: "1px",
+                             background: "var(--neutral-300)",
+                             width: "100%",
+                           }}
+                         />
+                         
+                         {/* Tab Navigation */}
+                         <TabNavigation
+                           testid="social-media-tabs"
+                           tabs={[
+                             { label: "Facebook", value: "facebook", icon: <FacebookLogo weight="fill" size={16} /> },
+                            //  { label: "LinkedIn", value: "linkedin", icon: <LinkedinLogo weight="fill" size={16} /> },
+                            //  { label: "Blog", value: "blog", icon: <BookOpen weight="fill" size={16} /> },
                            ]}
                            selectedTab={selectedTab}
                            onTabChange={setSelectedTab}
                            variant="icon-left"
                            iconSize={16}
                          />
-                       
-                       {/* Generated Post Card */}
-                       <GeneratedPostCard
-                         text="🎹 Spring is the perfect time to prepare for recitals! Here are my top 3 tips to help your child shine on stage:
-
-1. Practice performing - not just playing. Have mini-concerts at home!
-
-2. Focus on expression, not just notes. Music tells a story.
-
-3. Stay calm and breathe. Nerves are normal, even for pros!
-
-What questions do you have about recital prep? Drop them in the comments and I'll be happy to share tips, stories, and encouragement. Let's make this recital season your child's most confident and joyful yet!"
-                         image={
-                           selectedTab === "facebook" ? postImage2 :
-                           selectedTab === "linkedin" ? postImage1 :
-                           selectedTab === "blog" ? postImage3 : postImage2
-                         }
-                         platform={
-                           selectedTab === "facebook" ? "Facebook" :
-                           selectedTab === "linkedin" ? "LinkedIn" :
-                           selectedTab === "blog" ? "Blog" : "Facebook"
-                         }
-                         style={{ marginTop: '24px' }}
-                       />
+                         
+                        {/* Generated Post Card */}
+                        <GeneratedPostCard
+                          title={generatedPostTopic || "Generated Post"}
+                          post={generatedPostContent?.post_content || "No content generated yet"}
+                          image={
+                            selectedTab === "facebook" ? postImage2 :
+                            selectedTab === "linkedin" ? postImage1 :
+                            selectedTab === "blog" ? postImage3 : postImage2
+                          }
+                          platform={
+                            selectedTab === "facebook" ? "Facebook" :
+                            selectedTab === "linkedin" ? "LinkedIn" :
+                            selectedTab === "blog" ? "Blog" : "Facebook"
+                          }
+                          maxWordCount={wordCount}
+                          additionalContext={additionalContext}
+                          onRegeneratePost={handleRegeneratePost}
+                          style={{ marginTop: '24px' }}
+                        />
+                       </div>
+                     }
+                   />
+                   
+                   {/* Spinner Overlay for Generated Post */}
+                   {postsLoading && (
+                     <div className="spinner-overlay">
+                       <Spinner testid="posts-loading-spinner" />
                      </div>
-                   }
-                 />
+                   )}
+                   </div>
+                 )}
               </div>
             </div>
 
@@ -560,7 +739,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                   >
                     <Button
                       testid="content-library"
-                      color="grey"
+                      color="primary"
                       variant="text"
                       size="sm"
                       leftIcon={<Folder weight="fill" size={20} />}
@@ -570,7 +749,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                     </Button>
                     <Button
                       testid="brand-assets"
-                      color="grey"
+                      color="primary"
                       variant="text"
                       size="sm"
                       leftIcon={<Palette weight="fill" size={20} />}
@@ -580,7 +759,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                     </Button>
                     <Button
                       testid="help-support"
-                      color="grey"
+                      color="primary"
                       variant="text"
                       size="sm"
                       leftIcon={<Question weight="fill" size={20} />}
@@ -629,8 +808,7 @@ What questions do you have about recital prep? Drop them in the comments and I'l
                     >
                       <Text variant="h6">Pro Tip</Text>
                       <Text variant="body2" style={{ lineHeight: "20px" }}>
-                        Try combining seasonal topics with your teaching
-                        expertise for higher engagement rates!
+                        {proTip}
                       </Text>
                     </div>
                   </div>
@@ -644,4 +822,4 @@ What questions do you have about recital prep? Drop them in the comments and I'l
   );
 }
 
-export default Jane;
+export default DashboardPage;
