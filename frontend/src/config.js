@@ -24,8 +24,8 @@ export const getUrl = (path) => {
   return `${BASE_DOMAIN}${cleanPath}`;
 };
 
-// API Endpoints - use Vercel API routes with proper URL construction
+// API Endpoints - use Vercel API routes with hardcoded URLs
 export const API_ENDPOINTS = {
-  TOPICS_SUGGEST: getApiUrl('v1/topics:suggest'),
-  POSTS_GENERATE: getApiUrl('v1/posts:generate'),
+  TOPICS_SUGGEST: `${BASE_DOMAIN}/api/v1/topics:suggest`,
+  POSTS_GENERATE: `${BASE_DOMAIN}/api/v1/posts:generate`,
 }; 
