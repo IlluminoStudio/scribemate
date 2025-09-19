@@ -155,9 +155,9 @@ function DashboardPage() {
   };
   
   // Generate post content for a given topic
-  const generatePostContent = async (topicTitle) => {
+  const generatePostContent = async (topicTitle, customWordCount = wordCount, customContext = additionalContext) => {
     try {
-      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption, wordCount, additionalContext);
+      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption, customWordCount, customContext);
       
       // Store the generated post content and topic
       setGeneratedPostContent(generatedPost);
@@ -168,6 +168,11 @@ function DashboardPage() {
     } catch (error) {
       console.error('Failed to generate content for topic:', error);
     }
+  };
+  
+  // Handle regenerate post from GeneratedPostCard
+  const handleRegeneratePost = async (topicTitle, customWordCount, customContext) => {
+    await generatePostContent(topicTitle, customWordCount, customContext);
   };
   
   // Get first pro tip
@@ -618,18 +623,21 @@ function DashboardPage() {
                         <GeneratedPostCard
                           title={generatedPostTopic || "Generated Post"}
                           post={generatedPostContent?.post_content || "No content generated yet"}
-                           image={
-                             selectedTab === "facebook" ? postImage2 :
-                             selectedTab === "linkedin" ? postImage1 :
-                             selectedTab === "blog" ? postImage3 : postImage2
-                           }
-                           platform={
-                             selectedTab === "facebook" ? "Facebook" :
-                             selectedTab === "linkedin" ? "LinkedIn" :
-                             selectedTab === "blog" ? "Blog" : "Facebook"
-                           }
-                           style={{ marginTop: '24px' }}
-                         />
+                          image={
+                            selectedTab === "facebook" ? postImage2 :
+                            selectedTab === "linkedin" ? postImage1 :
+                            selectedTab === "blog" ? postImage3 : postImage2
+                          }
+                          platform={
+                            selectedTab === "facebook" ? "Facebook" :
+                            selectedTab === "linkedin" ? "LinkedIn" :
+                            selectedTab === "blog" ? "Blog" : "Facebook"
+                          }
+                          maxWordCount={wordCount}
+                          additionalContext={additionalContext}
+                          onRegeneratePost={handleRegeneratePost}
+                          style={{ marginTop: '24px' }}
+                        />
                        </div>
                      }
                    />

@@ -17,7 +17,17 @@ import {
 import { copyText } from "../utils/copyText";
 import "./GeneratedPostCard.css";
 
-function GeneratedPostCard({ title, post, image, platform = "Facebook", style = {}, ...props }) {
+function GeneratedPostCard({ 
+  title, 
+  post, 
+  image, 
+  platform = "Facebook", 
+  maxWordCount, 
+  additionalContext, 
+  onRegeneratePost, 
+  style = {}, 
+  ...props 
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Truncate post to 350 characters initially
@@ -31,7 +41,9 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
   };
 
   const handleRegenerateText = () => {
-    console.log("Regenerate text clicked");
+    if (onRegeneratePost && title && maxWordCount && additionalContext !== undefined) {
+      onRegeneratePost(title, maxWordCount, additionalContext);
+    }
   };
 
   const handleCopyTitle = async () => {
@@ -294,10 +306,13 @@ function GeneratedPostCard({ title, post, image, platform = "Facebook", style = 
 }
 
 GeneratedPostCard.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   post: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   platform: PropTypes.oneOf(["LinkedIn", "Facebook", "Blog"]),
+  maxWordCount: PropTypes.number.isRequired,
+  additionalContext: PropTypes.string.isRequired,
+  onRegeneratePost: PropTypes.func.isRequired,
   style: PropTypes.object,
 };
 
