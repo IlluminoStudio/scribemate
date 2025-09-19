@@ -8,7 +8,7 @@ export function useTopics() {
   const makeAuthenticatedApiCall = useAuthenticatedApi();
 
   // Fetch topic suggestions from external API
-  const fetchTopicSuggestions = useCallback(async (industry) => {
+  const fetchTopicSuggestions = useCallback(async (industry, topicsToAvoid = '') => {
     try {
       setLoading(true);
       setError(null);
@@ -18,7 +18,8 @@ export function useTopics() {
       const endpoint = API_ENDPOINTS.TOPICS_SUGGEST;
       
       const requestBody = {
-        industry: industry
+        industry: industry,
+        topicsToAvoid: topicsToAvoid
       };
       
       const response = await makeAuthenticatedApiCall(endpoint, {

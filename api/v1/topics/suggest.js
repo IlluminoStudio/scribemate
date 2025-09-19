@@ -45,7 +45,7 @@ export default async function suggestTopics(req, res) {
     }
 
     // Validate request body
-    const { industry } = req.body;
+    const { industry, topicsToAvoid = '' } = req.body;
 
     if (!industry || typeof industry !== "string") {
       logError(
@@ -89,11 +89,13 @@ export default async function suggestTopics(req, res) {
       .replace('{{industry}}', industry)
       .replace('{{RANDOM_GUID}}', randomGuid)
       .replace('{{RANDOM_INT}}', randomInt)
-      .replace('{{RAND_MODIFIERS}}', randomModifiers);
+      .replace('{{RAND_MODIFIERS}}', randomModifiers)
+      .replace('{{DO_NOT_GEN_LIST}}', topicsToAvoid || 'none');
     
     // Debug: Log the exact prompt being sent
     log(`=== OUTGOING PROMPT ===`)
     log(`Industry: ${industry}`)
+    log(`Topics to Avoid: ${topicsToAvoid || 'none'}`)
     // log(`Random GUID: ${randomGuid}`)
     // log(`Random Int: ${randomInt}`)
     log(`Random Modifiers: ${randomModifiers}`)

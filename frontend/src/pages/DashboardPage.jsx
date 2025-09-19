@@ -106,6 +106,7 @@ function DashboardPage() {
   const [generatedPostTopic, setGeneratedPostTopic] = React.useState("");
   const [wordCount, setWordCount] = React.useState(200);
   const [customTopic, setCustomTopic] = React.useState("");
+  const [topicsToAvoid, setTopicsToAvoid] = React.useState("");
   
   // Get user data from localStorage
   const { userData, updateUserData } = useUserData();
@@ -121,7 +122,8 @@ function DashboardPage() {
   const handleRefreshTopics = async () => {
     try {
       console.log('Fetching topics for industry:', industry);
-      const newTopics = await fetchTopicSuggestions(industry);
+      console.log('Topics to avoid:', topicsToAvoid);
+      const newTopics = await fetchTopicSuggestions(industry, topicsToAvoid);
       console.log('Fetched new topics:', newTopics);
       
       // Update topics in localStorage
@@ -358,6 +360,8 @@ function DashboardPage() {
                         <InputBox
                           testid="topics-to-avoid-input"
                           placeholder="Enter topics to filter out (eg. competition, advanced theory, performance anxiety)"
+                          value={topicsToAvoid}
+                          onChange={setTopicsToAvoid}
                         />
                         
                         {/* Helper text */}
