@@ -20,8 +20,8 @@ export function usePostsJane() {
         throw new Error('Tone guide is required');
       }
       
-      // Use localhost endpoint for Jane page
-      const endpoint = 'http://localhost:3001/api/v1/posts:generate';
+      // Use proxy endpoint for Jane page (same as regular hooks)
+      const endpoint = '/api/v1/posts:generate';
       
       // Build request body with provided parameters
       const requestBody = {

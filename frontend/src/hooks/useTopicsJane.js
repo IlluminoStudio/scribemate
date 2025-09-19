@@ -12,8 +12,8 @@ export function useTopicsJane() {
       setLoading(true);
       setError(null);
       
-      // Use localhost endpoint for Jane page
-      const endpoint = 'http://localhost:3001/api/v1/topics:suggest';
+      // Use proxy endpoint for Jane page (same as regular hooks)
+      const endpoint = '/api/v1/topics:suggest';
       
       const requestBody = {
         industry: industry,
