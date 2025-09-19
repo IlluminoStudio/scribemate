@@ -301,20 +301,7 @@ function DashboardPage() {
                         
                         {/* Spinner Overlay */}
                         {topicsLoading && (
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              backgroundColor: "rgba(255, 255, 255, 0.8)",
-                              zIndex: 10,
-                            }}
-                          >
+                          <div className="spinner-overlay">
                             <Spinner testid="topics-loading-spinner" />
                           </div>
                         )}
@@ -532,15 +519,16 @@ function DashboardPage() {
                 />
                                  
                  {showGeneratedPost && (
-                   <DashboardCard
-                     body={
-                       <div
-                         style={{
-                           display: "flex",
-                           flexDirection: "column",
-                           gap: "24px",
-                         }}
-                       >
+                   <div style={{ position: "relative" }}>
+                     <DashboardCard
+                       body={
+                         <div
+                           style={{
+                             display: "flex",
+                             flexDirection: "column",
+                             gap: "24px",
+                           }}
+                         >
                          {/* Header Section */}
                          <div
                            style={{
@@ -645,6 +633,14 @@ function DashboardPage() {
                        </div>
                      }
                    />
+                   
+                   {/* Spinner Overlay for Generated Post */}
+                   {postsLoading && (
+                     <div className="spinner-overlay">
+                       <Spinner testid="posts-loading-spinner" />
+                     </div>
+                   )}
+                   </div>
                  )}
               </div>
             </div>

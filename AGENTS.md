@@ -1,4 +1,5 @@
 # MODUS OPERANDI
+- This is an AI-assisted social content generator, from topics to the actual post writing.
 - Your task is to help me build my SaaS MVP, so simplicity and speed is the key.
 - Prioritize simplicity and minimalism in your solutions.
 - Use simple & easy-to-understand language. Write in short sentences.
