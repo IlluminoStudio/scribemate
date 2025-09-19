@@ -8,7 +8,7 @@ export function usePosts() {
   const makeAuthenticatedApiCall = useAuthenticatedApi();
 
   // Generate post content from external API
-  const generatePost = useCallback(async (topic, tone_guide, social_media = 'facebook', max_word_count = 150) => {
+  const generatePost = useCallback(async (topic, tone_guide, social_media = 'facebook', max_word_count = 150, additional_context = '') => {
     try {
       setLoading(true);
       setError(null);
@@ -29,7 +29,8 @@ export function usePosts() {
         topic,
         social_media,
         max_word_count,
-        tone_guide
+        tone_guide,
+        additional_context
       };
       
       const response = await makeAuthenticatedApiCall(endpoint, {

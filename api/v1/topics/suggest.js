@@ -67,7 +67,7 @@ export default async function suggestTopics(req, res) {
     }
 
     // Validate industry contains only keyboard-typable characters
-    const keyboardTypablePattern = /^[a-zA-Z0-9\s\-.,!?()]+$/;
+    const keyboardTypablePattern = /^[a-zA-Z0-9\s\-.,!?():;'"@#$%^&*+=_|\\/<>[\]{}`~]+$/;
     if (!keyboardTypablePattern.test(industry)) {
       logError(
         `Validation failed - industry contains invalid characters: ${industry}`

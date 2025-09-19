@@ -44,7 +44,7 @@ export default async function generatePost(req, res) {
     }
 
     // Validate request body
-    const { topic, social_media, max_word_count, tone_guide } = req.body;
+    const { topic, social_media, max_word_count, tone_guide, additional_context } = req.body;
 
     if (!topic || typeof topic !== "string") {
       logError(`Validation failed - topic: ${topic}, type: ${typeof topic}`);
@@ -147,6 +147,32 @@ export default async function generatePost(req, res) {
       }
     }
 
+    // additional_context is optional - validate if provided
+    let finalAdditionalContext = additional_context || "";
+    
+    if (additional_context && typeof additional_context !== "string") {
+      logError(
+        `Validation failed - additional_context: ${additional_context}, type: ${typeof additional_context}`
+      );
+      return res.status(400).json({
+        status: "error",
+        message: "Additional context parameter must be a string when provided",
+      });
+    } else if (additional_context && additional_context.trim() !== "") {
+      // Validate additional_context contains only keyboard-typable characters
+      if (!keyboardTypablePattern.test(additional_context)) {
+        logError(
+          `Validation failed - additional_context contains invalid characters: ${additional_context}`
+        );
+        return res.status(400).json({
+          status: "error",
+          message:
+            "Additional context must contain only keyboard-typable characters (letters, numbers, spaces, and common punctuation/symbols)",
+        });
+      }
+      finalAdditionalContext = additional_context.trim();
+    }
+
     // Prepare OpenAI request with dynamic parameter replacement
     const promptText = GENERATE_POST_PROMPT.replace(
       "{{social_media}}",
@@ -154,6 +180,7 @@ export default async function generatePost(req, res) {
     )
       .replace("{{max_word_count}}", max_word_count.toString())
       .replace("{{topic}}", topic)
+      .replace("{{additional_context}}", finalAdditionalContext)
       .replace("{{tone_guide}}", finalToneGuide);
 
     // Debug: Log the exact prompt being sent
@@ -161,6 +188,7 @@ export default async function generatePost(req, res) {
     log(`Topic: ${topic}`);
     log(`Social Media: ${social_media}`);
     log(`Max Word Count: ${max_word_count}`);
+    log(`Additional Context: ${finalAdditionalContext}`);
     log(`Tone Guide: ${finalToneGuide}`);
     log(`Prompt text: ${promptText}`);
     log(`======================`);

@@ -90,7 +90,7 @@ components:
           type: string
           minLength: 3
           maxLength: 80
-          pattern: "^[a-zA-Z0-9\\s\\-.,!?()]+$"
+          pattern: "^[a-zA-Z0-9\\s\\-.,!?():;\"'@#$%^&*+=_|\\/<>\\[\\]{}`~]+$"
           description: The industry or niche to suggest topics for (3-80 chars, keyboard-typable characters only)
           example: "private piano teaching"
       required: [industry]
@@ -130,7 +130,7 @@ components:
           type: string
           minLength: 5
           maxLength: 160
-          pattern: "^[a-zA-Z0-9\\s\\-.,!?()]+$"
+          pattern: "^[a-zA-Z0-9\\s\\-.,!?():;\"'@#$%^&*+=_|\\/<>\\[\\]{}`~]+$"
           description: The topic to generate a post about (5-160 chars, keyboard-typable characters only)
           example: How To Make Piano Lessons Affordable Amid Rising Costs
         social_media:
@@ -145,9 +145,14 @@ components:
           description: Maximum word count for the generated post (5-2000 words)
         tone_guide:
           type: string
-          pattern: "^[a-zA-Z0-9\\s\\-.,!?()]+$"
+          pattern: "^[a-zA-Z0-9\\s\\-.,!?():;\"'@#$%^&*+=_|\\/<>\\[\\]{}`~]+$"
           description: Tone and style guide for the post (keyboard-typable characters only). Optional - if not provided, a default tone guide will be used.
           example: "professional yet friendly, educational"
+        additional_context:
+          type: string
+          pattern: "^[a-zA-Z0-9\\s\\-.,!?():;\"'@#$%^&*+=_|\\/<>\\[\\]{}`~]+$"
+          description: Additional context about the topic, target audience, or specific points to cover (keyboard-typable characters only). Optional - if not provided, no additional context will be used.
+          example: "Focus on parents of young children, emphasize the value of music education"
       required: [topic, social_media, max_word_count]
 
     PostGenerateResponse:

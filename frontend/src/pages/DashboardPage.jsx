@@ -107,6 +107,7 @@ function DashboardPage() {
   const [wordCount, setWordCount] = React.useState(200);
   const [customTopic, setCustomTopic] = React.useState("");
   const [topicsToAvoid, setTopicsToAvoid] = React.useState("");
+  const [additionalContext, setAdditionalContext] = React.useState("");
   
   // Get user data from localStorage
   const { userData, updateUserData } = useUserData();
@@ -156,7 +157,7 @@ function DashboardPage() {
   // Generate post content for a given topic
   const generatePostContent = async (topicTitle) => {
     try {
-      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption, wordCount);
+      const generatedPost = await generatePost(topicTitle, tone_guide, socialMediaOption, wordCount, additionalContext);
       
       // Store the generated post content and topic
       setGeneratedPostContent(generatedPost);
@@ -396,6 +397,8 @@ function DashboardPage() {
                           testid="context-inputbox"
                           title="Additional Context"
                           placeholder="Provide more details about your topic, target audience, or specific points you'd like to cover..."
+                          value={additionalContext}
+                          onChange={setAdditionalContext}
                         />
                       </div>
                       {/*  Word Limit */}
