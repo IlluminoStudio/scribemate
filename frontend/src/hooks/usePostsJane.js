@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useAuthenticatedApi } from './useAuthenticatedApi';
+import { API_ENDPOINTS } from '../config';
 
 export function usePostsJane() {
   const [loading, setLoading] = useState(false);
@@ -20,8 +21,8 @@ export function usePostsJane() {
         throw new Error('Tone guide is required');
       }
       
-      // Use proxy endpoint for Jane page (same as regular hooks)
-      const endpoint = '/api/v1/posts:generate';
+      // Use Vercel API route endpoint (same as regular hooks)
+      const endpoint = API_ENDPOINTS.POSTS_GENERATE;
       
       // Build request body with provided parameters
       const requestBody = {

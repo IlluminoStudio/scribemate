@@ -24,10 +24,8 @@ export const getUrl = (path) => {
   return `${BASE_DOMAIN}${cleanPath}`;
 };
 
-// API Endpoints
+// API Endpoints - use Vercel API routes
 export const API_ENDPOINTS = {
-  // TOPICS_SUGGEST: 'http://localhost:3001/api/v1/topics:suggest',
-  TOPICS_SUGGEST: 'https://my.api.mockaroo.com/api/v1/topics:suggest',
-  // POSTS_GENERATE: 'http://localhost:3001/api/v1/posts:generate',
-  POSTS_GENERATE: 'https://my.api.mockaroo.com/api/v1/posts:generate',
+  TOPICS_SUGGEST: '/api/v1/topics:suggest',
+  POSTS_GENERATE: '/api/v1/posts:generate',
 }; 

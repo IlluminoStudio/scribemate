@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useAuthenticatedApi } from './useAuthenticatedApi';
+import { API_ENDPOINTS } from '../config';
 
 export function useTopicsJane() {
   const [loading, setLoading] = useState(false);
@@ -12,8 +13,8 @@ export function useTopicsJane() {
       setLoading(true);
       setError(null);
       
-      // Use proxy endpoint for Jane page (same as regular hooks)
-      const endpoint = '/api/v1/topics:suggest';
+      // Use Vercel API route endpoint (same as regular hooks)
+      const endpoint = API_ENDPOINTS.TOPICS_SUGGEST;
       
       const requestBody = {
         industry: industry,
